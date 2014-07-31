@@ -1,0 +1,1 @@
+# AngularJS client for OpenLocalization

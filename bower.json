@@ -1,0 +1,14 @@
+{
+  "name": "openl10n-angular",
+  "description": "A client for OpenLocalization built for AngularJS",
+  "homepage": "https://github.com/openl10n/openl10n-angular",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.2.21",
+    "jquery": "~2.1.1",
+    "angular-route": "~1.2.21",
+    "angular-resource": "~1.2.21",
+    "angular-animate": "~1.2.21"
+  }
+}

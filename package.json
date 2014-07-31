@@ -1,0 +1,18 @@
+{
+  "name": "openl10n-angular",
+  "description": "A client for OpenLocalization built for AngularJS",
+  "repository": "https://github.com/openl10n/openl10n-angular",
+  "version": "0.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "gulp-concat": "^2.3.4",
+    "gulp-connect": "^2.0.6",
+    "gulp-ng-annotate": "^0.2.0",
+    "gulp-sass": "^0.7.2",
+    "gulp-sourcemaps": "^1.1.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-util": "^3.0.0",
+    "rimraf": "^2.2.8"
+  }
+}
