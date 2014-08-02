@@ -1,0 +1,23 @@
+.title {
+  font-weight: 300;
+
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
+  &--level-1 {
+    @include font-size(28);
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  &--level-2 {
+    @include font-size(24);
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+  &--level-3 {
+
+  }
+}

@@ -49,7 +49,9 @@ gulp.task('build', ['clean'], function() {
 gulp.task('watch', ['server'], function() {
   gulp.watch(srcDir + '/**/*.js', ['scripts']);
 
-  gulp.watch(srcDir + '/**/*.styl', ['styles']);
+  gulp.watch(srcDir + '/**/*.scss', ['styles']);
+
+  gulp.watch(srcDir + '/public/**/*', ['public']);
 });
 
 //

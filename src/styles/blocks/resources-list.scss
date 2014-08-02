@@ -1,0 +1,16 @@
+.resources-list {
+  &__item {
+    @include font-size(14);
+    color: #444;
+    display: block;
+    padding: 0 20px;
+    background: #fff;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ddd;
+
+    &:hover {
+      color: #aaa;
+    }
+  }
+}

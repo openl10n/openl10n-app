@@ -1,0 +1,27 @@
+.l-project-details {
+  background-color: #aaa;
+  padding: 15px 20px;
+
+  &__header {
+    margin-top: 0px;
+    margin-bottom: 15px;
+  }
+
+  &__title {
+    // font-weight: 300;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__subtitle {
+    color: #555;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  &__description {
+    font-weight: 300;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #888;
+  }
+}

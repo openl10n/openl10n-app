@@ -3,13 +3,97 @@
 <head>
   <meta charset="utf-8">
   <title>OpenLocalization</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/app.css">
+
   <script src="/js/app.js"></script>
 </head>
-<body ng-app="app">
-  <input type="text" ng-model="data.message" autofocus>
+<body class="document" ng-app="app">
+  <div class="navbar">
+    NAV
+  </div>
+
+  <div class="document__content">
+    <div class="l-project-details column column--size-3 column--scrollable">
+      <div class="l-project-details__header">
+        <h1 class="l-project-details__title title title--level-1">
+          My Project
+        </h1>
+
+        <p class="l-project-details__subtitle">
+          my-project
+        </p>
+      </div>
+
+      <p class="l-project-details__description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+      <p>
+        <a href="/project/slug/translate" class="button button--primary">
+          Translate
+        </a>
+      </p>
+    </div>
+
+    <div class="l-project-languages column column--size-1">
+      <div class="column__inner">
+        <div class="language">
+          <div class="language__behind">
+            <div class="language__display-name">
+              English (United Kingdom)
+            </div>
+          </div>
+
+          <div class="language__title">
+            <span class="language__flag"></span>
+            <span class="language__locale">en_GB</span>
+          </div>
+        </div>
+
+        <div class="language">
+          <div class="language__behind">
+            <div class="language__display-name">
+              French (France)
+            </div>
+          </div>
+
+          <div class="language__title">
+            <span class="language__flag"></span>
+            <span class="language__locale">fr_FR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-project-resources column column--size-6 column--scrollable">
+      <h2 class="l-project-resources__title title title--level-2">
+        Resources
+      </h2>
+
+      <ul class="resources-list list--unstyled">
+        <li>
+          <a href="#" class="resources-list__item">
+            path/to/my/resources.en.yml
+          </a>
+        </li>
+        <li>
+          <a href="#" class="resources-list__item">
+            path/to/my/other/resources.en.yml
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="l-project-stats column column--size-2 column--scrollable">
+    </div>
+  </div>
+
+
+  <!-- <input type="text" ng-model="data.message" autofocus>
   <p>
     {{ data.message }}
-  </p>
+  </p> -->
 </body>
 </html>

@@ -1,0 +1,50 @@
+.button {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+
+  @include font-size(16);
+  padding: 6px 12px;
+  line-height: 1.42857;
+  border-radius: 2px;
+
+  &--primary {
+    color: #fff;
+    background-color: #3c6788;
+    border-color: #3c6788;
+  }
+
+  &--outline {
+    background-color: transparent;
+  }
+
+  &--size-small {
+    @include font-size(14);
+    padding: 4px 10px;
+  }
+
+  &--size-medium {
+    @include font-size(18);
+    padding: 8px 14px;
+  }
+
+  &--size-large {
+    @include font-size(20);
+    padding: 10px 16px;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Aliases
+.btn {
+  @extend .button;
+}

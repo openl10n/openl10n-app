@@ -1,0 +1,14 @@
+.document {
+  font-family: 'Open Sans', sans-serif;
+  background: #ddd;
+  height: 100%;
+  max-height: 100%;
+  min-width: 1000px;
+
+  &__content {
+    padding-left: 70px; // navbar offset
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+}

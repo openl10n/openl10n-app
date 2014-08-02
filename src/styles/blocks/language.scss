@@ -1,0 +1,62 @@
+.language {
+  margin: 5px 10px 2px;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__title {
+    position: relative;
+    padding: 10px 0 2px;
+    z-index: 10;
+    background: red;
+    background: transparent;
+  }
+
+  &__behind {
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    height: 80px;
+    top: 0;
+    bottom: 0;
+    background: #ccc;
+    width: 300px;
+    visibility: hidden;
+    padding-top: 8px;
+    padding-left: 90px;
+
+    border-radius: 2px;
+    box-shadow: 1px 2px 12px rgba(0,0,0,0.32);
+
+    transform: translateX(-10px);
+    transition: all 180ms ease-out;
+  }
+
+  &:hover &__behind {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: none;
+  }
+
+  &__flag {
+    display: block;
+    margin: auto;
+    width: 60px;
+    height: 40px;
+    background: #aaa;
+    margin-bottom: 3px;
+  }
+
+  &__locale {
+    @include font-size(12);
+    color: #555;
+    display: block;
+    text-align: center;
+  }
+
+  &__display-name {
+    @include font-size(16);
+  }
+}

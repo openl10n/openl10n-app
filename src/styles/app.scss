@@ -1,3 +1,27 @@
-body {
-  background: #eee;
-}
+//
+// Global settings
+//
+@import "settings/variables";
+@import "settings/mixins";
+@import "settings/normalize";
+@import "settings/global";
+
+//
+// Blocks
+//
+@import "blocks/button";
+@import "blocks/column";
+@import "blocks/document";
+@import "blocks/language";
+@import "blocks/list";
+@import "blocks/navbar";
+@import "blocks/resources-list";
+@import "blocks/title";
+
+//
+// Layouts
+//
+@import "layouts/project-details";
+@import "layouts/project-resources";
+@import "layouts/project-languages";
+@import "layouts/project-stats";
