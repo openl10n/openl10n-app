@@ -5,18 +5,34 @@
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   white-space: nowrap;
+  text-transform: uppercase;
 
-  @include font-size(16);
+  @include font-size(14);
   padding: 6px 12px;
   line-height: 1.42857;
   border-radius: 2px;
+
+  transition: all 150ms ease-out;
 
   &--primary {
     color: #fff;
     background-color: #3c6788;
     border-color: #3c6788;
+
+    &.button--outline {
+      color: #3c6788;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      background-color: darken(#3c6788, 4);
+      border-color: darken(#3c6788, 4);
+    }
   }
 
   &--outline {

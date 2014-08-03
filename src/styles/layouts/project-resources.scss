@@ -1,8 +1,26 @@
 .l-project-resources {
-  background-color: #eee;
   padding: 15px;
+  height: 100%;
+  max-height: 100%;
 
   &__title {
     margin: 0;
+  }
+
+  .resources-list {
+    &__item {
+      @include font-size(14);
+      color: #444;
+      display: block;
+      padding: 0 20px;
+      background: #fff;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #ddd;
+
+      &:hover {
+        color: #aaa;
+      }
+    }
   }
 }

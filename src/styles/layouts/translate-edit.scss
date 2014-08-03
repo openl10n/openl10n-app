@@ -1,0 +1,84 @@
+.l-translate-edit {
+  position: relative;
+
+  .actions {
+    z-index: 2;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .translation-source {
+    z-index: 1;
+    position: relative;
+    padding: 15px;
+    border-bottom: 1px solid darken($color-gray-200, 5);
+    background-color: $color-gray-100;
+
+    // &:after {
+    //   bottom: -8px;
+    //   left: 22px;
+    //   border-top-color: #fafafa;
+    //   border-width: 8px;
+    //   content: '';
+    //   position: absolute;
+    //   width: 0;
+    //   height: 0;
+    //   border-style: solid;
+    //   border-color: transparent;
+    //   border-bottom: 0;
+    //   z-index: 5;
+    // }
+
+    &__title {
+      margin: 0 0 5px;
+      @include font-size(15);
+      font-weight: normal;
+      color: #999;
+    }
+
+    &__phrase {
+      @include font-size(22);
+      font-weight: 300;
+      margin-top: 0;
+      margin-bottom: 5px;
+      min-height: 50px;
+      max-height: 200px;
+      overflow-y: auto;
+      // overflow-x: hidden;
+    }
+  }
+
+  .translation-target {
+    padding: 0;
+    background-color: #fff;
+    z-index: 1;
+    border-bottom: 1px solid darken($color-gray-200, 5);
+
+    &__textarea {
+      padding: 15px;
+      padding-bottom: 20px;
+      border: none;
+      box-shadow: none;
+      font-size: 16px;
+      resize: none;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      word-wrap: break-word;
+      width: 100%;
+      height: 120px;
+
+      &:active, &:focus {
+        outline: 0;
+      }
+    }
+
+    &__footer {
+      @include font-size(12);
+      background-color: #fff;
+      margin: 0;
+      padding: 3px 10px;
+      color: #999;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.l-translate-translations {
+  height: calc(100% - 60px);
+  background: $color-gray-100;
+  border-right: 1px solid darken($color-gray-200, 5);
+
+  .translations {
+    &__resource {
+      @include font-size(16);
+      font-weight: 400;
+      margin: 0;
+      padding: 3px 10px;
+      background-color: $color-gray-200;
+      // background-color: rgba(224, 224, 224, 0.8);
+      border-bottom: 1px solid darken($color-gray-300, 1);
+    }
+
+    &__list {
+      margin: 0;
+    }
+
+    &__item {
+      margin: 0;
+      padding: 10px 10px;
+      border-bottom: 1px solid darken($color-gray-200, 5);
+    }
+  }
+}

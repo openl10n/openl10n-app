@@ -5,17 +5,18 @@
 @import "settings/mixins";
 @import "settings/normalize";
 @import "settings/global";
+@import "settings/utilities";
 
 //
 // Blocks
 //
+@import "blocks/action";
 @import "blocks/button";
 @import "blocks/column";
 @import "blocks/document";
-@import "blocks/language";
+@import "blocks/form";
 @import "blocks/list";
 @import "blocks/navbar";
-@import "blocks/resources-list";
 @import "blocks/title";
 
 //
@@ -25,3 +26,6 @@
 @import "layouts/project-resources";
 @import "layouts/project-languages";
 @import "layouts/project-stats";
+@import "layouts/translate-edit";
+@import "layouts/translate-header";
+@import "layouts/translate-translations";
