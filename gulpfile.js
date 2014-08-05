@@ -1,11 +1,13 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var concat = require('gulp-concat');
+var gulp = require('gulp')
+var gutil = require('gulp-util')
+var concat = require('gulp-concat')
 var connect = require('gulp-connect')
-var ngAnnotate = require('gulp-ng-annotate');
+var iconfont = require('gulp-iconfont')
+var iconfontCSS = require("gulp-iconfont-css")
+var ngAnnotate = require('gulp-ng-annotate')
 var rimraf = require('rimraf')
 var sourcemaps = require('gulp-sourcemaps')
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')
 var uglify = require('gulp-uglify')
 
 //
@@ -69,7 +71,7 @@ gulp.task('server', function() {
 // Assets
 //
 gulp.task('public', function () {
-  gulp.src(srcDir + '/public/*')
+  gulp.src(srcDir + '/public/**/*')
     .pipe(gulp.dest(distDir))
 })
 
@@ -95,3 +97,22 @@ gulp.task('styles', function () {
     .pipe(sass())
     .pipe(gulp.dest(distDir + '/css'))
 })
+
+//
+// Icons
+//
+gulp.task('icons', function(){
+  gulp.src([srcDir + '/icons/*.svg'])
+    .pipe(iconfontCSS({
+      fontName : 'icons',
+      path: 'scss',
+      targetPath: '../../styles/icons.scss',
+      fontPath: '../fonts/' // relative path
+    }))
+    .pipe(iconfont({
+      fontName: 'icons',
+      fixedWidth: true,
+      normalize: true
+    }))
+    .pipe(gulp.dest(srcDir + '/public/fonts'));
+});

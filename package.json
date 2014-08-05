@@ -8,6 +8,8 @@
     "gulp": "^3.8.6",
     "gulp-concat": "^2.3.4",
     "gulp-connect": "^2.0.6",
+    "gulp-iconfont": "^0.1.1",
+    "gulp-iconfont-css": "0.0.9",
     "gulp-ng-annotate": "^0.2.0",
     "gulp-sass": "^0.7.2",
     "gulp-sourcemaps": "^1.1.0",
