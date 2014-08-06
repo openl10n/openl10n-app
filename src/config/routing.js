@@ -4,6 +4,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   // Routing
   $stateProvider
+    .state('login', {
+      url: '/login',
+      templateUrl: 'partials/login.html',
+      controller: 'LoginCtrl',
+    })
     .state('dashboard', {
       url: '/',
       templateUrl: 'partials/dashboard.html',
@@ -30,3 +35,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: 'partials/translate.html',
     })
 });
+
+app.run(function($rootScope) {
+  $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    console.log(event);
+  })
+})

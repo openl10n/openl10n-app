@@ -1,0 +1,23 @@
+<div class="column column--size-1"></div>
+
+<div class="column column--size-4">
+  <h1>Login</h1>
+
+  <form ng-submit="authenticate()">
+    <p>
+      <label for="">Username</label>
+      <input type="text" class="form__control" ng-model="login.username">
+    </p>
+
+    <p>
+      <label for="">Password</label>
+      <input type="password" class="form__control" ng-model="login.password">
+    </p>
+
+    <p>
+      <button type="submit" class="button button--primary">
+        Login
+      </button>
+    </p>
+  </form>
+</div>
