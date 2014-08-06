@@ -1,0 +1,55 @@
+<div class="l-project-details column column--size-3 column--scrollable">
+  <div class="l-project-details__header">
+    <h1 class="l-project-details__title title title--level-1">
+      {{ project.name }}
+    </h1>
+
+    <p class="l-project-details__subtitle">
+      {{ project.slug }}
+    </p>
+  </div>
+
+  <p class="l-project-details__description">
+    {{ project.description }}
+  </p>
+
+  <p>
+    <a ui-sref="translate({slug: project.slug})" class="button button--primary">
+      Translate
+    </a>
+  </p>
+</div>
+
+<div class="l-project-languages column column--size-1">
+  <div class="column__inner">
+    <div class="language" ng-repeat="language in languages">
+      <div class="language__behind">
+        <div class="language__display-name">
+          {{ language.name }}
+        </div>
+      </div>
+
+      <div class="language__title">
+        <span class="language__flag"></span>
+        <span class="language__locale">{{ language.locale }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="l-project-resources column column--size-6 column--scrollable">
+  <h2 class="l-project-resources__title title title--level-2">
+    Resources
+  </h2>
+
+  <ul class="resources-list list--unstyled">
+    <li ng-repeat="resource in resources">
+      <a href="#" class="resources-list__item">
+        {{ resource.pathname }}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="l-project-stats column column--size-2 column--scrollable">
+</div>

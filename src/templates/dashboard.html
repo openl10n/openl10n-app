@@ -1,0 +1,10 @@
+DASHBOARD
+
+
+<ul>
+  <li ng-repeat="project in projects">
+    <a ui-sref="project({slug: project.slug})">
+      {{ project.name }}
+    </a>
+  </li>
+</ul>

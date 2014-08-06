@@ -20,6 +20,7 @@ var isDebug = !gutil.env.prod;
 
 var javascriptFiles = [
   vendorDir + '/angular/angular.js',
+  vendorDir + '/angular-ui-router/release/angular-ui-router.js',
   srcDir + '/app.js',
   srcDir + '/**/*.js'
 ];
@@ -42,7 +43,7 @@ gulp.task('clean', function(cb) {
 // Build
 //
 gulp.task('build', ['clean'], function() {
-  gulp.start('scripts', 'styles', 'public');
+  gulp.start('scripts', 'styles', 'public', 'templates');
 });
 
 //
@@ -54,6 +55,8 @@ gulp.task('watch', ['server'], function() {
   gulp.watch(srcDir + '/**/*.scss', ['styles']);
 
   gulp.watch(srcDir + '/public/**/*', ['public']);
+
+  gulp.watch(srcDir + '/templates/**/*', ['templates']);
 });
 
 //
@@ -73,6 +76,14 @@ gulp.task('server', function() {
 gulp.task('public', function () {
   gulp.src(srcDir + '/public/**/*')
     .pipe(gulp.dest(distDir))
+})
+
+//
+// Templates
+//
+gulp.task('templates', function () {
+  gulp.src(srcDir + '/templates/**/*')
+    .pipe(gulp.dest(distDir + '/partials'))
 })
 
 
