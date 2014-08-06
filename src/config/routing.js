@@ -33,6 +33,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('translate', {
       url: '/project/:slug/translate',
       templateUrl: 'partials/translate.html',
+      controller: 'TranslateCtrl',
+      resolve: {
+        project: function($stateParams, ProjectService) {
+          return ProjectService.getProject($stateParams.slug);
+        },
+        languages: function($stateParams, LanguageService) {
+          return LanguageService.getLanguages($stateParams.slug);
+        },
+      }
     })
 });
 

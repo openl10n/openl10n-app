@@ -3,7 +3,7 @@ app.factory('LanguageService', function() {
 
   LanguageService.getLanguages = function(projectSlug) {
     return [
-      { name: 'English (United Kingdom)', locale: 'en_GB' },
+      { name: 'English (UK)', locale: 'en_GB' },
       { name: 'French (France)', locale: 'fr_FR' },
       { name: 'Spanish (Spain)', locale: 'es_ES' },
     ]
