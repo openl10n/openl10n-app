@@ -3,15 +3,15 @@
 <div class="column column--size-4">
   <h1>Login</h1>
 
-  <form ng-submit="authenticate()">
+  <form ng-submit="authenticate(credentials.username, credentials.password)">
     <p>
       <label for="">Username</label>
-      <input type="text" class="form__control" ng-model="login.username">
+      <input type="text" class="form__control" ng-model="credentials.username" autofocus>
     </p>
 
     <p>
       <label for="">Password</label>
-      <input type="password" class="form__control" ng-model="login.password">
+      <input type="password" class="form__control" ng-model="credentials.password">
     </p>
 
     <p>

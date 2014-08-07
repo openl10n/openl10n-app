@@ -7,17 +7,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('login', {
       url: '/login',
       templateUrl: 'partials/login.html',
-      controller: 'LoginCtrl',
+      controller: 'LoginController',
     })
     .state('dashboard', {
       url: '/',
       templateUrl: 'partials/dashboard.html',
-      controller: 'DashboardCtrl',
+      controller: 'DashboardController',
     })
     .state('project', {
       url: '/project/:slug',
       templateUrl: 'partials/project.html',
-      controller: 'ProjectCtrl',
+      controller: 'ProjectController',
       resolve: {
         project: function($stateParams, ProjectService) {
           return ProjectService.getProject($stateParams.slug);
@@ -33,7 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('translate', {
       url: '/project/:slug/translate',
       templateUrl: 'partials/translate.html',
-      controller: 'TranslateCtrl',
+      controller: 'TranslateController',
       resolve: {
         project: function($stateParams, ProjectService) {
           return ProjectService.getProject($stateParams.slug);
