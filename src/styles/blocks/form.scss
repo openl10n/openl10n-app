@@ -18,7 +18,10 @@
 
     &:hover, &:active, &:focus {
       outline: 0;
-      // border: 1px solid #ccc;
+    }
+
+    &:active, &:focus {
+      border: 1px solid darken($color-gray-500, 5);
     }
   }
 
