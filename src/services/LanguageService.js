@@ -1,12 +1,29 @@
-app.factory('LanguageService', function() {
+app.factory('LanguageService', function($http, $q, Configuration) {
   var LanguageService = {};
 
   LanguageService.getLanguages = function(projectSlug) {
-    return [
-      { name: 'English (UK)', locale: 'en_GB' },
-      { name: 'French (France)', locale: 'fr_FR' },
-      { name: 'Spanish (Spain)', locale: 'es_ES' },
-    ]
+    var deferred = $q.defer();
+
+    $http.get(Configuration.SERVER_BASE_URL + '/projects/' + projectSlug + '/languages').success(function(data) {
+      deferred.resolve(data);
+    }, function() {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
+  LanguageService.getDefaultLanguages = function(projectSlug) {
+    var deferred = $q.defer();
+
+    var data = [
+      { locale: 'en', name: 'English (UK) '},
+      { locale: 'fr', name: 'French (France) '},
+    ];
+
+    deferred.resolve(data);
+
+    return deferred.promise;
   };
 
   return LanguageService;

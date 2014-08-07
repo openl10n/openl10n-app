@@ -1,26 +1,24 @@
-app.factory('AuthenticationService', function ($window, $q, $timeout) {
+app.factory('AuthenticationService', function ($q, $http, Configuration, Session) {
   var AuthenticationService = {};
 
   AuthenticationService.login = function (username, password) {
     var deferred = $q.defer();
 
-    if (username === 'foo' && password === 'bar') {
-      $window.sessionStorage.token = '12345';
+    var token = btoa(username + ':' + password);
 
-      $timeout(deferred.resolve, 0);
-    } else {
-      $timeout(deferred.reject, 0);
-    }
+    $http({
+      method: 'GET',
+      url: Configuration.SERVER_BASE_URL + '/me',
+      headers: { 'Authorization': 'Basic ' + token }
+    }).then(function() {
+      Session.create(token);
+      deferred.resolve();
+    }, function() {
+      Session.destroy();
+      deferred.reject();
+    })
 
     return deferred.promise;
-  }
-
-  AuthenticationService.logout = function () {
-    delete $window.sessionStorage.token;
-  }
-
-  AuthenticationService.isLogged = function() {
-    return !!$window.sessionStorage.token;
   }
 
   return AuthenticationService;

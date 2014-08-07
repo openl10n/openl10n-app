@@ -1,13 +1,11 @@
-app.factory('AuthenticationInterceptor', function ($q, $window, AuthenticationService) {
+app.factory('AuthenticationInterceptor', function ($q, Session) {
   return {
     request: function (config) {
       config.headers = config.headers || {};
 
-      // if ($window.sessionStorage.token) {
-      //   config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-      // }
-
-      config.headers.Authorization = 'Basic ' + btoa("user:userpass");
+      if (Session.isAuthenticated()) {
+        config.headers.Authorization = 'Basic ' + Session.getToken();
+      }
 
       return config;
     },

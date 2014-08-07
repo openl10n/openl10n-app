@@ -1,18 +1,28 @@
-app.factory('ResourceService', function() {
+app.factory('ResourceService', function($http, $q, Configuration) {
   var ResourceService = {};
 
   ResourceService.getResources = function(projectSlug) {
-    return [
-      { id: 1, pathname: 'path/to/my/resources.en.yml' },
-      { id: 2, pathname: 'path/to/my/other/resources.en.yml' },
-    ]
+    var deferred = $q.defer();
+
+    $http.get(Configuration.SERVER_BASE_URL + '/resources?project=' + projectSlug).success(function(data) {
+      deferred.resolve(data);
+    }, function() {
+      deferred.reject();
+    });
+
+    return deferred.promise;
   };
 
   ResourceService.getResource = function(id) {
-    return {
-      id: id,
-      pathname: 'path/to/my/resources.en.yml',
-    };
+    var deferred = $q.defer();
+
+    $http.get(Configuration.SERVER_BASE_URL + '/resources/' + id).success(function(data) {
+      deferred.resolve(data);
+    }, function() {
+      deferred.reject();
+    });
+
+    return deferred.promise;
   };
 
   return ResourceService;
