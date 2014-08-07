@@ -13,6 +13,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/',
       templateUrl: 'partials/dashboard.html',
       controller: 'DashboardController',
+      resolve: {
+        projects: function(ProjectService) {
+          return ProjectService.getProjects();
+        },
+      }
     })
     .state('project', {
       url: '/project/:slug',
@@ -42,6 +47,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
           return LanguageService.getLanguages($stateParams.slug);
         },
       }
+    })
+    .state('translate.phrase', {
+      url: '/:id',
+      templateUrl: 'partials/translate-phrase.html',
+      controller: 'TranslatePhraseController',
     })
 });
 

@@ -1,19 +1,28 @@
-app.factory('ProjectService', function(Project) {
+app.factory('ProjectService', function($http, $q, Configuration, Project) {
   var ProjectService = {};
 
   ProjectService.getProjects = function() {
-    return [
-      new Project({ name: 'Foobar', slug: 'foobar' }),
-      new Project({ name: 'Barbaz', slug: 'barbaz' }),
-    ]
+    var deferred = $q.defer();
+
+    $http.get(Configuration.SERVER_BASE_URL + '/projects').success(function(data) {
+      deferred.resolve(data);
+    }, function() {
+      deferred.reject();
+    });
+
+    return deferred.promise;
   };
 
   ProjectService.getProject = function(slug) {
-    return new Project({
-      name: 'Project ' + slug,
-      slug: slug,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.'
+    var deferred = $q.defer();
+
+    $http.get(Configuration.SERVER_BASE_URL + '/projects/' + slug).success(function(data) {
+      deferred.resolve(new Project(data));
+    }, function() {
+      deferred.reject();
     });
+
+    return deferred.promise;
   };
 
   return ProjectService;

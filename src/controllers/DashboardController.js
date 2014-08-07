@@ -1,3 +1,3 @@
-app.controller('DashboardController', function($scope, ProjectService) {
-  $scope.projects = ProjectService.getProjects();
+app.controller('DashboardController', function($scope, projects) {
+  $scope.projects = projects;
 })

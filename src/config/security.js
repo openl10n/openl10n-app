@@ -15,6 +15,6 @@ app.run(function ($rootScope, $location, AuthenticationService) {
 //
 // Add token interceptor
 //
-// app.config(function ($httpProvider) {
-//   $httpProvider.interceptors.push('TokenInterceptor');
-// });
+app.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('AuthenticationInterceptor');
+});

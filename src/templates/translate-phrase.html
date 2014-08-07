@@ -1,0 +1,31 @@
+<div class="l-translate-edit">
+  <div class="actions">
+    <button class="action action__success action__size-large">
+      <span class="action__icon">
+        &times;
+      </span>
+
+      <span class="action__label">Save</span>
+    </button>
+  </div>
+
+  <div class="translation-source">
+    <div class="translation-source__title">
+      Original phrase
+    </div>
+
+    <p class="translation-source__phrase">
+      {{ translation.sourcePhrase }}
+    </p>
+  </div>
+
+  <div class="translation-target">
+    <textarea class="translation-target__textarea" ng-model="translation.targetPhrase"></textarea>
+
+    <p class="translation-target__footer">
+      <span>
+        Press <strong>TAB</strong> to move to the next phrase
+      </span>
+    </p>
+  </div>
+</div>
