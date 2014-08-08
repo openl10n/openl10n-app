@@ -1,0 +1,45 @@
+.l-dashboard-projects {
+  padding: 15px 20px;
+
+  &__header {
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__list {
+    border: 1px solid $color-gray-300;
+    border-bottom: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 0 $color-gray-200;
+  }
+
+  &__item {
+    display: block;
+    color: $color-dark;
+    padding: 10px;
+    padding-left: 20px;
+    background: #fff;
+    border-bottom: 1px solid $color-gray-300;
+
+    &:hover {
+      background-color: $color-gray-50;
+    }
+  }
+
+  .project {
+
+    &__name {
+      @include font-size(18);
+      display: block;
+    }
+
+    &__slug {
+      @include font-size(13);
+      display: block;
+      color: $color-gray-400;
+    }
+  }
+}

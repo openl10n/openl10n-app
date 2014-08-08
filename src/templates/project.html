@@ -14,41 +14,52 @@
   </p>
 
   <p>
-    <a ui-sref="translate({slug: project.slug})" class="button button--primary">
+    <a ui-sref="translate({slug: project.slug})" class="button button--primary button--size-wide">
       Translate
     </a>
   </p>
 </div>
 
-<div class="l-project-languages column column--size-1">
-  <div class="column__inner">
-    <div class="language" ng-repeat="language in languages">
-      <div class="language__behind">
-        <div class="language__display-name">
-          {{ language.name }}
-        </div>
-      </div>
+<div class="l-project-main-column column column--size-7 column--scrollable">
+  <div class="l-project-languages column column--size-2">
+    <div class="column__inner">
+      <!-- <h3 class="l-project-languages__title title title--level-3">
+        {{ languages.length }}
+        <br>
+        languages
+      </h3> -->
 
-      <div class="language__title">
-        <span class="language__flag"></span>
-        <span class="language__locale">{{ language.locale }}</span>
+      <div class="language" ng-repeat="language in languages">
+        <div class="language__behind">
+          <div class="language__display-name">
+            {{ language.name }}
+          </div>
+          <div class="language__locale">
+            {{ language.locale }}
+          </div>
+        </div>
+
+        <div class="language__title">
+          <span class="language__flag"></span>
+          <span class="language__id">{{ language.locale }}</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="l-project-resources column column--size-6 column--scrollable">
-  <h2 class="l-project-resources__title title title--level-2">
-    Resources
-  </h2>
+  <div class="l-project-resources column column--size-10">
+    <h2 class="l-project-resources__title title title--level-5 title--uppercase">
+      Resources
+    </h2>
 
-  <ul class="resources-list list--unstyled">
-    <li ng-repeat="resource in resources">
-      <a href="#" class="resources-list__item">
-        {{ resource.pathname }}
-      </a>
-    </li>
-  </ul>
+    <ul class="resources-list list--unstyled">
+      <li ng-repeat="resource in resources">
+        <a ui-sref="translate({slug: project.slug})" class="resources-list__item">
+          {{ resource.pathname }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div class="l-project-stats column column--size-2 column--scrollable">

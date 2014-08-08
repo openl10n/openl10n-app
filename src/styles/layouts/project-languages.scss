@@ -3,6 +3,13 @@
   height: 100%;
   max-height: 100%;
 
+  &__title {
+    @include font-size(16);
+    text-align: center;
+    line-height: 1.1em;
+    padding: 5px;
+  }
+
   .language {
     margin: 5px 10px 2px;
     position: relative;
@@ -13,7 +20,7 @@
 
     &__title {
       position: relative;
-      padding: 10px 0 2px;
+      padding: 12px 0 2px;
       z-index: 10;
       background: red;
       background: transparent;
@@ -23,22 +30,23 @@
       opacity: 0;
       z-index: 1;
       position: absolute;
-      height: 80px;
+      height: 70px;
       top: 0;
       bottom: 0;
       background: $color-gray-200;
       // background: rgba(200, 200, 200, 0.9);
       width: 300px;
       visibility: hidden;
-      padding-top: 8px;
+      padding-top: 10px;
       padding-left: 90px;
 
       border-radius: 2px;
-      box-shadow: 1px 2px 12px rgba(0,0,0,0.32);
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 
       transform: translateX(-10px);
       transition: all 180ms ease-out;
     }
+
 
     &:hover .language__behind {
       opacity: 1;
@@ -53,17 +61,33 @@
       height: 40px;
       background: $color-gray-300;
       margin-bottom: 3px;
+      transition: all 180ms ease-out;
     }
 
-    &__locale {
+    &:hover .language__flag {
+      transform: translateY(3px);
+    }
+
+    &__id {
       @include font-size(12);
       color: #555;
       display: block;
       text-align: center;
+      transition: all 180ms ease-out;
+    }
+
+    &:hover .language__id {
+      transform: translateY(5px);
+      opacity: 0;
     }
 
     &__display-name {
-      @include font-size(16);
+      @include font-size(18);
+    }
+
+    &__locale {
+      @include font-size(12);
+      color: $color-gray-500;
     }
   }
 

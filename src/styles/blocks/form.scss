@@ -4,6 +4,12 @@
     display: inline-block;
   }
 
+  &__label {
+    font-weight: 300;
+    text-transform: uppercase;
+    @include font-size(12);
+  }
+
   &__control {
     @include font-size(14);
     display: block;
@@ -21,7 +27,11 @@
     }
 
     &:active, &:focus {
-      border: 1px solid darken($color-gray-500, 5);
+      border: 1px solid darken($color-primary, 5);
+    }
+
+    &--size-large {
+      height: 44px;
     }
   }
 

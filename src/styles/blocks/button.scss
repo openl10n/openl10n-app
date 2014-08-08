@@ -16,6 +16,10 @@
 
   transition: all 150ms ease-out;
 
+  &:focus {
+    outline: 0;
+  }
+
   &--primary {
     color: #fff;
     background-color: $color-primary;
@@ -29,9 +33,9 @@
       }
     }
 
-    &:hover {
-      background-color: darken($color-primary, 4);
-      border-color: darken($color-primary, 4);
+    &:hover, &:focus {
+      background-color: darken($color-primary, 8);
+      border-color: darken($color-primary, 8);
     }
   }
 
@@ -52,6 +56,11 @@
   &--size-large {
     @include font-size(20);
     padding: 10px 16px;
+  }
+
+  &--size-wide {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   &--block {

@@ -1,21 +1,23 @@
 <div class="column column--size-1"></div>
 
-<div class="column column--size-4">
-  <h1>Login</h1>
+<div class="column column--size-3">
+  <h1>
+    Login
+  </h1>
 
   <form ng-submit="authenticate(credentials.username, credentials.password)">
     <p>
-      <label for="">Username</label>
-      <input type="text" class="form__control" ng-model="credentials.username" autofocus>
+      <label for="" class="form__label">Username</label>
+      <input type="text" class="form__control form__control--size-large" ng-model="credentials.username" autofocus>
     </p>
 
     <p>
-      <label for="">Password</label>
-      <input type="password" class="form__control" ng-model="credentials.password">
+      <label for="" class="form__label">Password</label>
+      <input type="password" class="form__control form__control--size-large" ng-model="credentials.password">
     </p>
 
     <p>
-      <button type="submit" class="button button--primary">
+      <button type="submit" class="button button--primary button--size-wide">
         Login
       </button>
     </p>

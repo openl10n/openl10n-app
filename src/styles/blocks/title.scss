@@ -18,6 +18,20 @@
   }
 
   &--level-3 {
+    @include font-size(22);
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
 
+  &--level-4 {
+    @include font-size(20);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  &--level-5 {
+    @include font-size(18);
+    margin-top: 5px;
+    margin-bottom: 3px;
   }
 }
