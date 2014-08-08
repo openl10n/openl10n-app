@@ -48,8 +48,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
         },
       }
     })
-    .state('translate.phrase', {
-      url: '/:id',
+    .state('translate.source', {
+      url: '/{source:[^/]+}',
+      controller: 'TranslateSourceController',
+      template: '<div ui-view></div>',
+    })
+    .state('translate.source.target', {
+      url: '/{target:[^/]+}',
+      controller: 'TranslateTargetController',
+      template: '<div ui-view></div>',
+    })
+    .state('translate.source.target.phrase', {
+      url: '/{id:[0-9]+}',
       templateUrl: 'partials/translate-phrase.html',
       controller: 'TranslatePhraseController',
     })

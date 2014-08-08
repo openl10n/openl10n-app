@@ -11,7 +11,7 @@
   }
 
   .language {
-    margin: 5px 10px 2px;
+    margin: 3px 10px 0px;
     position: relative;
 
     &:hover {
@@ -33,8 +33,7 @@
       height: 70px;
       top: 0;
       bottom: 0;
-      background: $color-gray-200;
-      // background: rgba(200, 200, 200, 0.9);
+      background: rgba($color-gray-200, 0.85);
       width: 300px;
       visibility: hidden;
       padding-top: 10px;
@@ -74,6 +73,9 @@
       display: block;
       text-align: center;
       transition: all 180ms ease-out;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &:hover .language__id {
