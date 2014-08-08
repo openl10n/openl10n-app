@@ -10,7 +10,7 @@
   text-transform: uppercase;
 
   @include font-size(14);
-  padding: 6px 12px;
+  padding: 8px 16px;
   line-height: 1.42857;
   border-radius: 2px;
 
@@ -18,11 +18,11 @@
 
   &--primary {
     color: #fff;
-    background-color: #3c6788;
-    border-color: #3c6788;
+    background-color: $color-primary;
+    border-color: $color-primary;
 
     &.button--outline {
-      color: #3c6788;
+      color: $color-primary;
 
       &:hover {
         color: #fff;
@@ -30,8 +30,8 @@
     }
 
     &:hover {
-      background-color: darken(#3c6788, 4);
-      border-color: darken(#3c6788, 4);
+      background-color: darken($color-primary, 4);
+      border-color: darken($color-primary, 4);
     }
   }
 
