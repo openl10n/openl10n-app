@@ -5,6 +5,7 @@ var connect = require('gulp-connect')
 var iconfont = require('gulp-iconfont')
 var iconfontCSS = require("gulp-iconfont-css")
 var ngAnnotate = require('gulp-ng-annotate')
+var plumber = require('gulp-plumber')
 var rimraf = require('rimraf')
 var sourcemaps = require('gulp-sourcemaps')
 var sass = require('gulp-sass')
@@ -105,6 +106,7 @@ gulp.task('scripts', function () {
 //
 gulp.task('styles', function () {
   gulp.src(srcDir + '/styles/app.scss')
+    .pipe(plumber())
     .pipe(sass())
     .pipe(gulp.dest(distDir + '/css'))
 })
