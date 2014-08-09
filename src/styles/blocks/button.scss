@@ -20,6 +20,16 @@
     outline: 0;
   }
 
+  &:hover, &:focus {
+    transform: translateY(-2px);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    transition: box-shadow 50ms ease-out;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    transform: none;
+  }
+
   &--primary {
     color: #fff;
     background-color: $color-primary;

@@ -13,3 +13,9 @@ $color-dark: #37474f;
 // $color-primary: #27ae60;
 // $color-primary: #55b161;
 $color-primary: #67b972;
+
+// Status colors
+$color-invalid: #c41411;
+$color-untranslated: $color-gray-300;
+$color-translated: lighten(#67b972, 20);
+$color-approved: #67b972;

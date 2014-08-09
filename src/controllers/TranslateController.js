@@ -6,11 +6,15 @@ app.controller('TranslateController', function($scope, $state, project, language
   $scope.resources = resources;
   $scope.context = { source: '', target: '' };
   $scope.translations = [];
+  $scope.translationCommits = [];
   $scope.translationId = null;
 
+  // Fetch the project's translations
   TranslationService.getTranslations().then(function(data) {
-    _.forEach(data, function(translation) {
-      $scope.translations.push(new TranslationCommit(translation, $scope.context));
+    $scope.translations = data;
+
+    _.forEach($scope.translations, function(translation) {
+      $scope.translationCommits.push(new TranslationCommit(translation, $scope.context));
     })
   })
 

@@ -29,6 +29,7 @@
   &:hover {
     cursor: pointer;
     box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.32);
+    transform: translateY(-2px);
   }
 
   &:hover &__label {
@@ -43,6 +44,7 @@
   &:active {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.32);
     transition: box-shadow 50ms ease-out;
+    transform: none;
   }
 
   &__size-small {

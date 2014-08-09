@@ -24,4 +24,37 @@
       border-bottom: 1px solid darken($color-gray-100, 5);
     }
   }
+
+  .translation {
+    border-right: 6px solid $color-untranslated;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-gray-50;
+    }
+
+    &--translated {
+      border-right-color: $color-translated;
+    }
+    &--approved {
+      border-right-color: $color-approved;
+    }
+
+    &__key {
+      padding: 0;
+      margin: 0;
+    }
+
+    &__source {
+      color: $color-gray-500;
+      padding: 0;
+      margin: 0;
+      margin-top: 5px;
+
+      &--undefined {
+        color: $color-invalid;
+        font-style: italic;
+      }
+    }
+  }
 }

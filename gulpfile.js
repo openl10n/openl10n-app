@@ -21,6 +21,7 @@ var isDebug = !gutil.env.prod;
 
 var javascriptFiles = [
   vendorDir + '/lodash/dist/lodash.js',
+  vendorDir + '/string/lib/string.js',
   vendorDir + '/angular/angular.js',
   vendorDir + '/angular-ui-router/release/angular-ui-router.js',
   srcDir + '/app.js',

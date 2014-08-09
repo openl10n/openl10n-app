@@ -38,16 +38,25 @@
     </h3>
 
     <ul class="translations__list list--unstyled">
-      <li class="translations__item" ng-repeat="translation in translations">
-        {{ translation.id }}
-        {{ translation.getSourcePhrase() }}
-        <!-- <a ui-sref="translate.source.target.phrase({target: 'fr', id: 1})">
-          Translation item 1
-        </a> -->
-      </li>
+      <li
+        class="translations__item translation"
+        ng-class="translation.isApproved() ? 'translation--approved' : (translation.isTranslated() ? 'translation--translated' : '')"
+        ng-repeat="translation in translationCommits"
+        ui-sref="translate.source.target.phrase({id: translation.id})"
+      >
+        <p class="translation__key">
+          {{ translation.key }}
+        </p>
+
+        <p class="translation__source" ng-show="translation.isSourceTranslated()">
+          {{ translation.getSourcePhrase()|truncate:80 }}
+        </p>
+        <p class="translation__source translation__source--undefined" ng-hide="translation.isSourceTranslated()">
+          undefined
+        </p>
     </ul>
   </div>
 </div>
 
-<div class="column column--size-8 column--scrollable" ui-view>
+<div class="l-translate-main-column column column--size-8 column--scrollable" ui-view>
 </div>
