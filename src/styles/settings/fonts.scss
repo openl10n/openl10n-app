@@ -1,0 +1,19 @@
+// Order of the includes matters, and it is: normal, bold, italic, bold+italic.
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $font-family;
+    font-weight: $weight;
+    font-style: $style;
+
+    src: url('#{$file-path}.eot');
+    src: url('#{$file-path}.eot?#iefix')               format('embedded-opentype'),
+         url('#{$file-path}.woff')                     format('woff'),
+         url('#{$file-path}.ttf')                      format('truetype'),
+         url('#{$file-path}.svg##{$font-family}')      format('svg');
+  }
+}
+
+@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-light', 300, normal);
+@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-Regular', 400, normal);
+@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-Bold', 700, normal);
+@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-Italic', 400, italic);
