@@ -1,10 +1,10 @@
 .l-translate-header {
   margin: 0;
   padding: 0;
-  background-color: $color-gray-100;
+  background-color: $color-gray-200;
   height: 60px;
   overflow: hidden;
-  border-bottom: 1px solid darken($color-gray-100, 5);
+  border-bottom: 1px solid $color-gray-300;
 
   &__title {
     font-weight: 400;

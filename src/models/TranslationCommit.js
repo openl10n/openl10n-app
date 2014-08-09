@@ -2,7 +2,7 @@ app.factory('TranslationCommit', function() {
 
   var TranslationCommit = function (translation, context) {
     this.id = translation.id;
-    this.key = translation.key;
+    this.key = translation.identifier;
     this._context = context;
     this._phrases = translation.phrases;
   }
@@ -48,7 +48,7 @@ app.factory('TranslationCommit', function() {
       return false;
     }
 
-    return this._phrases[locale].isApproved;
+    return this._phrases[locale].is_approved;
   }
 
 

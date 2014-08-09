@@ -48,12 +48,17 @@
           {{ translation.key }}
         </p>
 
-        <p class="translation__source" ng-show="translation.isSourceTranslated()">
+        <p
+          class="translation__source"
+          ng-show="translation.isSourceTranslated()"
+          ng-class="translation.isSourceApproved() ? 'translation__source--approved' : ''"
+        >
           {{ translation.getSourcePhrase()|truncate:80 }}
         </p>
         <p class="translation__source translation__source--undefined" ng-hide="translation.isSourceTranslated()">
           undefined
         </p>
+      </li>
     </ul>
   </div>
 </div>

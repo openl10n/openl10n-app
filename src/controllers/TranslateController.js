@@ -10,7 +10,7 @@ app.controller('TranslateController', function($scope, $state, project, language
   $scope.translationId = null;
 
   // Fetch the project's translations
-  TranslationService.getTranslations().then(function(data) {
+  TranslationService.getTranslations(project.slug).then(function(data) {
     $scope.translations = data;
 
     _.forEach($scope.translations, function(translation) {
