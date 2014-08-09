@@ -20,6 +20,7 @@ var vendorDir = './bower_components';
 var isDebug = !gutil.env.prod;
 
 var javascriptFiles = [
+  vendorDir + '/lodash/dist/lodash.js',
   vendorDir + '/angular/angular.js',
   vendorDir + '/angular-ui-router/release/angular-ui-router.js',
   srcDir + '/app.js',

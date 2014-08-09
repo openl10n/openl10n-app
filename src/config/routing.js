@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('project', {
-      url: '/project/:slug',
+      url: '/project/{slug:[a-zA-Z0-9\-\.\_]+}',
       templateUrl: 'partials/project.html',
       controller: 'ProjectController',
       resolve: {
@@ -46,15 +46,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
         languages: function($stateParams, LanguageService) {
           return LanguageService.getLanguages($stateParams.slug);
         },
+        resources: function($stateParams, ResourceService) {
+          return ResourceService.getResources($stateParams.slug);
+        },
       }
     })
     .state('translate.source', {
-      url: '/{source:[^/]+}',
+      url: '/{source:[a-zA-Z\-_]+}',
       controller: 'TranslateSourceController',
       template: '<div ui-view></div>',
     })
     .state('translate.source.target', {
-      url: '/{target:[^/]+}',
+      url: '/{target:[a-zA-Z\-_]+}',
       controller: 'TranslateTargetController',
       template: '<div ui-view></div>',
     })

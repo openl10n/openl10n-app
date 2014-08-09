@@ -19,16 +19,12 @@
 
   <div class="column column--size-3 form--inline">
     <div class="l-translate-header__locale-form">
-      <select class="form__control">
-        <option ng-repeat="language in languages" value="{{ language.locale }}">
-          {{ language.name }}
-        </option>
+      <select class="form__control" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+        <option value=""></option>
       </select>
 
-      <select class="form__control">
-        <option ng-repeat="language in languages" value="{{ language.locale }}">
-          {{ language.name }}
-        </option>
+      <select class="form__control" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+        <option value=""></option>
       </select>
     </div>
   </div>
@@ -42,15 +38,12 @@
     </h3>
 
     <ul class="translations__list list--unstyled">
-      <li class="translations__item">
-        <a ui-sref="translate.source.target.phrase({target: 'fr', id: 1})">
+      <li class="translations__item" ng-repeat="translation in translations">
+        {{ translation.id }}
+        {{ translation.getSourcePhrase() }}
+        <!-- <a ui-sref="translate.source.target.phrase({target: 'fr', id: 1})">
           Translation item 1
-        </a>
-      </li>
-      <li class="translations__item">
-        <a ui-sref="translate.source.target.phrase({target: 'fr',   id: 2})">
-          Translation item 2
-        </a>
+        </a> -->
       </li>
     </ul>
   </div>

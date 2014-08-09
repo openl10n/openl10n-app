@@ -6,10 +6,11 @@
   "license": "MIT",
   "dependencies": {
     "angular": "~1.2.21",
-    "jquery": "~2.1.1",
-    "angular-route": "~1.2.21",
-    "angular-resource": "~1.2.21",
     "angular-animate": "~1.2.21",
-    "angular-ui-router": "~0.2.10"
+    "angular-resource": "~1.2.21",
+    "angular-route": "~1.2.21",
+    "angular-ui-router": "~0.2.10",
+    "jquery": "~2.1.1",
+    "lodash": "~2.4.1"
   }
 }
