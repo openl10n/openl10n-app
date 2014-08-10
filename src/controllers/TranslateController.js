@@ -28,16 +28,16 @@ app.controller('TranslateController', function($scope, $state, project, language
         source: $scope.context.source,
         target: $scope.context.target,
         id: $scope.translationId
-      });
+      }, {location: "replace"});
     } else if ($scope.context.source && $scope.context.target) {
       $state.go('translate.source.target', {
         source: $scope.context.source,
         target: $scope.context.target
-      });
+      }, {location: "replace"});
     } else if ($scope.context.source) {
       $state.go('translate.source', {
         source: $scope.context.source,
-      });
+      }, {location: "replace"});
     }
   }
 
