@@ -3,6 +3,7 @@ app.factory('TranslationCommit', function() {
   var TranslationCommit = function (translation, context) {
     this.id = translation.id;
     this.key = translation.identifier;
+    this.resourceId = translation.resource_id;
     this._context = context;
     this._phrases = translation.phrases;
   }
