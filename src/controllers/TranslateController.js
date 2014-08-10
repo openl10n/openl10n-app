@@ -61,6 +61,8 @@ app.controller('TranslateTargetController', function($scope, $stateParams) {
 app.controller('TranslatePhraseController', function($scope, $stateParams) {
   console.log('TranslatePhraseController');
 
+  $scope.translationCommit = _.find($scope.translationCommits, {id: +$stateParams.id});
+
   $scope.translation = {
     sourcePhrase: 'Lorem ipsum ahmet source ' + $stateParams.id + '.',
     targetPhrase: 'Lorem ipsum ahmet target.',

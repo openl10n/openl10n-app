@@ -32,7 +32,7 @@
 
 
 <div class="l-translate-translations column column--size-4 column--scrollable">
-  <div class="translations" ng-repeat="resource in resources">
+  <div class="translations" ng-repeat="resource in resources|orderBy:'pathname'" ng-if="context.source && context.target">
     <h3 class="translations__resource">
       {{ resource.pathname }}
     </h3>
@@ -41,7 +41,7 @@
       <li
         class="translations__item translation"
         ng-class="translation.isApproved() ? 'translation--approved' : (translation.isTranslated() ? 'translation--translated' : '')"
-        ng-repeat="translation in translationCommits|filter:{resourceId: resource.resource_id}"
+        ng-repeat="translation in translationCommits|filter:{resourceId: resource.id}"
         ui-sref="translate.source.target.phrase({id: translation.id})"
       >
         <p class="translation__key">
