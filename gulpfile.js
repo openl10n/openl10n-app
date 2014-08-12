@@ -95,6 +95,7 @@ gulp.task('templates', function () {
 //
 gulp.task('scripts', function () {
   gulp.src(javascriptFiles)
+    .pipe(plumber())
     .pipe(sourcemaps.init())
       .pipe(concat('app.js'))
       .pipe(ngAnnotate())

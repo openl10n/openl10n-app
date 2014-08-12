@@ -38,6 +38,8 @@ app.controller('TranslateController', function($scope, $state, project, language
       $state.go('translate.source', {
         source: $scope.context.source,
       }, {location: "replace"});
+    } else {
+      $state.go('translate', {}, {location: "replace"});
     }
   }
 
