@@ -97,7 +97,7 @@ gulp.task('scripts', function () {
   gulp.src(javascriptFiles)
     .pipe(plumber())
     .pipe(sourcemaps.init())
-      .pipe(concat('app.js'))
+      .pipe(concat('app.js', {newLine: ';'}))
       .pipe(ngAnnotate())
       // .pipe(uglify())
     .pipe(sourcemaps.write())
