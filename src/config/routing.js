@@ -38,7 +38,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('translate', {
       url: '/project/:slug/translate',
       templateUrl: 'partials/translate.html',
-      controller: 'TranslateController',
+      controller: 'EditorController',
       resolve: {
         project: function($stateParams, ProjectService) {
           return ProjectService.getProject($stateParams.slug);
@@ -53,18 +53,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('translate.source', {
       url: '/{source:[a-zA-Z\-_]+}',
-      controller: 'TranslateSourceController',
-      template: '<div ui-view></div>',
+      controller: 'EditorSourceController',
+      // Setting the source locale doesn't change the UI so let's put an empty template
+      template: '<ui-view/>'
     })
     .state('translate.source.target', {
       url: '/{target:[a-zA-Z\-_]+}',
-      controller: 'TranslateTargetController',
-      template: '<div ui-view></div>',
+      controller: 'EditorTargetController',
+      template: '<ui-view/>'
     })
     .state('translate.source.target.phrase', {
       url: '/{id:[0-9]+}',
       templateUrl: 'partials/translate-phrase.html',
-      controller: 'TranslatePhraseController',
+      controller: 'EditorPhraseController',
     })
 });
 
