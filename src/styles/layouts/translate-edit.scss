@@ -15,6 +15,9 @@
     border-bottom: 1px solid darken($color-gray-200, 5);
     background-color: $color-gray-100;
 
+    // Remove 50px to avoid collision with the action button
+    width: calc(100% - 50px);
+
     // &:after {
     //   bottom: -8px;
     //   left: 22px;

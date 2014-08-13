@@ -34,6 +34,7 @@
 <div class="l-translate-translations column column--size-4 column--scrollable">
   <div class="translations" ng-repeat="resource in resources|orderBy:'pathname'" ng-if="context.source && context.target">
     <h3 class="translations__resource">
+      <i class="translations__resource-icon icon-file"></i>
       {{ resource.pathname }}
     </h3>
 

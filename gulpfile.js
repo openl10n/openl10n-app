@@ -121,13 +121,14 @@ gulp.task('icons', function(){
   gulp.src([srcDir + '/icons/*.svg'])
     .pipe(iconfontCSS({
       fontName : 'icons',
-      path: 'scss',
+      // path: 'scss',
+      path: srcDir + '/styles/templates/icons.scss',
       targetPath: '../../styles/icons.scss',
       fontPath: '../fonts/' // relative path
     }))
     .pipe(iconfont({
       fontName: 'icons',
-      fixedWidth: true,
+      // fixedWidth: true,
       normalize: true
     }))
     .pipe(gulp.dest(srcDir + '/public/fonts'));
