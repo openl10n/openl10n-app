@@ -6,7 +6,14 @@ angular
   .module('app')
   .filter('truncate', truncateFilter);
 
-function truncateFilter() {
+/**
+ * @name truncateFilter
+ *
+ * @return {Function} The truncate filter function
+ *
+ * @ngInject
+ */
+function truncateFilter(StringHandler) {
 
   /**
    * @name truncate
@@ -18,11 +25,9 @@ function truncateFilter() {
    * @param {String} chars  The ending char
    *
    * @return {String} The truncated string
-   *
-   * @ngInject
    */
   return function truncate(input, length, chars) {
-    return S(input).truncate(length, chars).s;
+    return StringHandler(input).truncate(length, chars).toString();
   };
 }
 
