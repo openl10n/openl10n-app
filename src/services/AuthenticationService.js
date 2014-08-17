@@ -34,7 +34,7 @@ app.factory('AuthenticationService', function ($q, $http, Configuration, Session
     // Retrieve user information
     $http.get(Configuration.SERVER_BASE_URL + '/me').success(function(data) {
       deferred.resolve(data);
-    }, function() {
+    }).error(function() {
       deferred.reject();
     })
 

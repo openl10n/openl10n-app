@@ -17,10 +17,13 @@ function NavbarController($rootScope, $scope, AuthEvents, AuthenticationService)
   refreshUser();
 
   $rootScope.$on(AuthEvents.LOGIN_SUCCESS, refreshUser);
+  $rootScope.$on(AuthEvents.LOGOUT_SUCCESS, refreshUser);
 
   function refreshUser() {
     AuthenticationService.getCurrentUser().then(function(data) {
       $scope.user = data;
+    }, function(reason) {
+      $scope.user = null;
     })
   }
 }
