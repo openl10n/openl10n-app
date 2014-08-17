@@ -19,6 +19,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         },
       }
     })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'partials/profile.html',
+      controller: 'ProfileController',
+    })
     .state('project', {
       url: '/project/{slug:[a-zA-Z0-9\-\.\_]+}',
       templateUrl: 'partials/project.html',

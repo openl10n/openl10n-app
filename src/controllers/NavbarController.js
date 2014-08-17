@@ -9,7 +9,7 @@ angular
 /**
  * @name NavbarController
  *
- * @desc Controller use to manage the navbar
+ * @desc Controller used to manage the navbar
  *
  * @ngInject
  */

@@ -1,0 +1,19 @@
+// Media Object
+.media {
+  overflow: hidden;
+  zoom: 1;
+
+  &__visual {
+    float: left;
+    margin-right: 1em;
+
+    img {
+      display: block;
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    zoom: 1;
+  }
+}

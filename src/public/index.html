@@ -40,7 +40,7 @@
 
     <ul class="navbar__menu-user list list--unstyled">
       <li ng-if="user">
-        <a href="" class="navbar__item">
+        <a ui-sref="profile" class="navbar__item">
           <img class="navbar__item-avatar" gravatar-src="user.email" alt="avatar">
           <span class="navbar__item-label navbar__item-username">
             {{ user.name }}
