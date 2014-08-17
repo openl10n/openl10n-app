@@ -7,12 +7,14 @@
 @import "settings/normalize";
 @import "settings/global";
 @import "settings/utilities";
+@import "settings/animate";
 @import "icons";
 
 //
 // Blocks
 //
 @import "blocks/action";
+@import "blocks/alert";
 @import "blocks/button";
 @import "blocks/column";
 @import "blocks/document";

@@ -1,0 +1,11 @@
+.alert {
+  padding: 15px;
+  border-radius: 2px;
+  // border: 1px solid;
+
+  &--danger {
+    color: #c0392b;
+    background: lighten(#c0392b, 40);
+    // border-color: lighten(#c0392b, 30);
+  }
+}

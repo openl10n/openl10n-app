@@ -8,6 +8,10 @@
     font-weight: 300;
     text-transform: uppercase;
     @include font-size(12);
+
+    &--has-error {
+      color: $color-invalid;
+    }
   }
 
   &__control {
@@ -24,6 +28,10 @@
 
     &:hover, &:active, &:focus {
       outline: 0;
+    }
+
+    &--has-error {
+      border-color: darken($color-invalid, 5) !important;
     }
 
     &:active, &:focus {
