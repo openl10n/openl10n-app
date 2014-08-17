@@ -25,26 +25,32 @@
   @if $filename == book {
     $char: "\E001";
   }
-  @if $filename == dashboard {
+  @if $filename == check {
     $char: "\E002";
   }
-  @if $filename == file {
+  @if $filename == check2 {
     $char: "\E003";
   }
-  @if $filename == hexagon {
+  @if $filename == dashboard {
     $char: "\E004";
   }
-  @if $filename == logo {
+  @if $filename == file {
     $char: "\E005";
   }
-  @if $filename == save {
+  @if $filename == hexagon {
     $char: "\E006";
   }
-  @if $filename == translate {
+  @if $filename == logo {
     $char: "\E007";
   }
-  @if $filename == world {
+  @if $filename == save {
     $char: "\E008";
+  }
+  @if $filename == translate {
+    $char: "\E009";
+  }
+  @if $filename == world {
+    $char: "\E00A";
   }
 
   @return $char;
@@ -63,6 +69,12 @@
 
 .icon-book {
   @include icon(book);
+}
+.icon-check {
+  @include icon(check);
+}
+.icon-check2 {
+  @include icon(check2);
 }
 .icon-dashboard {
   @include icon(dashboard);
