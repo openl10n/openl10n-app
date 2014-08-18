@@ -83,6 +83,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: 'partials/translate-phrase.html',
       controller: 'EditorPhraseController',
     })
+    .state('glossary', {
+      url: '/glossary',
+      menu: 'glossary',
+      templateUrl: 'partials/glossary.html',
+      controller: 'GlossaryController',
+    })
 });
 
 app.run(function($rootScope) {
