@@ -55,6 +55,25 @@
     }
   }
 
+  &--danger {
+    color: #fff;
+    background-color: $color-invalid;
+    border-color: $color-invalid;
+
+    &.button--outline {
+      color: $color-invalid;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    &:hover, &:focus {
+      background-color: darken($color-invalid, 8);
+      border-color: darken($color-invalid, 8);
+    }
+  }
+
   &--outline {
     background-color: transparent;
   }
