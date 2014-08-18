@@ -18,3 +18,4 @@ app.run(function ($rootScope, $location, Session) {
 app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthenticationInterceptor');
 });
+
