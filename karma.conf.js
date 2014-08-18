@@ -15,12 +15,19 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // Vendor
       'bower_components/lodash/dist/lodash.js',
       'bower_components/string/lib/string.js',
       'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-gravatar/build/md5.js',
+      'bower_components/angular-gravatar/build/angular-gravatar.js',
+      // Vendor (Test)
+      'bower_components/angular-mocks/angular-mocks.js',
+      //'bower_components/angular-scenario/angular-scenario.js',
+      // Sources
       'src/**/*.js',
+      // Tests
       'test/**/*.js'
     ],
 
