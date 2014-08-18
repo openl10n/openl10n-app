@@ -13,10 +13,8 @@ angular
  *
  * @ngInject
  */
-function ProfileController($scope, AuthenticationService) {
-  AuthenticationService.getCurrentUser().then(function(data) {
-    $scope.user = data;
-  })
+function ProfileController($scope, user) {
+  $scope.user = user;
 }
 
 })();

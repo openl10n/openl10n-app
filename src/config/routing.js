@@ -23,6 +23,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/profile',
       templateUrl: 'partials/profile.html',
       controller: 'ProfileController',
+      resolve: {
+        user: function(AuthenticationService) {
+          return AuthenticationService.getCurrentUser();
+        }
+      }
     })
     .state('project', {
       url: '/project/{slug:[a-zA-Z0-9\-\.\_]+}',
