@@ -31,7 +31,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('project', {
-      url: '/project/{slug:[a-zA-Z0-9\-\.\_]+}',
+      url: '/projects/{slug:[a-zA-Z0-9\-\.\_]+}',
       menu: 'translate',
       templateUrl: 'partials/project.html',
       controller: 'ProjectController',
@@ -48,7 +48,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('translate', {
-      url: '/project/:slug/translate',
+      url: '/projects/:slug/translate',
       menu: 'translate',
       templateUrl: 'partials/translate.html',
       controller: 'EditorController',
