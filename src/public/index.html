@@ -17,14 +17,14 @@
 
     <ul class="navbar__menu-main list list--unstyled">
       <li>
-        <a ui-sref="dashboard" class="navbar__item navbar__item--active">
+        <a ui-sref="dashboard" class="navbar__item" ng-class="{'navbar__item--active': (activePage == 'dashboard')}">
           <i class="navbar__item-icon icon-dashboard"></i>
           <span class="navbar__item-label">Dashboard</span>
         </a>
       </li>
 
       <li>
-        <a href="" class="navbar__item">
+        <a href="" class="navbar__item" ng-class="{'navbar__item--active': (activePage == 'translate')}">
           <i class="navbar__item-icon icon-translate"></i>
           <span class="navbar__item-label">Translate</span>
         </a>
