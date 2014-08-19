@@ -8,6 +8,10 @@ app.factory('TranslationCommit', function() {
     this._phrases = translation.phrases;
   }
 
+  TranslationCommit.prototype.isActive = function() {
+    return this.id == this._context.translationId;
+  }
+
   TranslationCommit.prototype.getSourcePhrase = function() {
     return this.getLocaleText(this._context.source);
   }

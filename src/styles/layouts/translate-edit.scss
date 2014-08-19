@@ -16,7 +16,7 @@
     background-color: $color-gray-100;
 
     // Remove 50px to avoid collision with the action button
-    width: calc(100% - 50px);
+    // width: calc(100% - 50px);
 
     // &:after {
     //   bottom: -8px;
@@ -45,7 +45,7 @@
       font-weight: 300;
       margin-top: 0;
       margin-bottom: 5px;
-      min-height: 50px;
+      min-height: 60px;
       max-height: 200px;
       overflow-y: auto;
       // overflow-x: hidden;

@@ -62,6 +62,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resources: function($stateParams, ResourceService) {
           return ResourceService.getResources($stateParams.slug);
         },
+        translations: function($stateParams, TranslationService) {
+          return TranslationService.getTranslations($stateParams.slug);
+        },
       }
     })
     .state('translate.source', {

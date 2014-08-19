@@ -41,7 +41,11 @@
     <ul class="translations__list list--unstyled">
       <li
         class="translations__item translation"
-        ng-class="translation.isApproved() ? 'translation--approved' : (translation.isTranslated() ? 'translation--translated' : '')"
+        ng-class="{
+          'translation--approved': translation.isApproved(),
+          'translation--translated': translation.isTranslated(),
+          'translation--active': translation.isActive()
+        }"
         ng-repeat="translation in translationCommits|filter:{resourceId: resource.id}"
         ui-sref="translate.source.target.phrase({id: translation.id})"
       >

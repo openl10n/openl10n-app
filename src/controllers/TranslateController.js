@@ -8,34 +8,28 @@ angular
   .controller('EditorPhraseController', EditorPhraseController)
 ;
 
-function EditorController($scope, $state, project, languages, resources, TranslationService, TranslationCommit) {
+function EditorController($scope, $state, project, languages, resources, translations, TranslationCommit) {
   console.log('EditorController')
 
   $scope.project = project;
   $scope.languages = languages;
   $scope.resources = resources;
-  $scope.context = { source: '', target: '' };
-  $scope.translations = [];
+  $scope.context = { source: '', target: '', translationId: null };
+  $scope.translations = translations;
+
   $scope.translationCommits = [];
-  $scope.translationId = null;
-
-  // Fetch the project's translations
-  TranslationService.getTranslations(project.slug).then(function(data) {
-    $scope.translations = data;
-
-    angular.forEach($scope.translations, function(translation) {
-      $scope.translationCommits.push(new TranslationCommit(translation, $scope.context));
-    })
+  angular.forEach($scope.translations, function(translation) {
+    $scope.translationCommits.push(new TranslationCommit(translation, $scope.context));
   })
 
-  function updateRoute() {
-    if ($scope.context.source && $scope.context.target && $scope.translationId) {
+  function updateRoute(context) {
+    if ($scope.context.source && $scope.context.target && $scope.context.translationId) {
       console.log('go(translate.source.target.phrase)');
 
       $state.go('translate.source.target.phrase', {
         source: $scope.context.source,
         target: $scope.context.target,
-        id: $scope.translationId
+        id: $scope.context.translationId
       }, {location: "replace"});
     } else if ($scope.context.source && $scope.context.target) {
       console.log('go(translate.source.target)');
@@ -77,12 +71,12 @@ function EditorTargetController($scope, $stateParams) {
 function EditorPhraseController($scope, $stateParams) {
   console.log('EditorPhraseController')
 
-  $scope.translationId = +$stateParams.id;
+  $scope.context.translationId = +$stateParams.id;
 
-  $scope.translationCommit = _.find($scope.translationCommits, {id: $scope.translationId});
+  $scope.translationCommit = _.find($scope.translationCommits, {id: $scope.context.translationId});
 
   $scope.translation = {
-    sourcePhrase: 'Lorem ipsum ahmet source ' + $scope.translationId + '.',
+    sourcePhrase: 'Lorem ipsum ahmet source ' + $scope.context.translationId + '.',
     targetPhrase: 'Lorem ipsum ahmet target.',
   }
 }

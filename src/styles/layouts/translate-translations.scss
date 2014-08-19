@@ -43,6 +43,10 @@
 
     &:hover {
       cursor: pointer;
+      background-color: $color-gray-100;
+    }
+
+    &--active {
       background-color: $color-gray-50;
     }
 
@@ -56,6 +60,15 @@
     &__key {
       padding: 0;
       margin: 0;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 5px;
+      overflow: hidden;
+    }
+
+    &--active .translation__key {
+      color: #428bca !important;
     }
 
     &__source {
