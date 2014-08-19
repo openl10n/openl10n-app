@@ -27,6 +27,11 @@
       line-height: 40px;
       border-bottom: 1px solid $color-gray-200;
 
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 15px;
+      overflow: hidden;
+
       // &:first-of-type {
       //   border-top-left-radius: 2px;
       //   border-top-right-radius: 2px;

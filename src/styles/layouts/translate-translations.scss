@@ -15,6 +15,10 @@
       border-bottom: 1px solid darken($color-gray-300, 2);
       // border-right: 6px solid $color-gray-400;
 
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
       position: -webkit-sticky;
       position: -moz-sticky;
       position: -ms-sticky;
