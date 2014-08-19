@@ -94,8 +94,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 });
 
-app.run(function($rootScope) {
+app.run(function($rootScope, Stopwatch) {
+  var stopwatch = Stopwatch.create();
+
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    stopwatch.start();
+  })
+
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+    console.log('Time to go to state = ' + stopwatch.time());
+    stopwatch.reset();
+  })
+
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    stopwatch.reset();
     console.log(event);
   })
 })
+
