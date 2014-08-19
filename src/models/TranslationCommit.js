@@ -16,6 +16,24 @@ app.factory('TranslationCommit', function() {
     return this.getLocaleText(this._context.target);
   }
 
+  TranslationCommit.prototype.setTargetPhrase = function(phrase) {
+    var locale = this._context.target;
+
+    if (!this._phrases[locale]) {
+      this._phrases[locale] = { is_approved: false };
+    }
+
+    this._phrases[locale].text = phrase;
+  }
+
+  TranslationCommit.prototype.targetPhrase = function(phrase) {
+    if (angular.isDefined(phrase)) {
+      this.setTargetPhrase(phrase);
+    }
+
+    return this.getTargetPhrase();
+  }
+
   // True is source phrase exist
   TranslationCommit.prototype.isSourceTranslated = function() {
     return "undefined" !== typeof this._phrases[this._context.source];

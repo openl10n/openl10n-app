@@ -19,13 +19,17 @@
     </p>
   </div>
 
-  <div class="translation-target">
+  <form class="translation-target">
     <textarea class="translation-target__textarea" ng-model="translation.targetPhrase"></textarea>
+    <!-- <textarea class="translation-target__textarea"
+      ng-model="translationCommit.targetPhrase"
+      ng-model-options="{ getterSetter: true }">
+    </textarea> -->
 
     <p class="translation-target__footer">
       <span>
         Press <strong>TAB</strong> to move to the next phrase
       </span>
     </p>
-  </div>
+  </form>
 </div>
