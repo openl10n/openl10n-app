@@ -20,6 +20,24 @@
     }
   }
 
+  &__stats {
+    padding-top: 10px;
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  &__counter {
+    @include font-size(24);
+    line-height: 24px;
+    display: block;
+  }
+
+  &__counter-label {
+    @include font-size(10);
+    text-transform: uppercase;
+    display: block;
+  }
+
   &__search-form {
     margin: 12px 0;
     padding-right: 20px;
