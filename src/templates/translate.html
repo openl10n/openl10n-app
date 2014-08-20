@@ -24,11 +24,11 @@
 
   <div class="column column--size-3 form--inline">
     <div class="l-translate-header__locale-form">
-      <select class="form__control" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+      <select class="form__control" ng-change="updateRoute()" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
         <option value=""></option>
       </select>
 
-      <select class="form__control" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+      <select class="form__control" ng-change="updateRoute()" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
         <option value=""></option>
       </select>
     </div>
@@ -49,9 +49,9 @@
         ng-class="{
           'translation--approved': translation.isApproved(),
           'translation--translated': translation.isTranslated(),
-          'translation--active': translation.isActive()
+          'translation--active': translation.selected
         }"
-        ng-repeat="translation in translationCommits|filter:{resourceId: resource.id}"
+        ng-repeat="translation in translationCommits.items|filter:{resourceId: resource.id}"
         ui-sref="translate.source.target.phrase({id: translation.id})"
       >
         <p class="translation__key">

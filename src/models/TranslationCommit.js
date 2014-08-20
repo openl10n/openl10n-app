@@ -9,7 +9,7 @@ app.factory('TranslationCommit', function() {
   }
 
   TranslationCommit.prototype.isActive = function() {
-    return this.id == this._context.translationId;
+    return false;
   }
 
   TranslationCommit.prototype.getSourcePhrase = function() {

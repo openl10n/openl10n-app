@@ -72,19 +72,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
       menu: 'translate',
       controller: 'EditorSourceController',
       // Setting the source locale doesn't change the UI so let's put an empty template
-      template: '<ui-view/>'
+      template: '<ui-view/>',
+      resolve: {
+        source: function($stateParams) {
+          return $stateParams.source;
+        }
+      }
     })
     .state('translate.source.target', {
       url: '/{target:[a-zA-Z\-_]+}',
       menu: 'translate',
       controller: 'EditorTargetController',
-      template: '<ui-view/>'
+      template: '<ui-view/>',
+      resolve: {
+        target: function($stateParams) {
+          return $stateParams.target;
+        },
+      }
     })
     .state('translate.source.target.phrase', {
       url: '/{id:[0-9]+}',
       menu: 'translate',
       templateUrl: 'partials/translate-phrase.html',
       controller: 'EditorPhraseController',
+      resolve: {
+        translationId: function($stateParams) {
+          return +$stateParams.id;
+        },
+      }
     })
     .state('glossary', {
       url: '/glossary',
