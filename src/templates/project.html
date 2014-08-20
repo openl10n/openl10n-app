@@ -14,7 +14,7 @@
   </p>
 
   <p>
-    <a ui-sref="translate({slug: project.slug})" class="button button--primary button--size-wide">
+    <a ui-sref="translate.source({slug: project.slug, source: project.default_locale})" class="button button--primary button--size-wide">
       Translate
     </a>
   </p>
@@ -54,7 +54,7 @@
 
     <ul class="resources-list list--unstyled">
       <li ng-repeat="resource in resources">
-        <a ui-sref="translate({slug: project.slug})" class="resources-list__item">
+        <a href="" class="resources-list__item">
           {{ resource.pathname }}
         </a>
       </li>
