@@ -52,8 +52,29 @@ function EditorSourceController($scope, source) {
   $scope.context.source = source;
 }
 
-function EditorTargetController($scope, target) {
+function EditorTargetController($scope, hotkeys, target) {
   $scope.context.target = target;
+
+  hotkeys
+    .bindTo($scope)
+    .add({
+      combo: 'tab',
+      description: 'Select next translation',
+      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback: function(e) {
+        e.preventDefault();
+        console.log('select next translation');
+      }
+    })
+    .add({
+      combo: 'shift+tab',
+      description: 'Select previous translation',
+      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback: function(e) {
+        e.preventDefault();
+        console.log('select previous translation');
+      }
+    });
 }
 
 function EditorPhraseController($scope, translationId, TranslationRepository) {

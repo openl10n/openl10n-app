@@ -27,6 +27,7 @@ var javascriptFiles = [
   vendorDir + '/angular-ui-router/release/angular-ui-router.js',
   vendorDir + '/angular-gravatar/build/md5.js',
   vendorDir + '/angular-gravatar/build/angular-gravatar.js',
+  vendorDir + '/angular-hotkeys/build/hotkeys.js',
   // Sources
   srcDir + '/app.js',
   srcDir + '/**/*.js'
