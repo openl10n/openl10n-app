@@ -56,11 +56,25 @@ function EditorTargetController($scope, target) {
   $scope.context.target = target;
 }
 
-function EditorPhraseController($scope, translationId) {
+function EditorPhraseController($scope, translationId, TranslationRepository) {
   $scope.translationCommit = $scope.translationCommits.select(translationId)
 
-  $scope.translation = {
-    targetPhrase: $scope.translationCommit.getTargetPhrase()
+  $scope.editedTranslation = {
+    id: translationId,
+    locale: $scope.context.target,
+    phrase: $scope.translationCommit.getTargetPhrase()
+  }
+
+  $scope.saveTranslation = function() {
+    TranslationRepository.savePhrase(
+      $scope.editedTranslation.id,
+      $scope.editedTranslation.locale,
+      $scope.editedTranslation.phrase
+    );
+
+    $scope.translationCommit.setTargetPhrase(
+      $scope.editedTranslation.phrase
+    );
   }
 }
 
