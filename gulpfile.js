@@ -4,6 +4,7 @@ var concat = require('gulp-concat')
 var connect = require('gulp-connect')
 var iconfont = require('gulp-iconfont')
 var iconfontCSS = require("gulp-iconfont-css")
+var karma = require('gulp-karma');
 var ngAnnotate = require('gulp-ng-annotate')
 var plumber = require('gulp-plumber')
 var rimraf = require('rimraf')
@@ -19,8 +20,7 @@ var distDir = './dist';
 var vendorDir = './bower_components';
 var isDebug = !gutil.env.prod;
 
-var javascriptFiles = [
-  // Vendors
+var vendorFiles = [
   vendorDir + '/lodash/dist/lodash.js',
   vendorDir + '/string/lib/string.js',
   vendorDir + '/angular/angular.js',
@@ -28,9 +28,14 @@ var javascriptFiles = [
   vendorDir + '/angular-gravatar/build/md5.js',
   vendorDir + '/angular-gravatar/build/angular-gravatar.js',
   vendorDir + '/angular-hotkeys/build/hotkeys.js',
-  // Sources
+];
+var sourceFiles = [
   srcDir + '/app.js',
   srcDir + '/**/*.js'
+];
+var testFiles = [
+  'bower_components/angular-mocks/angular-mocks.js',
+  'test/**/*.js'
 ];
 
 //
@@ -65,6 +70,12 @@ gulp.task('watch', ['server'], function() {
   gulp.watch(srcDir + '/public/**/*', ['public']);
 
   gulp.watch(srcDir + '/templates/**/*', ['templates']);
+
+  gulp.src(vendorFiles.concat(sourceFiles).concat(testFiles))
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'watch'
+    }));
 });
 
 //
@@ -99,7 +110,7 @@ gulp.task('templates', function () {
 // Javascript
 //
 gulp.task('scripts', function () {
-  gulp.src(javascriptFiles)
+  gulp.src(vendorFiles.concat(sourceFiles))
     .pipe(plumber())
     .pipe(sourcemaps.init())
       .pipe(concat('app.js', {newLine: ';'}))
@@ -137,4 +148,19 @@ gulp.task('icons', function(){
       normalize: true
     }))
     .pipe(gulp.dest(srcDir + '/public/fonts'));
+});
+
+//
+// Test
+//
+gulp.task('test', function (done) {
+  return gulp.src(vendorFiles.concat(sourceFiles).concat(testFiles))
+    .pipe(karma({
+      configFile: __dirname + '/karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    });
 });

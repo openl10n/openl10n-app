@@ -10,6 +10,7 @@
     "gulp-connect": "^2.0.6",
     "gulp-iconfont": "^0.1.1",
     "gulp-iconfont-css": "0.0.9",
+    "gulp-karma": "0.0.4",
     "gulp-ng-annotate": "^0.2.0",
     "gulp-plumber": "^0.6.4",
     "gulp-sass": "^0.7.2",
@@ -17,8 +18,8 @@
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^3.0.0",
     "karma": "^0.12.21",
-    "karma-jasmine": "^0.1.5",
     "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
     "rimraf": "^2.2.8"
   }
