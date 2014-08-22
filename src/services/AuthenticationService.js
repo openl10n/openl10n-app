@@ -1,4 +1,6 @@
 app.factory('AuthenticationService', function ($q, $http, Configuration, Session) {
+  'use strict';
+
   var AuthenticationService = {};
 
   AuthenticationService.login = function (username, password) {
@@ -17,10 +19,10 @@ app.factory('AuthenticationService', function ($q, $http, Configuration, Session
     }, function() {
       Session.destroy();
       deferred.reject();
-    })
+    });
 
     return deferred.promise;
-  }
+  };
 
   AuthenticationService.getCurrentUser = function() {
     var deferred = $q.defer();
@@ -36,10 +38,10 @@ app.factory('AuthenticationService', function ($q, $http, Configuration, Session
       deferred.resolve(data);
     }).error(function() {
       deferred.reject();
-    })
+    });
 
     return deferred.promise;
-  }
+  };
 
   return AuthenticationService;
 });

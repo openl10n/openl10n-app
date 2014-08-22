@@ -15,7 +15,7 @@ function StopwatchFactory() {
 
   factory.create = function() {
     return new Stopwatch();
-  }
+  };
 
   return factory;
 }
@@ -34,26 +34,26 @@ function Stopwatch() {
 
   this.time = function() {
     return lapTime + (startAt ? now() - startAt : 0);
-  }
+  };
 
   this.start = function() {
     startAt = now();
 
     return this;
-  }
+  };
 
   this.stop = function() {
     lapTime = startAt ? lapTime + now() - startAt : lapTime;
     startAt = 0; // pause
 
     return this;
-  }
+  };
 
   this.reset = function() {
     lapTime = startAt = 0;
 
     return this;
-  }
+  };
 }
 
 })();

@@ -1,4 +1,6 @@
 app.controller('LoginController', function ($rootScope, $scope, $location, $timeout, AuthenticationService, AuthEvents) {
+  'use strict';
+
   $scope.credentials = {
     username: '',
     password: '',

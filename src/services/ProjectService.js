@@ -1,4 +1,6 @@
 app.factory('ProjectService', function($http, $q, Configuration, Project) {
+  'use strict';
+
   var ProjectService = {};
 
   ProjectService.getProjects = function() {

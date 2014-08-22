@@ -1,4 +1,6 @@
 app.service('Session', function($window) {
+  'use strict';
+
   this.create = function(token) {
     $window.localStorage.token = token;
   }

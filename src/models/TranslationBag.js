@@ -1,4 +1,5 @@
 app.factory('TranslationBag', function() {
+  'use strict';
 
   var TranslationBag = function () {
     this.items = [];

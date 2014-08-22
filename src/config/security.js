@@ -1,3 +1,8 @@
+(function() {
+
+'use strict';
+
+
 //
 // Intercept every non loggued call
 //
@@ -19,3 +24,4 @@ app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthenticationInterceptor');
 });
 
+})();

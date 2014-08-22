@@ -4,7 +4,8 @@ var concat = require('gulp-concat')
 var connect = require('gulp-connect')
 var iconfont = require('gulp-iconfont')
 var iconfontCSS = require("gulp-iconfont-css")
-var karma = require('gulp-karma');
+var jshint = require('gulp-jshint')
+var karma = require('gulp-karma')
 var ngAnnotate = require('gulp-ng-annotate')
 var plumber = require('gulp-plumber')
 var rimraf = require('rimraf')
@@ -148,6 +149,15 @@ gulp.task('icons', function(){
       normalize: true
     }))
     .pipe(gulp.dest(srcDir + '/public/fonts'));
+});
+
+//
+// Lint
+//
+gulp.task('lint', function() {
+  return gulp.src(sourceFiles)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 //

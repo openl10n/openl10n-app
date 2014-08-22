@@ -1,4 +1,6 @@
 app.factory('LanguageService', function($http, $q, Configuration) {
+  'use strict';
+
   var LanguageService = {};
 
   LanguageService.getLanguages = function(projectSlug) {

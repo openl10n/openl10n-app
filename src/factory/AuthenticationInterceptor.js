@@ -1,4 +1,6 @@
 app.factory('AuthenticationInterceptor', function ($q, Session) {
+  'use strict';
+
   return {
     request: function (config) {
       config.headers = config.headers || {};

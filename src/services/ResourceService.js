@@ -1,4 +1,6 @@
 app.factory('ResourceService', function($http, $q, Configuration) {
+  'use strict';
+
   var ResourceService = {};
 
   ResourceService.getResources = function(projectSlug) {

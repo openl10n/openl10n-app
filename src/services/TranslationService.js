@@ -1,4 +1,6 @@
 app.factory('TranslationService', function($http, $q, Configuration) {
+  'use strict';
+
   var TranslationService = {};
 
   // Get project translations

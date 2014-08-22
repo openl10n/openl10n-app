@@ -1,3 +1,7 @@
+(function() {
+
+'use strict';
+
 app.config(function($stateProvider, $urlRouterProvider) {
   // Redirect 404 to homepage
   $urlRouterProvider.otherwise('/');
@@ -127,3 +131,4 @@ app.run(function($rootScope, Stopwatch) {
   })
 })
 
+})();

@@ -1,4 +1,5 @@
 app.factory('Project', function() {
+  'use strict';
 
   var Project = function (data) {
     angular.extend(this, {
