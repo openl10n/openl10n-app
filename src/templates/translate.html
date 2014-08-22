@@ -35,43 +35,51 @@
   </div>
 </div>
 
-
-<div class="l-translate-translations column column--size-4 column--scrollable">
-  <div class="translations" ng-repeat="resource in resources|orderBy:'pathname'" ng-if="context.source && context.target">
-    <h3 class="translations__resource">
-      <i class="translations__resource-icon icon-file"></i>
-      {{ resource.pathname }}
-    </h3>
-
-    <ul class="translations__list list--unstyled">
-      <li
-        class="translations__item translation"
-        ng-class="{
-          'translation--approved': translation.isApproved(),
-          'translation--translated': translation.isTranslated(),
-          'translation--active': translation.selected
-        }"
-        ng-repeat="translation in translationCommits.items|filter:{resourceId: resource.id}"
-        ui-sref="translate.source.target.phrase({id: translation.id})"
-      >
-        <p class="translation__key">
-          {{ translation.key }}
-        </p>
-
-        <p
-          class="translation__source"
-          ng-show="translation.isSourceTranslated()"
-          ng-class="translation.isSourceApproved() ? 'translation__source--approved' : ''"
-        >
-          {{ translation.getSourcePhrase()|truncate:80 }}
-        </p>
-        <p class="translation__source translation__source--undefined" ng-hide="translation.isSourceTranslated()">
-          undefined
-        </p>
-      </li>
-    </ul>
+<div class="l-translate-main">
+  <div class="l-translate-overlay" ng-if="!context.source || !context.target">
+    <span class="l-translate-overlay__arrow"></span>
+    <p class="l-translate-overlay__title">
+      Please choose a language to start
+    </p>
   </div>
-</div>
 
-<div class="l-translate-main-column column column--size-8 column--scrollable" ui-view>
+  <div class="l-translate-translations column column--size-4 column--scrollable">
+    <div class="translations" ng-repeat="resource in resources|orderBy:'pathname'" ng-if="context.source && context.target">
+      <h3 class="translations__resource">
+        <i class="translations__resource-icon icon-file"></i>
+        {{ resource.pathname }}
+      </h3>
+
+      <ul class="translations__list list--unstyled">
+        <li
+          class="translations__item translation"
+          ng-class="{
+            'translation--approved': translation.isApproved(),
+            'translation--translated': translation.isTranslated(),
+            'translation--active': translation.selected
+          }"
+          ng-repeat="translation in translationCommits.items|filter:{resourceId: resource.id}"
+          ui-sref="translate.source.target.phrase({id: translation.id})"
+        >
+          <p class="translation__key">
+            {{ translation.key }}
+          </p>
+
+          <p
+            class="translation__source"
+            ng-show="translation.isSourceTranslated()"
+            ng-class="translation.isSourceApproved() ? 'translation__source--approved' : ''"
+          >
+            {{ translation.getSourcePhrase()|truncate:80 }}
+          </p>
+          <p class="translation__source translation__source--undefined" ng-hide="translation.isSourceTranslated()">
+            undefined
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="column column--size-8 column--scrollable" ui-view>
+  </div>
 </div>
