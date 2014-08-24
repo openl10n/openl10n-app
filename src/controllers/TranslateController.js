@@ -4,14 +4,14 @@
 
 angular
   .module('app')
-  .controller('EditorController', EditorController)
-  .controller('EditorSourceController', EditorSourceController)
-  .controller('EditorTargetController', EditorTargetController)
-  .controller('EditorPhraseController', EditorPhraseController)
+  .controller('TranslateController', TranslateController)
+  .controller('TranslateSourceController', TranslateSourceController)
+  .controller('TranslateTargetController', TranslateTargetController)
+  .controller('TranslatePhraseController', TranslatePhraseController)
 ;
 
-function EditorController($scope, $state, project, languages, resources, translations, TranslationBag, TranslationCommit) {
-  console.log('EditorController')
+function TranslateController($scope, $state, project, languages, resources, translations, TranslationBag, TranslationCommit) {
+  console.log('TranslateController')
 
   $scope.project = project;
   $scope.languages = languages;
@@ -50,11 +50,11 @@ function EditorController($scope, $state, project, languages, resources, transla
   }
 }
 
-function EditorSourceController($scope, source) {
+function TranslateSourceController($scope, source) {
   $scope.context.source = source;
 }
 
-function EditorTargetController($scope, hotkeys, target) {
+function TranslateTargetController($scope, hotkeys, target) {
   $scope.context.target = target;
 
   hotkeys
@@ -79,7 +79,7 @@ function EditorTargetController($scope, hotkeys, target) {
     });
 }
 
-function EditorPhraseController($scope, translationId, TranslationRepository) {
+function TranslatePhraseController($scope, translationId, TranslationRepository) {
   $scope.translationCommit = $scope.translationCommits.select(translationId)
 
   $scope.editedTranslation = {
