@@ -62,6 +62,9 @@
           ui-sref="translate.source.target.phrase({id: translation.id})"
         >
           <p class="translation__key">
+            <span class="translation__icon icon-circle-o" ng-if="!translation.isApproved()"></span>
+            <span class="translation__icon icon-check" ng-if="translation.isApproved()"></span>
+
             {{ translation.key }}
           </p>
 

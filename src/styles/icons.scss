@@ -31,26 +31,32 @@
   @if $filename == check2 {
     $char: "\E003";
   }
-  @if $filename == dashboard {
+  @if $filename == circle-o {
     $char: "\E004";
   }
-  @if $filename == file {
+  @if $filename == circle {
     $char: "\E005";
   }
-  @if $filename == hexagon {
+  @if $filename == dashboard {
     $char: "\E006";
   }
-  @if $filename == logo {
+  @if $filename == file {
     $char: "\E007";
   }
-  @if $filename == save {
+  @if $filename == hexagon {
     $char: "\E008";
   }
-  @if $filename == translate {
+  @if $filename == logo {
     $char: "\E009";
   }
-  @if $filename == world {
+  @if $filename == save {
     $char: "\E00A";
+  }
+  @if $filename == translate {
+    $char: "\E00B";
+  }
+  @if $filename == world {
+    $char: "\E00C";
   }
 
   @return $char;
@@ -75,6 +81,12 @@
 }
 .icon-check2 {
   @include icon(check2);
+}
+.icon-circle-o {
+  @include icon(circle-o);
+}
+.icon-circle {
+  @include icon(circle);
 }
 .icon-dashboard {
   @include icon(dashboard);
