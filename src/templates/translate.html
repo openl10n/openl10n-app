@@ -71,7 +71,7 @@
           <p
             class="translation__source"
             ng-show="translation.isSourceTranslated()"
-            ng-class="translation.isSourceApproved() ? 'translation__source--approved' : ''"
+            ng-class="translation.isSourceApproved() ? '' : 'translation__source--non-approved'"
           >
             {{ translation.getSourcePhrase()|truncate:80 }}
           </p>

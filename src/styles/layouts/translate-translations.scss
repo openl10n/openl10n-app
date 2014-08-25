@@ -99,8 +99,8 @@
       white-space: nowrap;
       overflow: hidden;
 
-      &--approved {
-        color: $color-approved;
+      &--non-approved {
+        text-decoration: line-through;
       }
 
       &--undefined {
