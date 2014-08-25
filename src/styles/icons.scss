@@ -22,41 +22,47 @@
 @function icon-char($filename) {
   $char: "";
 
-  @if $filename == book {
+  @if $filename == arrow-left {
     $char: "\E001";
   }
-  @if $filename == check {
+  @if $filename == arrow-right {
     $char: "\E002";
   }
-  @if $filename == check2 {
+  @if $filename == book {
     $char: "\E003";
   }
-  @if $filename == circle-o {
+  @if $filename == check {
     $char: "\E004";
   }
-  @if $filename == circle {
+  @if $filename == check2 {
     $char: "\E005";
   }
-  @if $filename == dashboard {
+  @if $filename == circle-o {
     $char: "\E006";
   }
-  @if $filename == file {
+  @if $filename == circle {
     $char: "\E007";
   }
-  @if $filename == hexagon {
+  @if $filename == dashboard {
     $char: "\E008";
   }
-  @if $filename == logo {
+  @if $filename == file {
     $char: "\E009";
   }
-  @if $filename == save {
+  @if $filename == hexagon {
     $char: "\E00A";
   }
-  @if $filename == translate {
+  @if $filename == logo {
     $char: "\E00B";
   }
-  @if $filename == world {
+  @if $filename == save {
     $char: "\E00C";
+  }
+  @if $filename == translate {
+    $char: "\E00D";
+  }
+  @if $filename == world {
+    $char: "\E00E";
   }
 
   @return $char;
@@ -73,6 +79,12 @@
   }
 }
 
+.icon-arrow-left {
+  @include icon(arrow-left);
+}
+.icon-arrow-right {
+  @include icon(arrow-right);
+}
 .icon-book {
   @include icon(book);
 }

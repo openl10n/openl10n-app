@@ -23,10 +23,12 @@
   </div>
 
   <div class="column column--size-3 form--inline">
-    <div class="l-translate-header__locale-form">
+    <div class="l-translate-header__locale-form u-text-right">
       <select class="form__control" ng-change="updateRoute()" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
         <option value=""></option>
       </select>
+
+      <i class="l-translate-header__icon icon-arrow-right"></i>
 
       <select class="form__control" ng-change="updateRoute()" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
         <option value=""></option>
