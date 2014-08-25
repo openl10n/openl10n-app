@@ -81,6 +81,10 @@ function TranslateTargetController($scope, hotkeys, target) {
 function TranslatePhraseController($scope, translationId, TranslationRepository) {
   $scope.translationCommit = $scope.translationCommits.select(translationId)
 
+  if (!$scope.translationCommit) {
+    return;
+  }
+
   $scope.editedTranslation = {
     id: translationId,
     locale: $scope.context.target,
