@@ -119,6 +119,11 @@ function TranslatePhraseController($scope, hotkeys, translationId, TranslationRe
     $scope.editForm.$setPristine();
   }
 
+  $scope.copySource = function() {
+    $scope.editedTranslation.phrase = $scope.translationCommit.getSourcePhrase();
+    $scope.editForm.$setDirty();
+  };
+
   hotkeys
     .bindTo($scope)
     .add({

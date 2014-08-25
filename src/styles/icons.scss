@@ -43,26 +43,29 @@
   @if $filename == circle {
     $char: "\E007";
   }
-  @if $filename == dashboard {
+  @if $filename == copy {
     $char: "\E008";
   }
-  @if $filename == file {
+  @if $filename == dashboard {
     $char: "\E009";
   }
-  @if $filename == hexagon {
+  @if $filename == file {
     $char: "\E00A";
   }
-  @if $filename == logo {
+  @if $filename == hexagon {
     $char: "\E00B";
   }
-  @if $filename == save {
+  @if $filename == logo {
     $char: "\E00C";
   }
-  @if $filename == translate {
+  @if $filename == save {
     $char: "\E00D";
   }
-  @if $filename == world {
+  @if $filename == translate {
     $char: "\E00E";
+  }
+  @if $filename == world {
+    $char: "\E00F";
   }
 
   @return $char;
@@ -99,6 +102,9 @@
 }
 .icon-circle {
   @include icon(circle);
+}
+.icon-copy {
+  @include icon(copy);
 }
 .icon-dashboard {
   @include icon(dashboard);

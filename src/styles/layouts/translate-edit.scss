@@ -52,6 +52,16 @@
       overflow-y: auto;
       // overflow-x: hidden;
     }
+
+    &__copy {
+      font-size: 0.8em;
+      color: $color-gray-400;
+
+      &:hover {
+        cursor: pointer;
+        color: $color-gray-500;
+      }
+    }
   }
 
   .translation-target {
