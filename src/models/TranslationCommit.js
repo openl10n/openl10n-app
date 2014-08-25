@@ -6,7 +6,7 @@ app.factory('TranslationCommit', function() {
     this.key = translation.identifier;
     this.resourceId = translation.resource_id;
     this._context = context;
-    this._phrases = translation.phrases;
+    this._phrases = translation.phrases || {};
   };
 
   TranslationCommit.prototype.isActive = function() {

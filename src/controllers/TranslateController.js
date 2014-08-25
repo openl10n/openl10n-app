@@ -10,7 +10,7 @@ angular
   .controller('TranslatePhraseController', TranslatePhraseController)
 ;
 
-function TranslateController($scope, $state, project, languages, resources, translations, TranslationBag, TranslationCommit) {
+function TranslateController($scope, $state, project, languages, resources, translations, TranslationCommitCollection) {
   console.log('TranslateController')
 
   $scope.project = project;
@@ -19,19 +19,16 @@ function TranslateController($scope, $state, project, languages, resources, tran
   $scope.context = { source: '', target: '' };
   $scope.translations = translations;
 
-  $scope.translationCommits = new TranslationBag();
-  angular.forEach(translations, function(translation) {
-    $scope.translationCommits.add(new TranslationCommit(translation, $scope.context));
-  });
+  $scope.translationCommits = new TranslationCommitCollection(translations, resources, $scope.context);
 
   $scope.updateRoute = updateRoute;
 
   function updateRoute() {
-    if ($scope.context.source && $scope.context.target && $scope.translationCommits.selected) {
+    if ($scope.context.source && $scope.context.target && $scope.translationCommits.selectedTranslation) {
       $state.go('translate.source.target.phrase', {
         source: $scope.context.source,
         target: $scope.context.target,
-        id: $scope.translationCommits.selected.id
+        id: $scope.translationCommits.selectedTranslation.id
       }, {location: "replace"});
     } else if ($scope.context.source && $scope.context.target) {
       $state.go('translate.source.target', {
@@ -65,7 +62,8 @@ function TranslateTargetController($scope, hotkeys, target) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        console.log('select next translation');
+        $scope.translationCommits.selectNext();
+        $scope.updateRoute();
       }
     })
     .add({
@@ -74,7 +72,8 @@ function TranslateTargetController($scope, hotkeys, target) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        console.log('select previous translation');
+        $scope.translationCommits.selectPrevious();
+        $scope.updateRoute();
       }
     });
 }
