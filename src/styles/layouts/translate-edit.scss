@@ -98,5 +98,20 @@
       padding: 3px 10px;
       color: #999;
     }
+
+    &__status-icon {
+      font-size: 0.9em;
+    }
+    &__status {
+      padding-right: 5px;
+      color: $color-invalid;
+
+      &--approved {
+        color: $color-approved;
+      }
+      &--translated {
+        color: $color-approved;
+      }
+    }
   }
 }

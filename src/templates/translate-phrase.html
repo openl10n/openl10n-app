@@ -32,6 +32,29 @@
 
     <p class="translation-target__footer">
       <span class="u-pull-right">
+        <span
+          class="translation-target__status"
+          ng-class="{
+            'translation-target__status--approved': translationCommit.isApproved(),
+            'translation-target__status--translated': translationCommit.isTranslated(),
+          }">
+
+          <span ng-if="!translationCommit.isTranslated()">
+            <i class="translation-target__status-icon icon-circle-o"></i>
+            <!-- untranslated -->
+          </span>
+
+          <span ng-if="!translationCommit.isApproved() && translationCommit.isTranslated()">
+            <i class="translation-target__status-icon icon-circle-o"></i>
+            <!-- translated -->
+          </span>
+
+          <span ng-if="translationCommit.isApproved()">
+            <i class="translation-target__status-icon icon-check"></i>
+            <!-- approved -->
+          </span>
+        </span>
+
         {{ +editedTranslation.phrase.length }} / ∞
       </span>
 
