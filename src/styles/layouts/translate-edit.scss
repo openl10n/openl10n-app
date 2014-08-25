@@ -11,7 +11,7 @@
   .translation-source {
     z-index: 1;
     position: relative;
-    padding: 15px;
+    padding: 10px;
     padding-right: 50px;
     border-bottom: 1px solid darken($color-gray-200, 5);
     background-color: $color-gray-100;
@@ -35,10 +35,11 @@
     // }
 
     &__title {
-      margin: 0 0 5px;
-      @include font-size(15);
+      margin: 0;
+      @include font-size(14);
       font-weight: normal;
       color: #999;
+      // text-transform: uppercase;
     }
 
     &__phrase {
@@ -60,8 +61,20 @@
     z-index: 1;
     border-bottom: 1px solid darken($color-gray-200, 5);
 
+    &__title {
+      margin: 0;
+      padding-top: 5px;
+      padding-left: 10px;
+      @include font-size(14);
+      font-weight: normal;
+      color: #999;
+      // text-transform: uppercase;
+    }
+
     &__textarea {
-      padding: 15px;
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
       padding-bottom: 20px;
       border: none;
       box-shadow: none;
