@@ -96,7 +96,10 @@ function TranslatePhraseController($scope, hotkeys, translationId, TranslationRe
   $scope.editedTranslation = {
     id: translationId,
     locale: $scope.context.target,
-    phrase: $scope.translationCommit.getTargetPhrase()
+    phrase: $scope.translationCommit.getTargetPhrase(),
+    isDirty: function() {
+      return this.phrase !== $scope.translationCommit.getTargetPhrase();
+    }
   }
 
   // Fetch this translate to be sure the text is up to date
@@ -115,13 +118,10 @@ function TranslatePhraseController($scope, hotkeys, translationId, TranslationRe
     $scope.translationCommit.setTargetPhrase(
       $scope.editedTranslation.phrase
     );
-
-    $scope.editForm.$setPristine();
   }
 
   $scope.copySource = function() {
     $scope.editedTranslation.phrase = $scope.translationCommit.getSourcePhrase();
-    $scope.editForm.$setDirty();
   };
 
   hotkeys

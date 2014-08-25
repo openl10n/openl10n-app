@@ -1,6 +1,6 @@
 <div class="l-translate-edit">
   <div class="actions">
-    <button class="action action--success action--size-large" ng-click="saveTranslation()" ng-show="editForm.$dirty">
+    <button class="action action--success action--size-large" ng-click="saveTranslation()" ng-show="editedTranslation.isDirty()">
       <span class="action__icon">
         <i class="icon-check"></i>
       </span>
@@ -62,8 +62,12 @@
         {{ +editedTranslation.phrase.length }} / ∞
       </span>
 
-      <span>
+      <span ng-show="!editedTranslation.isDirty()">
         Press <strong>TAB</strong> to move to the next phrase
+      </span>
+
+      <span ng-show="editedTranslation.isDirty()">
+        Press <strong>Ctrl+Enter</strong> to save translation
       </span>
     </p>
   </form>
