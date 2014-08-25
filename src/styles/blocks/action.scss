@@ -10,7 +10,7 @@
   height: 40px;
 
   &__icon {
-    line-height: 45px; // for the icon
+    // line-height: 45px; // for the icon
     text-align: center;
   }
 
@@ -51,23 +51,23 @@
     transform: none;
   }
 
-  &__size-small {
+  &--size-small {
     width: 32px;
     height: 32px;
     @include font-size(18);
   }
-  &__size-medium {
+  &--size-medium {
     width: 44px;
     height: 44px;
     @include font-size(24);
   }
-  &__size-large {
+  &--size-large {
     width: 48px;
     height: 48px;
     @include font-size(26);
   }
 
-  &__success {
+  &--success {
     background-color: #27ae60;
     color: #fff;
 
@@ -76,7 +76,7 @@
     }
   }
 
-  &__success &__label {
+  &--success &__label {
     color: #27ae60;
   }
 }

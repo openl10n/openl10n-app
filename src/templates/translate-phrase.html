@@ -1,6 +1,6 @@
 <div class="l-translate-edit">
   <div class="actions">
-     <button class="action action__success action__size-large" ng-click="saveTranslation()">
+    <button class="action action--success action--size-large" ng-click="saveTranslation()" ng-show="editForm.$dirty">
       <span class="action__icon">
         <i class="icon-check"></i>
       </span>
@@ -19,7 +19,7 @@
     </p>
   </div>
 
-  <form action="" class="translation-target" ng-submit="saveTranslation()">
+  <form name="editForm" class="translation-target" ng-submit="saveTranslation()">
     <!-- <p class="translation-target__title">
       Translation
     </p> -->

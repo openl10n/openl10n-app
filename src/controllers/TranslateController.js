@@ -115,6 +115,8 @@ function TranslatePhraseController($scope, hotkeys, translationId, TranslationRe
     $scope.translationCommit.setTargetPhrase(
       $scope.editedTranslation.phrase
     );
+
+    $scope.editForm.$setPristine();
   }
 
   hotkeys
