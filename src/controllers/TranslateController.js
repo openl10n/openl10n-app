@@ -54,6 +54,16 @@ function TranslateSourceController($scope, source) {
 function TranslateTargetController($scope, hotkeys, target) {
   $scope.context.target = target;
 
+  $scope.selectNext = _.throttle(function() {
+    $scope.translationCommits.selectNext();
+    $scope.updateRoute();
+  }, 100);
+
+  $scope.selectPrevious = _.throttle(function() {
+    $scope.translationCommits.selectPrevious();
+    $scope.updateRoute();
+  }, 100);
+
   hotkeys
     .bindTo($scope)
     .add({
@@ -62,8 +72,7 @@ function TranslateTargetController($scope, hotkeys, target) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        $scope.translationCommits.selectNext();
-        $scope.updateRoute();
+        $scope.selectNext();
       }
     })
     .add({
@@ -72,8 +81,7 @@ function TranslateTargetController($scope, hotkeys, target) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        $scope.translationCommits.selectPrevious();
-        $scope.updateRoute();
+        $scope.selectPrevious();
       }
     });
 }
