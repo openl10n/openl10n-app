@@ -87,6 +87,12 @@ function TranslatePhraseController($scope, translationId, TranslationRepository)
     phrase: $scope.translationCommit.getTargetPhrase()
   }
 
+  // Fetch this translate to be sure the text is up to date
+  TranslationRepository.get(translationId).then(function(translation) {
+    angular.copy(translation.phrases, $scope.translationCommit._phrases);
+    $scope.editedTranslation.phrase = $scope.translationCommit.getTargetPhrase();
+  });
+
   $scope.saveTranslation = function() {
     TranslationRepository.savePhrase(
       $scope.editedTranslation.id,
