@@ -7,9 +7,9 @@ angular
   .directive('logout', LogoutDirective);
 
 /**
- * @name NavbarController
+ * @name LogoutDirective
  *
- * @desc Controller used to manage the navbar
+ * @desc Handle logout click
  *
  * @ngInject
  */
