@@ -78,7 +78,7 @@ function TranslateTargetController($scope, hotkeys, target) {
     });
 }
 
-function TranslatePhraseController($scope, translationId, TranslationRepository) {
+function TranslatePhraseController($scope, hotkeys, translationId, TranslationRepository) {
   $scope.translationCommit = $scope.translationCommits.select(translationId)
 
   if (!$scope.translationCommit) {
@@ -108,6 +108,18 @@ function TranslatePhraseController($scope, translationId, TranslationRepository)
       $scope.editedTranslation.phrase
     );
   }
+
+  hotkeys
+    .bindTo($scope)
+    .add({
+      combo: 'mod+enter',
+      description: 'Save translation',
+      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback: function(e) {
+        e.preventDefault();
+        $scope.saveTranslation();
+      }
+    })
 }
 
 })();
