@@ -36,6 +36,16 @@
     pointer-events: none;
   }
 
+  &--link {
+    color: $color-primary;
+    background-color: transparent;
+    border: 0;
+
+    &:hover, &:focus {
+      color: darken($color-primary, 8);
+    }
+  }
+
   &--primary {
     color: #fff;
     background-color: $color-primary;

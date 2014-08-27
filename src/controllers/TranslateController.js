@@ -123,6 +123,9 @@ function TranslatePhraseController($scope, hotkeys, translationId, TranslationRe
   $scope.copySource = function() {
     $scope.editedTranslation.phrase = $scope.translationCommit.getSourcePhrase();
   };
+  $scope.cancelTranslation = function() {
+    $scope.editedTranslation.phrase = $scope.translationCommit.getTargetPhrase();
+  };
 
   hotkeys
     .bindTo($scope)
