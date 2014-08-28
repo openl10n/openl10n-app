@@ -4,7 +4,8 @@ This is an alternative UI client for OpenLocalization built with AngularJS.
 
 ## Usage
 
-Modify `src/config/config.js` to point the server API endpoint to the right URL.
+Copy `src/config/config.js.dist` to `src/config/config.js` to initialize the application
+configuration.
 
 Install dependencies:
 
@@ -16,7 +17,7 @@ bower install
 Build assets & start server on [localhost:3000](http://localhost:3000):
 
 ```shell
-gulp build --prod
+gulp
 ```
 
 ## License
