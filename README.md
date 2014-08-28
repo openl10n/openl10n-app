@@ -16,7 +16,7 @@ bower install
 Build assets & start server on [localhost:3000](http://localhost:3000):
 
 ```shell
-gulp
+gulp build --prod
 ```
 
 ## License
