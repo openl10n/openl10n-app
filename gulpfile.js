@@ -70,7 +70,7 @@ gulp.task('watch', ['server'], function() {
 
   gulp.watch(srcDir + '/public/**/*', ['public']);
 
-  gulp.watch(srcDir + '/templates/**/*', ['templates']);
+  gulp.watch(srcDir + '/partials/**/*', ['templates']);
 
   gulp.src(vendorFiles.concat(sourceFiles).concat(testFiles))
     .pipe(karma({
@@ -102,7 +102,7 @@ gulp.task('public', function () {
 // Templates
 //
 gulp.task('templates', function () {
-  gulp.src(srcDir + '/templates/**/*')
+  gulp.src(srcDir + '/partials/**/*')
     .pipe(gulp.dest(distDir + '/partials'))
 })
 
