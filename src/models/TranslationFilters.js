@@ -13,6 +13,10 @@ app.factory('TranslationFilters', function() {
     this.rules.push(rule);
   }
 
+  TranslationFilters.prototype.resetRules = function() {
+    this.rules = [];
+  }
+
   TranslationFilters.prototype.isSatisfying = function(translation) {
     var i, rule;
 

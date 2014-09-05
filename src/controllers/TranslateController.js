@@ -21,6 +21,17 @@ function TranslateController($scope, $state, project, languages, resources, tran
 
   $scope.translationCommits = new TranslationCommitCollection(translations, resources, $scope.context);
   $scope.filters = new TranslationFilters();
+  $scope.searchQuery = '';
+  $scope.applySearchSpecification = function(searchQuery) {
+    $scope.filters.resetRules();
+
+    // TODO: parse search query using a Lexer
+    if (searchQuery === '!is:translated') {
+      $scope.filters.addRule(function(translation) {
+        return !translation.isTranslated();
+      })
+    }
+  }
 
   $scope.updateRoute = updateRoute;
 

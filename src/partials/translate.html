@@ -17,9 +17,9 @@
   </div>
 
   <div class="column column--size-4">
-    <div class="l-translate-header__search-form">
-      <input type="text" placeholder="Search…" class="form__control">
-    </div>
+    <form class="l-translate-header__search-form" ng-submit="applySearchSpecification(searchQuery)">
+      <input type="text" placeholder="Search…" class="form__control" ng-model="searchQuery">
+    </form>
   </div>
 
   <div class="column column--size-4 form--inline">
