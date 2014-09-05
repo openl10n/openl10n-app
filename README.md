@@ -10,6 +10,9 @@ This is an alternative UI client for OpenLocalization built with AngularJS.
 Copy `src/config/config.js.dist` to `src/config/config.js` to initialize the application
 configuration.
 
+Make sure you have [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/#install-bower)
+installed on your machine.
+
 Install dependencies:
 
 ```shell
