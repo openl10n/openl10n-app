@@ -60,7 +60,7 @@
             'translation--translated': translation.isTranslated(),
             'translation--active': translation.selected
           }"
-          ng-repeat="translation in translationCommits.translations[resource.id]"
+          ng-repeat="translation in translationCommits.translations[resource.id]|matchSpecification:filters"
           ui-sref="translate.source.target.phrase({id: translation.id})"
         >
           <p class="translation__key">

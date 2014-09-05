@@ -10,7 +10,7 @@ angular
   .controller('TranslatePhraseController', TranslatePhraseController)
 ;
 
-function TranslateController($scope, $state, project, languages, resources, translations, TranslationCommitCollection) {
+function TranslateController($scope, $state, project, languages, resources, translations, TranslationCommitCollection, TranslationFilters) {
   console.log('TranslateController')
 
   $scope.project = project;
@@ -20,6 +20,7 @@ function TranslateController($scope, $state, project, languages, resources, tran
   $scope.translations = translations;
 
   $scope.translationCommits = new TranslationCommitCollection(translations, resources, $scope.context);
+  $scope.filters = new TranslationFilters();
 
   $scope.updateRoute = updateRoute;
 
