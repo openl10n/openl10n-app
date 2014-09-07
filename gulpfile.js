@@ -22,6 +22,7 @@ var vendorDir = './bower_components';
 var isDebug = !gutil.env.prod;
 
 var vendorFiles = [
+  vendorDir + '/jquery/dist/jquery.js',
   vendorDir + '/lodash/dist/lodash.js',
   vendorDir + '/string/lib/string.js',
   vendorDir + '/angular/angular.js',
@@ -29,6 +30,9 @@ var vendorFiles = [
   vendorDir + '/angular-gravatar/build/md5.js',
   vendorDir + '/angular-gravatar/build/angular-gravatar.js',
   vendorDir + '/angular-hotkeys/build/hotkeys.js',
+  vendorDir + '/ngInfiniteScroll/build/ng-infinite-scroll.js',
+  vendorDir + '/angular-elastic/elastic.js',
+  vendorDir + '/angular-scroll/angular-scroll.js',
 ];
 var sourceFiles = [
   srcDir + '/app.js',

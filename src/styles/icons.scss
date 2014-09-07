@@ -22,50 +22,68 @@
 @function icon-char($filename) {
   $char: "";
 
-  @if $filename == arrow-left {
+  @if $filename == add {
     $char: "\E001";
   }
-  @if $filename == arrow-right {
+  @if $filename == arrow-left {
     $char: "\E002";
   }
-  @if $filename == book {
+  @if $filename == arrow-right {
     $char: "\E003";
   }
-  @if $filename == check {
+  @if $filename == book {
     $char: "\E004";
   }
-  @if $filename == check2 {
+  @if $filename == caret-up {
     $char: "\E005";
   }
-  @if $filename == circle-o {
+  @if $filename == check {
     $char: "\E006";
   }
-  @if $filename == circle {
+  @if $filename == check2 {
     $char: "\E007";
   }
-  @if $filename == copy {
+  @if $filename == circle-o {
     $char: "\E008";
   }
-  @if $filename == dashboard {
+  @if $filename == circle {
     $char: "\E009";
   }
-  @if $filename == file {
+  @if $filename == copy {
     $char: "\E00A";
   }
-  @if $filename == hexagon {
+  @if $filename == dashboard {
     $char: "\E00B";
   }
-  @if $filename == logo {
+  @if $filename == ellipsis-v {
     $char: "\E00C";
   }
-  @if $filename == save {
+  @if $filename == ellipsis {
     $char: "\E00D";
   }
-  @if $filename == translate {
+  @if $filename == file {
     $char: "\E00E";
   }
-  @if $filename == world {
+  @if $filename == hexagon {
     $char: "\E00F";
+  }
+  @if $filename == logo {
+    $char: "\E010";
+  }
+  @if $filename == minus {
+    $char: "\E011";
+  }
+  @if $filename == save {
+    $char: "\E012";
+  }
+  @if $filename == times {
+    $char: "\E013";
+  }
+  @if $filename == translate {
+    $char: "\E014";
+  }
+  @if $filename == world {
+    $char: "\E015";
   }
 
   @return $char;
@@ -82,6 +100,9 @@
   }
 }
 
+.icon-add {
+  @include icon(add);
+}
 .icon-arrow-left {
   @include icon(arrow-left);
 }
@@ -90,6 +111,9 @@
 }
 .icon-book {
   @include icon(book);
+}
+.icon-caret-up {
+  @include icon(caret-up);
 }
 .icon-check {
   @include icon(check);
@@ -109,6 +133,12 @@
 .icon-dashboard {
   @include icon(dashboard);
 }
+.icon-ellipsis-v {
+  @include icon(ellipsis-v);
+}
+.icon-ellipsis {
+  @include icon(ellipsis);
+}
 .icon-file {
   @include icon(file);
 }
@@ -118,8 +148,14 @@
 .icon-logo {
   @include icon(logo);
 }
+.icon-minus {
+  @include icon(minus);
+}
 .icon-save {
   @include icon(save);
+}
+.icon-times {
+  @include icon(times);
 }
 .icon-translate {
   @include icon(translate);

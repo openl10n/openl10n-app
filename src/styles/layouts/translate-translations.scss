@@ -1,112 +1,190 @@
-.l-translate-translations {
+.l-translations-container {
   height: 100%;
-  background: $color-gray-200;
-  // border-right: 1px solid darken($color-gray-100, 5);
-  position: relative;
+  border-right: 1px solid $color-gray-300;
+}
 
-  .translations {
-    &__resource {
-      @include font-size(16);
-      font-weight: 400;
-      margin: 0;
-      padding: 5px 10px;
-      background-color: rgba($color-gray-300, 0.8);
-      // background-color: rgba(224, 224, 224, 0.8);
-      border-bottom: 1px solid darken($color-gray-300, 2);
-      // border-right: 6px solid $color-gray-400;
+.l-translations {
+  margin: 10px 0 20px;
 
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-
-      position: -webkit-sticky;
-      position: -moz-sticky;
-      position: -ms-sticky;
-      position: -o-sticky;
-      position: sticky;
-      top: 0;
-    }
-
-    &__resource-icon {
-      padding-right: 2px;
-    }
-
-    &__list {
-      margin: 0;
-    }
-
-    &__item {
-      margin: 0;
-      padding: 10px 10px;
-      border-bottom: 1px solid darken($color-gray-200, 5);
-    }
+  &__header {
+    @include font-size(16);
+    font-weight: 400;
+    margin: 0 20px;
+    padding: 15px 15px;
+    background: #fff;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    // background: $color-gray-50;
+    // border-bottom: 1px solid $color-gray-100;
+    // border-right: 5px solid $color-gray-300;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   }
 
-  .translation {
-    border-right: 6px solid $color-untranslated;
+  &__header-icon {
+    margin-right: 7px;
+  }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.translation-card {
+  // TODO move margin to .card-list__item--detached
+  margin: 0 20px;
+  position: relative;
+  overflow: hidden;
+
+  transition: all 100ms ease-out;
+
+  background: #fff;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  border-right: 5px solid $color-gray-200;
+
+  &--status-translated {
+    border-right-color: $color-translated;
+  }
+  &--status-approved {
+    border-right-color: $color-approved;
+  }
+  &--status-editing {
+    border-right-color: #3498db;
+  }
+
+  &__header {
+    padding: 0 15px;
+    height: 50px;
+    line-height: 50px;
+    @include text-ellipsis();
+  }
+  &__body {
+    padding-bottom: 15px;
+    display: block;
+    width: 100%;
+    position: relative;
+    @include clearfix();
+  }
+  &__footer {
+    padding: 0 15px;
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px solid $color-gray-200;
+  }
+
+  &__key {
+    @include font-size(13);
+    color: $color-dark;
+  }
+  &__top-icon {
+    color: $color-gray-500;
 
     &:hover {
+      // Click to deactivate card
       cursor: pointer;
-      background-color: $color-gray-100;
+      color: $color-dark;
+    }
+  }
+  &__part {
+    display: block;
+    width: 50%;
+    position: relative;
+    float: left;
+    min-height: 1px;
+  }
+  &__source,
+  &__target {
+    padding: 0 15px;
+  }
+  &__subtitle {
+    @include font-size(11);
+    text-transform: uppercase;
+    color: $color-gray-400;
+  }
+  &__phrase {
+    @include font-size(16);
+    font-weight: 300;
+    margin: 0;
+
+    // Attributes when used with textarea tag
+    border: none;
+    width: 100%;
+    background: none;
+    resize: none;
+    overflow: auto;
+
+    &:active,
+    &:focus {
+      outline: 0;
     }
 
-    &--active {
-      background-color: $color-gray-50;
-    }
+    &--short {
+      @include text-ellipsis();
 
-    &--translated {
-      border-right-color: $color-translated;
-    }
-
-    &--approved {
-      border-right-color: $color-approved;
-    }
-
-    &__key {
-      padding: 0;
-      margin: 0;
-
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding-right: 5px;
-      overflow: hidden;
-    }
-
-    &__icon {
-      display: inline-block;
-      width: 15px;
-      font-size: 0.9em;
-      color: $color-invalid;
-    }
-
-    &--active .translation__key {
-      color: #428bca;
-    }
-
-    &--translated .translation__icon,
-    &--approved .translation__icon {
-      color: $color-approved;
-    }
-
-    &__source {
-      color: $color-gray-500;
-      padding: 0;
-      margin: 0;
-      margin-top: 5px;
-      padding-left: 18px;
-
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-
-      &--non-approved {
-        text-decoration: line-through;
-      }
-
-      &--undefined {
-        color: $color-invalid;
-        font-style: italic;
+      &:hover {
+        cursor: pointer;
       }
     }
   }
+  &__hint {
+    @include font-size(12);
+    color: $color-gray-500;
+  }
+  &__actions {
+    float: right;
+  }
+
+
+  &--expanded {
+    margin: 10px 10px 15px;
+    border-radius: 2px;
+    border-top: 1px solid $color-gray-100;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  &--collapsed:hover {
+    background: $color-gray-50;
+
+    // Click to activate card
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  // &--collapsed .translation-card__phrase {
+  //   white-space: nowrap;
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  // }
+  &--collapsed .translation-card__header {
+    height: 30px;
+    line-height: 30px;
+    padding-top: 5px;
+  }
+  &--collapsed .translation-card__key {
+    color: $color-gray-400;
+  }
+  &--collapsed:hover .translation-card__key {
+    color: $color-dark;
+  }
+  &--collapsed .translation-card__body {
+    padding-bottom: 10px;
+  }
+  &--collapsed .translation-card__subtitle {
+    display: none;
+  }
+  &--collapsed .translation-card__footer {
+    height: 0;
+    border: none;
+    overflow: hidden;
+  }
+}
+
+.translation-loading-card {
+  margin: 0 20px;
+  padding: 10px 0;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  text-align: center;
 }

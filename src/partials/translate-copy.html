@@ -1,0 +1,123 @@
+<div class="l-translate-header u-clearfix">
+  <div class="column column--size-3">
+    <h1 class="l-translate-header__title title title--level-1">
+      <a ui-sref="project({slug: project.slug})">
+        {{ project.name }}
+      </a>
+    </h1>
+  </div>
+
+  <div class="l-translate-header__stats column column--size-1" style="overflow:hidden">
+    <span class="l-translate-header__counter">
+      {{ translations.length }}
+    </span>
+    <span class="l-translate-header__counter-label">
+      translations
+    </span>
+  </div>
+
+  <div class="column column--size-4">
+    <form class="l-translate-header__search-form" ng-submit="applySearchSpecification(searchQuery)">
+      <input type="text" placeholder="Search…" class="form__control" ng-model="searchQuery">
+    </form>
+  </div>
+
+  <div class="column column--size-4 form--inline">
+    <div class="l-translate-header__locale-form u-text-right">
+      <select class="form__control" ng-change="updateRoute()" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+        <option value=""></option>
+      </select>
+
+      <i class="l-translate-header__icon icon-arrow-right"></i>
+
+      <select class="form__control" ng-change="updateRoute()" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="l-translate-main">
+  <div class="l-translations-container column column--size-8 column--scrollable">
+    <div class="l-translations" ng-repeat="resource in translationCommits.resources" ng-if="context.source && context.target">
+      <h3 class="l-translations__header">
+        <i class="l-translations__header-icon icon-file"></i>
+        {{ resource.pathname }}
+      </h3>
+
+      <ul class="l-translations__list" infinite-scroll="loadMore(translationCommits.translations[resource.id])" infinite-scroll-distance="2">
+        <li
+          class="translation-card"
+          ng-class="{
+            'translation-card--status-approved': translation.isApproved(),
+            'translation-card--status-translated': translation.isTranslated(),
+            'translation-card--expanded': translation.active,
+            'translation-card--collapsed': !translation.active
+          }"
+          ng-repeat="translation in translationCommits.translations[resource.id]|matchSpecification:filters"
+        >
+          <div class="translation-card__header" ng-click="translation.active ? deactivateTranslation(translation) : activateTranslation(translation)">
+            <div class="translation-card__key">
+              <div class="translation-card__top-icon u-pull-right" ng-if="translation.active">
+                <i class="icon-minus"></i>
+              </div>
+
+              {{ translation.key }}
+            </div>
+          </div>
+
+          <div class="translation-card__body">
+            <div class="translation-card__part translation-card__source">
+              <div class="translation-card__subtitle">
+                Source
+              </div>
+
+              <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translation.active" ng-click="translation.active ? deactivateTranslation(translation) : activateTranslation(translation)">
+                {{ translation.getSourcePhrase() }}
+              </p>
+              <p class="translation-card__phrase" ng-if="translation.active">
+                {{ translation.getSourcePhrase() }}
+              </p>
+            </div>
+
+            <div class="translation-card__part translation-card__target">
+              <div class="translation-card__subtitle">
+                Target
+              </div>
+
+              <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translation.active" ng-click="translation.active ? deactivateTranslation(translation) : activateTranslation(translation)">
+                {{ translation.getTargetPhrase() }}
+              </p>
+              <p class="translation-card__phrase" ng-if="translation.active" contenteditable>
+                {{ translation.getTargetPhrase() }}
+              </p>
+            </div>
+          </div>
+
+          <div class="translation-card__footer">
+            <div class="translation-card__actions">
+             <!--  <button class="button button--type-flat button--size-small">
+                Cancel
+              </button>
+
+              <button class="button button--type-flat button--color-primary button--size-small">
+                Save
+              </button> -->
+
+              <button class="button button--type-flat button--size-small button--icon">
+                <i class="icon-ellipsis-v"></i>
+              </button>
+            </div>
+
+            <div class="translation-card__hint">
+              Press <strong>TAB</strong> to go to the next phrase.
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="column column--size-4 column--scrollable">
+  </div>
+</div>

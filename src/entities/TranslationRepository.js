@@ -21,7 +21,7 @@ function TranslationRepository($http, $q, Configuration) {
     return deferred.promise;
   }
 
-  this.savePhrase = function(translationId, locale, phrase) {
+  this.savePhrase = function(translationId, locale, phrase, params) {
     console.log('savePhrase');
 
     var deferred = $q.defer();
@@ -29,7 +29,7 @@ function TranslationRepository($http, $q, Configuration) {
     $http({
       method: 'POST',
       url: Configuration.SERVER_BASE_URL + '/translations/' + translationId + '/phrases/' + locale,
-      data: { text: phrase, approved: false }
+      data: angular.extend({ text: phrase, approved: false }, params)
     }).success(function(data) {
       deferred.resolve(data);
     }, function() {

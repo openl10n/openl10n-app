@@ -1,5 +1,19 @@
 (function() {
 
+//
+// TODO:
+//
+// - [x] auto focus when select translation
+// - [ ] auto scroll when select translation
+// - [x] save
+// - [x] approve
+// - [ ] fetch data when select/save translation + merge
+// - [ ] search
+// - [ ] filter
+// - [ ] counters
+// - [ ] deduplicate translations on loadMore action
+//
+
 'use strict';
 
 angular
@@ -7,74 +21,180 @@ angular
   .controller('TranslateController', TranslateController)
   .controller('TranslateSourceController', TranslateSourceController)
   .controller('TranslateTargetController', TranslateTargetController)
-  .controller('TranslatePhraseController', TranslatePhraseController)
 ;
 
-function TranslateController($scope, $state, project, languages, resources, translations, TranslationCommitCollection, TranslationFilters) {
-  console.log('TranslateController')
+function ResourceWrapper(resource, context, translationCommitRepository) {
+  // Keep orginal object & services
+  this.resource = resource;
+  this.context = context;
+  this.translationCommitRepository = translationCommitRepository;
+
+  // Map object attributes
+  this.pathname = this.resource.pathname;
+  this.translationCommits = [];
+
+  // Handle paging
+  this.page = 0;
+  this.perPage = 40;
+  this.complete = false;
+  this.busy = false;
+}
+
+ResourceWrapper.prototype.reset = function() {
+  this.translationCommits = [];
+  this.complete = false;
+  this.page = 0;
+}
+
+ResourceWrapper.prototype.loadMore = function() {
+  if (this.busy || this.complete)
+    return;
+
+  if (!this.context.source || !this.context.target)
+    return;
+
+  this.busy = true;
+  this.page++;
+  this.translationCommitRepository.findBy(this.context.source, this.context.target, {
+    resource: this.resource.id,
+    page: this.page,
+    per_page: this.perPage
+  }).then(function(translationCommits) {
+    if (translationCommits.length < this.perPage) {
+      console.log('fetching finished')
+      this.complete = true;
+    }
+
+    for (var i = 0; i < translationCommits.length; i++) {
+      var translationCommit = translationCommits[i];
+      translationCommit.edit_phrase = translationCommit.target_phrase;
+      this.translationCommits.push(translationCommit);
+    }
+
+    this.busy = false;
+  }.bind(this));
+
+}
+
+function TranslateController($scope, $state, project, languages, resources, TranslationRepository, TranslationCommitRepository) {
+
+  console.log('TranslateController');
+
+  // if (!target) {
+  //   $state.transitionTo('translate', {locale: 'en'}, { location: true, inherit: true, relative: $state.$current, notify: false })
+  // }
 
   $scope.project = project;
   $scope.languages = languages;
-  $scope.resources = resources;
-  $scope.context = { source: '', target: '' };
-  $scope.translations = translations;
+  $scope.context = { source: project.default_locale, target: null };
 
-  $scope.translationCommits = new TranslationCommitCollection(translations, resources, $scope.context);
-  $scope.filters = new TranslationFilters();
-  $scope.searchQuery = '';
-  $scope.applySearchSpecification = function(searchQuery) {
-    $scope.filters.resetRules();
+  $scope.resources = [];
+  angular.forEach(resources, function(resource) {
+    $scope.resources.push(
+      new ResourceWrapper(resource, $scope.context, TranslationCommitRepository)
+    );
+  });
 
-    // TODO: parse search query using a Lexer
-    if (searchQuery === '!is:translated') {
-      $scope.filters.addRule(function(translation) {
-        return !translation.isTranslated();
-      })
-    }
+
+  var activedTranslation = null;
+  $scope.activateTranslation = function(translation) {
+    if (null !== activedTranslation)
+      activedTranslation.active = false;
+
+    activedTranslation = translation;
+    activedTranslation.active = true;
+  }
+  $scope.deactivateTranslation = function(translation, $event) {
+    if ($event)
+      $event.stopPropagation();
+    if (translation)
+      translation.active = false;
+    else if (activedTranslation)
+      activedTranslation.active = false;
   }
 
   $scope.updateRoute = updateRoute;
 
   function updateRoute() {
-    if ($scope.context.source && $scope.context.target && $scope.translationCommits.selectedTranslation) {
-      $state.go('translate.source.target.phrase', {
-        source: $scope.context.source,
-        target: $scope.context.target,
-        id: $scope.translationCommits.selectedTranslation.id
-      }, {location: "replace"});
-    } else if ($scope.context.source && $scope.context.target) {
+    if ($scope.context.source && $scope.context.target) {
       $state.go('translate.source.target', {
         source: $scope.context.source,
         target: $scope.context.target
-      }, {location: "replace"});
+      }, {location: "replace", inherit: true, relative: $state.$current, notify: true});
     } else if ($scope.context.source) {
       $state.go('translate.source', {
         source: $scope.context.source,
-      }, {location: "replace"});
+      }, {location: "replace", inherit: true, relative: $state.$current, notify: true});
     } else {
       $state.go('translate.source', {
         source: project.default_locale,
-      }, {location: "replace"});
+      }, {location: "replace", inherit: true, relative: $state.$current, notify: true});
     }
+  }
+
+  $scope.saveTranslation = function(translationCommit) {
+    var originalPhrase = translationCommit.target_phrase;
+    translationCommit.target_phrase = translationCommit.edit_phrase;
+    translationCommit.is_translated = true;
+    translationCommit.is_approved = false;
+
+    TranslationRepository.savePhrase(
+      translationCommit.id,
+      translationCommit.target_locale,
+      translationCommit.target_phrase
+    );
+
+    // TODO : update original data
+  }
+
+  $scope.approveTranslation = function(translationCommit) {
+    var originalPhrase = translationCommit.target_phrase;
+    translationCommit.target_phrase = translationCommit.edit_phrase;
+    translationCommit.is_translated = true;
+    translationCommit.is_approved = true;
+
+    TranslationRepository.savePhrase(
+      translationCommit.id,
+      translationCommit.target_locale,
+      translationCommit.target_phrase,
+      {approved: true}
+    );
+
+    // TODO : update original data
+  }
+
+  $scope.cancelEdit = function(translationCommit) {
+    translationCommit.edit_phrase = translationCommit.target_phrase;
+    // TODO : update original data
   }
 }
 
 function TranslateSourceController($scope, source) {
+  console.log('TranslateSourceController');
   $scope.context.source = source;
 }
 
-function TranslateTargetController($scope, hotkeys, target) {
+function TranslateTargetController($scope, hotkeys, resources, target, TranslationCommitRepository) {
+  console.log('TranslateTargetController');
+
   $scope.context.target = target;
 
-  $scope.selectNext = _.throttle(function() {
-    $scope.translationCommits.selectNext();
-    $scope.updateRoute();
-  }, 100);
+  console.log($scope.context);
 
-  $scope.selectPrevious = _.throttle(function() {
-    $scope.translationCommits.selectPrevious();
-    $scope.updateRoute();
-  }, 100);
+  $scope.resources.forEach(function(resource) {
+    resource.reset();
+    resource.loadMore();
+  })
+
+  // $scope.selectNext = _.throttle(function() {
+  //   $scope.translationCommits.selectNext();
+  //   $scope.updateRoute();
+  // }, 100);
+
+  // $scope.selectPrevious = _.throttle(function() {
+  //   $scope.translationCommits.selectPrevious();
+  //   $scope.updateRoute();
+  // }, 100);
 
   hotkeys
     .bindTo($scope)
@@ -84,7 +204,7 @@ function TranslateTargetController($scope, hotkeys, target) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        $scope.selectNext();
+        // $scope.selectNext();
       }
     })
     .add({
@@ -93,63 +213,20 @@ function TranslateTargetController($scope, hotkeys, target) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        $scope.selectPrevious();
-      }
-    });
-}
-
-function TranslatePhraseController($scope, hotkeys, translationId, TranslationRepository) {
-  $scope.translationCommit = $scope.translationCommits.select(translationId)
-
-  if (!$scope.translationCommit) {
-    return;
-  }
-
-  $scope.editedTranslation = {
-    id: translationId,
-    locale: $scope.context.target,
-    phrase: $scope.translationCommit.getTargetPhrase(),
-    isDirty: function() {
-      return this.phrase !== $scope.translationCommit.getTargetPhrase();
-    }
-  }
-
-  // Fetch this translate to be sure the text is up to date
-  TranslationRepository.get(translationId).then(function(translation) {
-    angular.copy(translation.phrases, $scope.translationCommit._phrases);
-    $scope.editedTranslation.phrase = $scope.translationCommit.getTargetPhrase();
-  });
-
-  $scope.saveTranslation = function() {
-    TranslationRepository.savePhrase(
-      $scope.editedTranslation.id,
-      $scope.editedTranslation.locale,
-      $scope.editedTranslation.phrase
-    );
-
-    $scope.translationCommit.setTargetPhrase(
-      $scope.editedTranslation.phrase
-    );
-  }
-
-  $scope.copySource = function() {
-    $scope.editedTranslation.phrase = $scope.translationCommit.getSourcePhrase();
-  };
-  $scope.cancelTranslation = function() {
-    $scope.editedTranslation.phrase = $scope.translationCommit.getTargetPhrase();
-  };
-
-  hotkeys
-    .bindTo($scope)
-    .add({
-      combo: 'mod+enter',
-      description: 'Save translation',
-      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
-      callback: function(e) {
-        e.preventDefault();
-        $scope.saveTranslation();
+        // $scope.selectPrevious();
       }
     })
+    .add({
+      combo: 'esc',
+      description: 'Unselected translation',
+      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback: function(e) {
+        console.log('ESC');
+        e.preventDefault();
+        $scope.deactivateTranslation();
+      }
+    })
+    ;
 }
 
 })();

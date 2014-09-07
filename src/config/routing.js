@@ -66,9 +66,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resources: function($stateParams, ResourceService) {
           return ResourceService.getResources($stateParams.slug);
         },
-        translations: function($stateParams, TranslationService) {
-          return TranslationService.getTranslations($stateParams.slug);
-        },
+        // translations: function($stateParams, TranslationService) {
+        //   return TranslationService.getTranslations($stateParams.slug);
+        // },
+        // target: function($stateParams) {
+        //   return $stateParams.locale;
+        // },
       }
     })
     .state('translate.source', {
@@ -94,17 +97,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
         },
       }
     })
-    .state('translate.source.target.phrase', {
-      url: '/{id:[0-9]+}',
-      menu: 'translate',
-      templateUrl: 'partials/translate-phrase.html',
-      controller: 'TranslatePhraseController',
-      resolve: {
-        translationId: function($stateParams) {
-          return +$stateParams.id;
-        },
-      }
-    })
+    // .state('translate.source.target.phrase', {
+    //   url: '/{id:[0-9]+}',
+    //   menu: 'translate',
+    //   templateUrl: 'partials/translate-phrase.html',
+    //   controller: 'TranslatePhraseController',
+    //   resolve: {
+    //     translationId: function($stateParams) {
+    //       return +$stateParams.id;
+    //     },
+    //   }
+    // })
     .state('glossary', {
       url: '/glossary',
       menu: 'glossary',
