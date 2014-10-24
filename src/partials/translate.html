@@ -38,7 +38,7 @@
 </div>
 
 <div class="l-translate-main">
-  <div class="l-translations-container column column--size-8 column--scrollable" attach-as="containerElement">
+  <div class="l-translations-container column column--size-8 column--scrollable" attach-as="containerElement" du-scroll-container>
     <div class="l-translations" ng-repeat="resource in resources" ng-if="context.source && context.target">
       <h3 class="l-translations__header">
         <i class="l-translations__header-icon icon-file"></i>
@@ -64,6 +64,11 @@
             'translation-card--collapsed': !translationCommit.active
           }"
           ng-click="translationCommit.active ? null : activateTranslation(translationCommit)"
+          scroll
+          scroll-container="containerElement"
+          scroll-when="translationCommit.active"
+          scroll-offset="50"
+          scroll-duration="500"
         >
           <div class="translation-card__header">
             <div class="translation-card__key">
