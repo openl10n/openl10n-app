@@ -12,7 +12,7 @@ angular
  *
  * @ngInject
  */
-function ScrollDirective($window) {
+function ScrollDirective($document) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -21,7 +21,7 @@ function ScrollDirective($window) {
         return;
       }
 
-      var container = attrs['scrollContainer'] ? scope[attrs['scrollContainer']] : $window;
+      var container = attrs['scrollContainer'] ? scope[attrs['scrollContainer']] : $document;
       var offset = attrs['scrollOffset'] || 0;
       var duration = attrs['scrollDuration'] || 0;
 
