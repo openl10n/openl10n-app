@@ -96,13 +96,13 @@ function TranslateController($scope, $state, project, languages, resources, Tran
   });
 
 
-  var activedTranslation = null;
+  $scope.activedTranslation = null;
   $scope.activateTranslation = function(translation) {
-    if (null !== activedTranslation)
-      activedTranslation.active = false;
+    if (null !== $scope.activedTranslation)
+      $scope.activedTranslation.active = false;
 
-    activedTranslation = translation;
-    activedTranslation.active = true;
+    $scope.activedTranslation = translation;
+    $scope.activedTranslation.active = true;
   }
   $scope.deactivateTranslation = function(translation, $event) {
     if ($event)
@@ -224,6 +224,17 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
         console.log('ESC');
         e.preventDefault();
         $scope.deactivateTranslation();
+      }
+    })
+    .add({
+      combo: 'mod+enter',
+      description: 'Save translation',
+      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback: function(e) {
+        e.preventDefault();
+        if (!$scope.activedTranslation)
+          return;
+        $scope.saveTranslation($scope.activedTranslation);
       }
     })
     ;
