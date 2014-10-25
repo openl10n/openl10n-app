@@ -60,6 +60,7 @@
             'translation-card--status-editing': (translationCommit.edit_phrase != translationCommit.target_phrase),
             'translation-card--status-approved': translationCommit.is_approved,
             'translation-card--status-translated': translationCommit.is_translated,
+            'translation-card--status-untranslated': translationCommit.source_phrase && !translationCommit.is_translated,
             'translation-card--expanded': translationCommit.active,
             'translation-card--collapsed': !translationCommit.active
           }"

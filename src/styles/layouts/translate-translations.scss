@@ -66,6 +66,9 @@
   &--status-editing {
     border-right-color: #3498db;
   }
+  &--status-untranslated {
+    border-right-color: $color-invalid;
+  }
 
   &__header {
     padding: 0 15px;
