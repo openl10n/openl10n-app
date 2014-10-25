@@ -4,14 +4,16 @@
   height: 100%;
   margin: 0 auto;
   // border-right: 1px solid $color-gray-300;
+  margin-top: 80px;
+  position: relative;
 }
 
 .l-translations {
+  position: relative;
   margin: 20px 20px 20px;
   padding-bottom: 15px;
   background: $color-gray-300;
-  position: relative;
-  border-radius: 3px;
+  border-radius: 4px;
   @include clearfix();
 
   &__header {
@@ -22,8 +24,8 @@
     // background: #fff;
     position: -webkit-sticky;
     position: sticky;
-    top: 0px;
-    background: rgba($color-gray-300, 0.9);
+    top: 60px;
+    background: rgba($color-gray-300, 0.95);
     z-index: 2;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -100,7 +102,7 @@
   &__description {
     @include font-size(14);
     border-radius: 3px;
-    padding: 10px;
+    padding: 10px 15px;
     background: $color-gray-100;
     color: $color-dark;
     color: $color-gray-600;

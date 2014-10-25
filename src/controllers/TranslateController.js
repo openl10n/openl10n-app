@@ -76,7 +76,7 @@ ResourceWrapper.prototype.loadMore = function() {
 
 }
 
-function TranslateController($scope, $state, project, languages, resources, TranslationRepository, TranslationCommitRepository) {
+function TranslateController($document, $scope, $state, project, languages, resources, TranslationRepository, TranslationCommitRepository) {
 
   console.log('TranslateController');
 

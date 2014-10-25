@@ -1,171 +1,173 @@
-<div class="l-translate-header u-clearfix">
-  <div class="column column--size-2">
-    <h1 class="l-translate-header__title title title--level-1">
-      <a ui-sref="project({slug: project.slug})">
-        {{ project.name }}
-      </a>
-    </h1>
-  </div>
+<div class="l-translate-container column column--size-12 column--scrollable" attach-as="containerElement">
+  <div class="l-translate-header u-clearfix">
+    <div class="column column--size-2">
+      <h1 class="l-translate-header__title title title--level-1">
+        <a ui-sref="project({slug: project.slug})">
+          {{ project.name }}
+        </a>
+      </h1>
+    </div>
 
-  <!-- <div class="l-translate-header__stats column column--size-1" style="overflow:hidden">
-    <span class="l-translate-header__counter">
-      {{ translations.length }}
-    </span>
-    <span class="l-translate-header__counter-label">
-      translations
-    </span>
-  </div> -->
+    <!-- <div class="l-translate-header__stats column column--size-1" style="overflow:hidden">
+      <span class="l-translate-header__counter">
+        {{ translations.length }}
+      </span>
+      <span class="l-translate-header__counter-label">
+        translations
+      </span>
+    </div> -->
 
-  <div class="column column--size-6">
-    <form class="l-translate-header__search-form" ng-submit="applySearchSpecification(searchQuery)">
-      <input type="text" placeholder="Search…" class="form__control" ng-model="searchQuery">
-    </form>
-  </div>
+    <div class="column column--size-6">
+      <form class="l-translate-header__search-form" ng-submit="applySearchSpecification(searchQuery)">
+        <input type="text" placeholder="Search…" class="form__control l-translate-header__search-input" ng-model="searchQuery">
+      </form>
+    </div>
 
-  <div class="column column--size-4 form--inline">
-    <div class="l-translate-header__locale-form u-text-right">
-      <select class="form__control" ng-change="updateRoute()" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
-        <option value=""></option>
-      </select>
+    <div class="column column--size-4 form--inline">
+      <div class="l-translate-header__locale-form u-text-right">
+        <select class="form__control" ng-change="updateRoute()" ng-model="context.source" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+          <option value=""></option>
+        </select>
 
-      <i class="l-translate-header__icon icon-arrow-right"></i>
+        <i class="l-translate-header__icon icon-arrow-right"></i>
 
-      <select class="form__control" ng-change="updateRoute()" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
-        <option value=""></option>
-      </select>
+        <select class="form__control" ng-change="updateRoute()" ng-model="context.target" ng-options="language.locale as language.name for language in languages|orderBy:'name'">
+          <option value=""></option>
+        </select>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="l-translate-main column column--size-12 column--scrollable" attach-as="containerElement">
-  <div class="l-translations-container">
-    <div class="l-translations" ng-repeat="resource in resources" ng-if="context.source && context.target">
-      <h3 class="l-translations__header">
-        <i class="l-translations__header-icon icon-file"></i>
-        {{ resource.pathname }}
-      </h3>
+  <div class="l-translate-main column column--size-12">
+    <div class="l-translations-container">
+      <div class="l-translations" ng-repeat="resource in resources" ng-if="context.source && context.target">
+        <h3 class="l-translations__header">
+          <i class="l-translations__header-icon icon-file"></i>
+          {{ resource.pathname }}
+        </h3>
 
-      <ul
-        class="l-translations__list"
-        infinite-scroll="resource.loadMore()"
-        infinite-scroll-distance="2"
-        infinite-scroll-container="containerElement"
-        infinite-scroll-disabled="resource.busy"
-      >
-        <li
-          id="translation-{{translationCommit.id}}"
-          class="translation-card"
-          ng-repeat="translationCommit in resource.translationCommits"
-          ng-class="{
-            'translation-card--status-editing': (translationCommit.edit_phrase != translationCommit.target_phrase),
-            'translation-card--status-approved': translationCommit.is_approved,
-            'translation-card--status-translated': translationCommit.is_translated,
-            'translation-card--status-untranslated': translationCommit.source_phrase && !translationCommit.is_translated,
-            'translation-card--expanded': translationCommit.active,
-            'translation-card--collapsed': !translationCommit.active
-          }"
-          ng-click="translationCommit.active ? null : activateTranslation(translationCommit)"
-          scroll
-          scroll-container="containerElement"
-          scroll-when="translationCommit.active"
-          scroll-offset="45"
-          scroll-duration="500"
+        <ul
+          class="l-translations__list"
+          infinite-scroll="resource.loadMore()"
+          infinite-scroll-distance="2"
+          infinite-scroll-container="containerElement"
+          infinite-scroll-disabled="resource.busy"
         >
-          <div class="translation-card__header" ng-click="translationCommit.active ? deactivateTranslation(translationCommit, $event) : null">
-            <div class="translation-card__key">
-              <div class="translation-card__top-icon u-pull-right" ng-if="translationCommit.active">
-                <i class="icon-caret-up" ng-click="deactivateTranslation(translationCommit, $event)"></i>
-              </div>
-
-              {{ translationCommit.key }}
-            </div>
-          </div>
-
-          <div class="translation-card__body">
-            <div class="translation-card__wrapper">
-              <div class="translation-card__part translation-card__source">
-                <div class="translation-card__subtitle">
-                  Source
+          <li
+            id="translation-{{translationCommit.id}}"
+            class="translation-card"
+            ng-repeat="translationCommit in resource.translationCommits"
+            ng-class="{
+              'translation-card--status-editing': (translationCommit.edit_phrase != translationCommit.target_phrase),
+              'translation-card--status-approved': translationCommit.is_approved,
+              'translation-card--status-translated': translationCommit.is_translated,
+              'translation-card--status-untranslated': translationCommit.source_phrase && !translationCommit.is_translated,
+              'translation-card--expanded': translationCommit.active,
+              'translation-card--collapsed': !translationCommit.active
+            }"
+            ng-click="translationCommit.active ? null : activateTranslation(translationCommit)"
+            scroll
+            scroll-when="translationCommit.active"
+            scroll-offset="100"
+            scroll-duration="500"
+            scroll-container="containerElement"
+          >
+            <div class="translation-card__header" ng-click="translationCommit.active ? deactivateTranslation(translationCommit, $event) : null">
+              <div class="translation-card__key">
+                <div class="translation-card__top-icon u-pull-right" ng-if="translationCommit.active">
+                  <i class="icon-caret-up" ng-click="deactivateTranslation(translationCommit, $event)"></i>
                 </div>
 
-                <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
-                  {{ translationCommit.source_phrase }}
-                </p>
-                <p class="translation-card__phrase" ng-if="translationCommit.active">
-                  {{ translationCommit.source_phrase }}
-                </p>
+                {{ translationCommit.key }}
               </div>
+            </div>
 
-              <div class="translation-card__part translation-card__target">
-                <div class="translation-card__subtitle">
-                  Target
+            <div class="translation-card__body">
+              <div class="translation-card__wrapper">
+                <div class="translation-card__part translation-card__source">
+                  <div class="translation-card__subtitle">
+                    Source
+                  </div>
+
+                  <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
+                    {{ translationCommit.source_phrase }}
+                  </p>
+                  <p class="translation-card__phrase" ng-if="translationCommit.active">
+                    {{ translationCommit.source_phrase }}
+                  </p>
                 </div>
 
-                <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
-                  {{ translationCommit.edit_phrase }}
-                </p>
-                <textarea auto-select class="translation-card__phrase" ng-if="translationCommit.active" ng-model="translationCommit.edit_phrase" placeholder="Translate here…" msd-elastic>
-                  {{ translationCommit.edit_phrase }}
-                </textarea>
+                <div class="translation-card__part translation-card__target">
+                  <div class="translation-card__subtitle">
+                    Target
+                  </div>
+
+                  <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
+                    {{ translationCommit.edit_phrase }}
+                  </p>
+                  <textarea auto-select class="translation-card__phrase" ng-if="translationCommit.active" ng-model="translationCommit.edit_phrase" placeholder="Translate here…" msd-elastic>
+                    {{ translationCommit.edit_phrase }}
+                  </textarea>
+                </div>
+              </div>
+
+              <div class="translation-card__context">
+                <textarea ng-model="translationCommit.description" class="translation-card__description column column--size-12" placeholder="Click here to add a description…" msd-elastic></textarea>
               </div>
             </div>
 
-            <div class="translation-card__context">
-              <textarea ng-model="translationCommit.description" class="translation-card__description column column--size-12" placeholder="Click here to add a description…" msd-elastic></textarea>
+            <div class="translation-card__footer">
+              <div class="translation-card__actions">
+                <span ng-if="translationCommit.edit_phrase != translationCommit.target_phrase">
+                  <button ng-click="cancelEdit(translationCommit)" class="button button--type-flat button--size-small">
+                    Cancel
+                  </button>
+
+                  <button ng-click="saveTranslation(translationCommit)" class="button button--type-raised button--color-primary button--size-small">
+                    Save
+                  </button>
+                </span>
+
+                <span ng-if="translationCommit.edit_phrase == translationCommit.target_phrase && translationCommit.is_translated && !translationCommit.is_approved">
+                  <button ng-click="approveTranslation(translationCommit)" class="button button--type-flat button--color-primary button--size-small">
+                    Approve
+                  </button>
+                </span>
+
+                <span ng-if="translationCommit.edit_phrase == translationCommit.target_phrase && translationCommit.is_approved">
+                  <button ng-click="saveTranslation(translationCommit)" class="button button--type-flat button--color-danger button--size-small">
+                    Unapprove
+                  </button>
+                </span>
+
+                <!-- <button class="button button--type-flat button--size-small button--icon">
+                  <i class="icon-ellipsis-v"></i>
+                </button> -->
+              </div>
+
+              <div class="translation-card__hint">
+                <span ng-show="translationCommit.edit_phrase == translationCommit.target_phrase">
+                  Press <strong>TAB</strong> to move to the next phrase.
+                </span>
+
+                <span ng-show="translationCommit.edit_phrase != translationCommit.target_phrase" class="u-text-blue">
+                  Press <strong><span mod-key></span>+Enter</strong> to save translation
+                </span>
+              </div>
             </div>
-          </div>
+          </li>
 
-          <div class="translation-card__footer">
-            <div class="translation-card__actions">
-              <span ng-if="translationCommit.edit_phrase != translationCommit.target_phrase">
-                <button ng-click="cancelEdit(translationCommit)" class="button button--type-flat button--size-small">
-                  Cancel
-                </button>
-
-                <button ng-click="saveTranslation(translationCommit)" class="button button--type-raised button--color-primary button--size-small">
-                  Save
-                </button>
-              </span>
-
-              <span ng-if="translationCommit.edit_phrase == translationCommit.target_phrase && translationCommit.is_translated && !translationCommit.is_approved">
-                <button ng-click="approveTranslation(translationCommit)" class="button button--type-flat button--color-primary button--size-small">
-                  Approve
-                </button>
-              </span>
-
-              <span ng-if="translationCommit.edit_phrase == translationCommit.target_phrase && translationCommit.is_approved">
-                <button ng-click="saveTranslation(translationCommit)" class="button button--type-flat button--color-danger button--size-small">
-                  Unapprove
-                </button>
-              </span>
-
-              <!-- <button class="button button--type-flat button--size-small button--icon">
-                <i class="icon-ellipsis-v"></i>
-              </button> -->
+          <li class="translation-loading-card" ng-if="!resource.complete" ng-click="resource.loadMore()">
+            <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
             </div>
-
-            <div class="translation-card__hint">
-              <span ng-show="translationCommit.edit_phrase == translationCommit.target_phrase">
-                Press <strong>TAB</strong> to move to the next phrase.
-              </span>
-
-              <span ng-show="translationCommit.edit_phrase != translationCommit.target_phrase" class="u-text-blue">
-                Press <strong><span mod-key></span>+Enter</strong> to save translation
-              </span>
-            </div>
-          </div>
-        </li>
-
-        <li class="translation-loading-card" ng-if="!resource.complete" ng-click="resource.loadMore()">
-          <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div ui-view></div>
+    <div ui-view></div>
+  </div>
 </div>
