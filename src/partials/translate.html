@@ -1,5 +1,5 @@
 <div class="l-translate-header u-clearfix">
-  <div class="column column--size-3">
+  <div class="column column--size-2">
     <h1 class="l-translate-header__title title title--level-1">
       <a ui-sref="project({slug: project.slug})">
         {{ project.name }}
@@ -7,16 +7,16 @@
     </h1>
   </div>
 
-  <div class="l-translate-header__stats column column--size-1" style="overflow:hidden">
+  <!-- <div class="l-translate-header__stats column column--size-1" style="overflow:hidden">
     <span class="l-translate-header__counter">
       {{ translations.length }}
     </span>
     <span class="l-translate-header__counter-label">
       translations
     </span>
-  </div>
+  </div> -->
 
-  <div class="column column--size-4">
+  <div class="column column--size-6">
     <form class="l-translate-header__search-form" ng-submit="applySearchSpecification(searchQuery)">
       <input type="text" placeholder="Search…" class="form__control" ng-model="searchQuery">
     </form>
@@ -37,8 +37,8 @@
   </div>
 </div>
 
-<div class="l-translate-main">
-  <div class="l-translations-container column column--size-9 column--scrollable" attach-as="containerElement" du-scroll-container>
+<div class="l-translate-main column column--size-12 column--scrollable" attach-as="containerElement">
+  <div class="l-translations-container">
     <div class="l-translations" ng-repeat="resource in resources" ng-if="context.source && context.target">
       <h3 class="l-translations__header">
         <i class="l-translations__header-icon icon-file"></i>
@@ -48,7 +48,7 @@
       <ul
         class="l-translations__list"
         infinite-scroll="resource.loadMore()"
-        infinite-scroll-distance="3"
+        infinite-scroll-distance="2"
         infinite-scroll-container="containerElement"
         infinite-scroll-disabled="resource.busy"
       >
@@ -67,7 +67,7 @@
           scroll
           scroll-container="containerElement"
           scroll-when="translationCommit.active"
-          scroll-offset="50"
+          scroll-offset="45"
           scroll-duration="500"
         >
           <div class="translation-card__header" ng-click="translationCommit.active ? deactivateTranslation(translationCommit, $event) : null">
@@ -109,9 +109,9 @@
               </div>
             </div>
 
-            <!-- <div class="translation-card__context">
-              <textarea ng-model="translationCommit.description" class="translation-card__description" placeholder="Click here to add a description…" msd-elastic></textarea>
-            </div> -->
+            <div class="translation-card__context">
+              <textarea ng-model="translationCommit.description" class="translation-card__description column column--size-12" placeholder="Click here to add a description…" msd-elastic></textarea>
+            </div>
           </div>
 
           <div class="translation-card__footer">
@@ -144,7 +144,13 @@
             </div>
 
             <div class="translation-card__hint">
-              Press <strong>TAB</strong> to go to the next phrase.
+              <span ng-show="translationCommit.edit_phrase == translationCommit.target_phrase">
+                Press <strong>TAB</strong> to move to the next phrase.
+              </span>
+
+              <span ng-show="translationCommit.edit_phrase != translationCommit.target_phrase" class="u-text-blue">
+                Press <strong><span mod-key></span>+Enter</strong> to save translation
+              </span>
             </div>
           </div>
         </li>
@@ -158,10 +164,6 @@
         </li>
       </ul>
     </div>
-  </div>
-
-  <div class="column column--size-3 column--scrollable l-translate-sidebar">
-    &nbsp;
   </div>
 
   <div ui-view></div>

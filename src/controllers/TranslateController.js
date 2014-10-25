@@ -109,8 +109,8 @@ function TranslateController($scope, $state, project, languages, resources, Tran
       $event.stopPropagation();
     if (translation)
       translation.active = false;
-    else if (activedTranslation)
-      activedTranslation.active = false;
+    else if ($scope.activedTranslation)
+      $scope.activedTranslation.active = false;
   }
 
   $scope.updateRoute = updateRoute;
