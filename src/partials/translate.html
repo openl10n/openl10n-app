@@ -38,7 +38,7 @@
 </div>
 
 <div class="l-translate-main">
-  <div class="l-translations-container column column--size-8 column--scrollable" attach-as="containerElement" du-scroll-container>
+  <div class="l-translations-container column column--size-9 column--scrollable" attach-as="containerElement" du-scroll-container>
     <div class="l-translations" ng-repeat="resource in resources" ng-if="context.source && context.target">
       <h3 class="l-translations__header">
         <i class="l-translations__header-icon icon-file"></i>
@@ -70,7 +70,7 @@
           scroll-offset="50"
           scroll-duration="500"
         >
-          <div class="translation-card__header">
+          <div class="translation-card__header" ng-click="translationCommit.active ? deactivateTranslation(translationCommit, $event) : null">
             <div class="translation-card__key">
               <div class="translation-card__top-icon u-pull-right" ng-if="translationCommit.active">
                 <i class="icon-caret-up" ng-click="deactivateTranslation(translationCommit, $event)"></i>
@@ -81,31 +81,37 @@
           </div>
 
           <div class="translation-card__body">
-            <div class="translation-card__part translation-card__source">
-              <div class="translation-card__subtitle">
-                Source
+            <div class="translation-card__wrapper">
+              <div class="translation-card__part translation-card__source">
+                <div class="translation-card__subtitle">
+                  Source
+                </div>
+
+                <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
+                  {{ translationCommit.source_phrase }}
+                </p>
+                <p class="translation-card__phrase" ng-if="translationCommit.active">
+                  {{ translationCommit.source_phrase }}
+                </p>
               </div>
 
-              <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
-                {{ translationCommit.source_phrase }}
-              </p>
-              <p class="translation-card__phrase" ng-if="translationCommit.active">
-                {{ translationCommit.source_phrase }}
-              </p>
-            </div>
+              <div class="translation-card__part translation-card__target">
+                <div class="translation-card__subtitle">
+                  Target
+                </div>
 
-            <div class="translation-card__part translation-card__target">
-              <div class="translation-card__subtitle">
-                Target
+                <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
+                  {{ translationCommit.edit_phrase }}
+                </p>
+                <textarea auto-select class="translation-card__phrase" ng-if="translationCommit.active" ng-model="translationCommit.edit_phrase" placeholder="Translate here…" msd-elastic>
+                  {{ translationCommit.edit_phrase }}
+                </textarea>
               </div>
-
-              <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
-                {{ translationCommit.edit_phrase }}
-              </p>
-              <textarea auto-select class="translation-card__phrase" ng-if="translationCommit.active" ng-model="translationCommit.edit_phrase" placeholder="Translate here…" msd-elastic>
-                {{ translationCommit.edit_phrase }}
-              </textarea>
             </div>
+
+            <!-- <div class="translation-card__context">
+              <textarea ng-model="translationCommit.description" class="translation-card__description" placeholder="Click here to add a description…" msd-elastic></textarea>
+            </div> -->
           </div>
 
           <div class="translation-card__footer">
@@ -115,7 +121,7 @@
                   Cancel
                 </button>
 
-                <button ng-click="saveTranslation(translationCommit)" class="button button--type-flat button--color-primary button--size-small">
+                <button ng-click="saveTranslation(translationCommit)" class="button button--type-raised button--color-primary button--size-small">
                   Save
                 </button>
               </span>
@@ -154,7 +160,8 @@
     </div>
   </div>
 
-  <div class="column column--size-4 column--scrollable">
+  <div class="column column--size-3 column--scrollable l-translate-sidebar">
+    &nbsp;
   </div>
 
   <div ui-view></div>

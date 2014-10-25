@@ -60,6 +60,7 @@
     @include text-ellipsis();
   }
   &__body {
+    padding-top: 10px;
     padding-bottom: 15px;
     display: block;
     width: 100%;
@@ -73,9 +74,35 @@
     border-top: 1px solid $color-gray-200;
   }
 
+  &__wrapper {
+    @include clearfix();
+  }
+  &__context {
+    padding: 10px;
+    background: $color-gray-100;
+    color: $color-dark;
+    margin: 10px 15px 5px;
+    border-radius: 2px;
+  }
+  &__description {
+    @include font-size(14);
+    color: $color-gray-600;
+    background: transparent;
+    border: none;
+    width: 100%;
+    resize: none;
+    overflow: auto;
+    height: 20px;
+
+    &:active,
+    &:focus {
+      outline: 0;
+    }
+  }
+
   &__key {
     @include font-size(13);
-    color: $color-dark;
+    color: $color-gray-500;
   }
   &__top-icon {
     color: $color-gray-500;
@@ -161,14 +188,22 @@
     line-height: 30px;
     padding-top: 5px;
   }
+  &--expanded .translation-card__header:hover {
+    // background: $color-gray-50;
+    cursor: pointer;
+  }
   &--collapsed .translation-card__key {
     color: $color-gray-400;
   }
   &--collapsed:hover .translation-card__key {
-    color: $color-dark;
+    color: $color-gray-500;
   }
   &--collapsed .translation-card__body {
+    padding-top: 5px;
     padding-bottom: 10px;
+  }
+  &--collapsed .translation-card__context {
+    display: none;
   }
   &--collapsed .translation-card__subtitle {
     display: none;
