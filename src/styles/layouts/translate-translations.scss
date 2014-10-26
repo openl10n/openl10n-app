@@ -48,7 +48,7 @@
 
 .translation-card {
   // TODO move margin to .card-list__item--detached
-  margin: 0 15px;
+  margin: 0 20px;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -65,11 +65,11 @@
   &--status-approved {
     border-right-color: $color-approved;
   }
-  &--status-editing {
-    border-right-color: #3498db;
-  }
   &--status-untranslated {
     border-right-color: $color-invalid;
+  }
+  &--status-editing {
+    border-right-color: #3498db;
   }
 
   &__header {
@@ -95,6 +95,7 @@
 
   &__wrapper {
     @include clearfix();
+    margin: 0 15px;
   }
   &__context {
     margin: 10px 15px 5px;
@@ -137,10 +138,7 @@
     position: relative;
     float: left;
     min-height: 1px;
-  }
-  &__source,
-  &__target {
-    padding: 0 15px;
+    padding-right: 15px;
   }
   &__subtitle {
     @include font-size(11);
@@ -207,6 +205,18 @@
     line-height: 30px;
     padding-top: 5px;
   }
+  &--expanded .translation-card__part {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  &--expanded .translation-card__target {
+    background: #f1f8e9; // lightgreen
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  &--expanded.translation-card--status-editing .translation-card__target {
+    background: #e1f5fe; // lightblue
+  }
   &--expanded .translation-card__header:hover {
     // background: $color-gray-50;
     cursor: pointer;
@@ -236,7 +246,7 @@
 
 .translation-loading-card {
   z-index: 1;
-  margin: 0 15px;
+  margin: 0 20px;
   padding: 10px 0;
   position: relative;
   overflow: hidden;

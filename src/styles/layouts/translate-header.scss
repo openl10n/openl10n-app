@@ -1,14 +1,15 @@
 .l-translate-header {
   position: fixed;
   top: 0;
-  right: 0;
-  left: 70px;
-  z-index: 99;
+  right: -10px;
+  left: 70px - 10px;
+  z-index: 10;
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
   // background-color: $color-gray-200;
   background-color: darken($color-primary, 2);
   height: 60px;
+  min-width: 1100px;
   overflow: hidden;
   // border-bottom: 1px solid $color-gray-300;
   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
@@ -85,6 +86,10 @@
   &__locale-form {
     line-height: 55px;
     padding: 0 10px;
+
+    select {
+      max-width: 150px;
+    }
   }
 
   &__icon {

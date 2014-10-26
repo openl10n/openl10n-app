@@ -1,6 +1,7 @@
 $color-navbar-bg: #37474f;
 
 .navbar {
+  z-index: 99;
   color: #fff;
   background-color: $color-navbar-bg;
   width: 70px;
@@ -35,7 +36,7 @@ $color-navbar-bg: #37474f;
 
     &:hover {
       // color: $color-gray-100;
-      color: #f1c40f;
+      background-color: rgba($color-gray-500, 0.1);
     }
   }
 
