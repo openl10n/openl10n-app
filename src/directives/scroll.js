@@ -12,7 +12,7 @@ angular
  *
  * @ngInject
  */
-function ScrollDirective($document) {
+function ScrollDirective($document, $timeout) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -24,10 +24,13 @@ function ScrollDirective($document) {
       var container = attrs['scrollContainer'] ? scope[attrs['scrollContainer']] : $document;
       var offset = attrs['scrollOffset'] || 0;
       var duration = attrs['scrollDuration'] || 0;
+      var delay = attrs['scrollDelay'] || 0;
 
       var unwatch = scope.$watch(when, function(newValue, oldValue) {
         if (!oldValue && newValue) {
-          container.scrollTo(element, +offset, +duration);
+          $timeout(function() {
+            container.scrollTo(element, +offset, +duration);
+          }, delay);
         }
       });
 
