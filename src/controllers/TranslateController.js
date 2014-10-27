@@ -4,13 +4,12 @@
 // TODO:
 //
 // - [x] auto focus when select translation
-// - [ ] auto scroll when select translation
+// - [x] auto scroll when select translation
 // - [x] save
 // - [x] approve
+// - [x] Next/Previous shortcuts
+// - [ ] search/filter/counters
 // - [ ] fetch data when select/save translation + merge
-// - [ ] search
-// - [ ] filter
-// - [ ] counters
 // - [ ] deduplicate translations on loadMore action
 //
 
@@ -23,10 +22,11 @@ angular
   .controller('TranslateTargetController', TranslateTargetController)
 ;
 
-function ResourceWrapper(resource, context, translationCommitRepository) {
+function ResourceWrapper(resource, context, filters, translationCommitRepository) {
   // Keep orginal object & services
   this.resource = resource;
   this.context = context;
+  this.filters = filters;
   this.translationCommitRepository = translationCommitRepository;
 
   // Map object attributes
@@ -58,7 +58,8 @@ ResourceWrapper.prototype.loadMore = function() {
   this.translationCommitRepository.findBy(this.context.source, this.context.target, {
     resource: this.resource.id,
     page: this.page,
-    per_page: this.perPage
+    per_page: this.perPage,
+    text: this.filters.text
   }).then(function(translationCommits) {
     if (translationCommits.length < this.perPage) {
       console.log('fetching finished')
@@ -87,11 +88,13 @@ function TranslateController($document, $scope, $state, project, languages, reso
   $scope.project = project;
   $scope.languages = languages;
   $scope.context = { source: project.default_locale, target: null };
+  $scope.filters = { text: '' };
+  $scope.searchQuery = '';
 
   $scope.resources = [];
   angular.forEach(resources, function(resource) {
     $scope.resources.push(
-      new ResourceWrapper(resource, $scope.context, TranslationCommitRepository)
+      new ResourceWrapper(resource, $scope.context, $scope.filters, TranslationCommitRepository)
     );
   });
 
@@ -166,6 +169,14 @@ function TranslateController($document, $scope, $state, project, languages, reso
   $scope.cancelEdit = function(translationCommit) {
     translationCommit.edit_phrase = translationCommit.target_phrase;
     // TODO : update original data
+  }
+
+  $scope.search = function(text) {
+    $scope.filters.text = text;
+    $scope.resources.forEach(function(resource) {
+      resource.reset();
+      resource.loadMore();
+    })
   }
 }
 
