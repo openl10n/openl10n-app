@@ -1,0 +1,45 @@
+$countries:
+  "ad", "ax", "bo", "ch", "de", "fj", "gm", "ht", "jo", "lb", "mf", "mv", "nr", "ps", "se", "sx", "tr", "vg",
+  "ae", "az", "bq", "ci", "dj", "fk", "gn", "hu", "jp", "lc", "mg", "mw", "nu", "pt", "sg", "sy", "tt", "vi",
+  "af", "ba", "br", "ck", "dk", "fm", "gp", "id", "ke", "li", "mh", "mx", "nz", "pw", "sh", "sz", "tv", "vn",
+  "ag", "bb", "bs", "cl", "dm", "fo", "gq", "ie", "kg", "lk", "mk", "my", "om", "py", "si", "tc", "tw", "vu",
+  "ai", "bd", "bt", "cm", "do", "fr", "gr", "il", "kh", "lr", "ml", "mz", "pa", "qa", "sj", "td", "tz", "wf",
+  "al", "be", "bv", "cn", "dz", "ga", "gs", "im", "ki", "ls", "mm", "na", "pe", "re", "sk", "tf", "ua", "ws",
+  "am", "bf", "bw", "co", "ec", "gb", "gt", "in", "km", "lt", "mn", "nc", "pf", "ro", "sl", "tg", "ug", "ye",
+  "ao", "bg", "by", "cr", "ee", "gd", "gu", "io", "kn", "lu", "mo", "ne", "pg", "rs", "sm", "th", "um", "yt",
+  "aq", "bh", "bz", "cu", "eg", "ge", "gw", "iq", "kp", "lv", "mp", "nf", "ph", "ru", "sn", "tj", "us", "za",
+  "ar", "bi", "ca", "cv", "eh", "gf", "gy", "ir", "kr", "ly", "mq", "ng", "pk", "rw", "so", "tk", "uy", "zm",
+  "as", "bj", "cc", "cw", "er", "gg", "hk", "is", "kw", "ma", "mr", "ni", "pl", "sa", "sr", "tl", "uz", "zw",
+  "at", "bl", "cd", "cx", "es", "gh", "hm", "it", "ky", "mc", "ms", "nl", "pm", "sb", "ss", "tm", "va",
+  "au", "bm", "cf", "cy", "et", "gi", "hn", "je", "kz", "md", "mt", "no", "pn", "sc", "st", "tn", "vc",
+  "aw", "bn", "cg", "cz", "fi", "gl", "hr", "jm", "la", "me", "mu", "np", "pr", "sd", "sv", "to", "ve";
+
+.flag-icon {
+  position: relative;
+  display: inline-block;
+  width: 1.3333333333333333em;
+  line-height: 1em;
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+.flag-icon:before {
+  content: "\00a0";
+}
+.flag-icon.flag-icon-squared {
+  width: 1em;
+}
+.flag-icon-background {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+@each $country in $countries {
+  .flag-icon-#{$country} {
+    background-image: url(../images/flags/4x3/#{$country}.svg);
+  }
+  .flag-icon-#{$country}.flag-icon-squared {
+    background-image: url(../images/flags/1x1/#{$country}.svg);
+  }
+}

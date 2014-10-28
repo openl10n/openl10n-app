@@ -98,8 +98,13 @@ gulp.task('server', function() {
 // Assets
 //
 gulp.task('public', function () {
+  // Versionned assets
   gulp.src(srcDir + '/public/**/*')
     .pipe(gulp.dest(distDir))
+
+  // Flags icons
+  gulp.src(vendorDir + '/flag-icon-css/flags/**/*')
+    .pipe(gulp.dest(distDir + '/images/flags'))
 })
 
 //

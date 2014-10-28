@@ -87,7 +87,8 @@
               <div class="translation-card__wrapper">
                 <div class="translation-card__part translation-card__source">
                   <div class="translation-card__subtitle">
-                    Source
+                    <span>Source</span>
+                    <span class="flag-icon flag-icon-{{ translationCommit.source_locale|region|lowercase }}"></span>
                   </div>
 
                   <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
@@ -100,7 +101,8 @@
 
                 <div class="translation-card__part translation-card__target">
                   <div class="translation-card__subtitle">
-                    Target
+                    <span>Target</span>
+                    <span class="flag-icon flag-icon-{{ translationCommit.target_locale|region|lowercase }}"></span>
                   </div>
 
                   <p class="translation-card__phrase translation-card__phrase--short" ng-if="!translationCommit.active">
