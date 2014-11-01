@@ -10,13 +10,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('login', {
       url: '/login',
-      templateUrl: 'partials/login.html',
+      templateUrl: 'views/login.html',
       controller: 'LoginController',
     })
     .state('dashboard', {
       url: '/',
       menu: 'dashboard',
-      templateUrl: 'partials/dashboard.html',
+      templateUrl: 'views/dashboard.html',
       controller: 'DashboardController',
       resolve: {
         projects: function(ProjectService) {
@@ -26,7 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('profile', {
       url: '/profile',
-      templateUrl: 'partials/profile.html',
+      templateUrl: 'views/profile.html',
       controller: 'ProfileController',
       resolve: {
         user: function(AuthenticationService) {
@@ -37,7 +37,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('project', {
       url: '/projects/{slug:[a-zA-Z0-9\-\.\_]+}',
       menu: 'translate',
-      templateUrl: 'partials/project.html',
+      templateUrl: 'views/project.html',
       controller: 'ProjectController',
       resolve: {
         project: function($stateParams, ProjectService) {
@@ -54,7 +54,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('translate', {
       url: '/projects/:slug/translate',
       menu: 'translate',
-      templateUrl: 'partials/translate.html',
+      templateUrl: 'views/translate.html',
       controller: 'TranslateController',
       resolve: {
         project: function($stateParams, ProjectService) {
@@ -100,7 +100,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // .state('translate.source.target.phrase', {
     //   url: '/{id:[0-9]+}',
     //   menu: 'translate',
-    //   templateUrl: 'partials/translate-phrase.html',
+    //   templateUrl: 'views/translate-phrase.html',
     //   controller: 'TranslatePhraseController',
     //   resolve: {
     //     translationId: function($stateParams) {
@@ -111,7 +111,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('glossary', {
       url: '/glossary',
       menu: 'glossary',
-      templateUrl: 'partials/glossary.html',
+      templateUrl: 'views/glossary.html',
       controller: 'GlossaryController',
     })
 });
