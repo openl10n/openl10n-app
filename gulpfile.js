@@ -11,6 +11,8 @@ var plumber = require('gulp-plumber')
 var rimraf = require('rimraf')
 var sourcemaps = require('gulp-sourcemaps')
 var sass = require('gulp-sass')
+var streamqueue = require('streamqueue')
+var templateCache = require('gulp-angular-templatecache')
 var uglify = require('gulp-uglify')
 
 //
@@ -115,16 +117,27 @@ gulp.task('templates', function () {
     .pipe(gulp.dest(distDir + '/views'))
 })
 
-
 //
 // Javascript
 //
 gulp.task('scripts', function () {
-  gulp.src(vendorFiles.concat(sourceFiles))
+  var vendor = gulp.src(vendorFiles)
+
+  var src = gulp.src(sourceFiles)
     .pipe(plumber())
+    .pipe(ngAnnotate())
+
+  // Inline templates
+  var templates = gulp.src(srcDir + '/views/*.html')
+    .pipe(templateCache('templates.js', {
+      standalone: true,
+      root: 'views',
+    }))
+
+  // Combine into a single app script
+  streamqueue({ objectMode: true }, vendor, src, templates)
     .pipe(sourcemaps.init())
       .pipe(concat('app.js', {newLine: ';'}))
-      .pipe(ngAnnotate())
       // .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(distDir + '/js'))
