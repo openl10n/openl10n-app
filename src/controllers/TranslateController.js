@@ -114,6 +114,8 @@ function TranslateController($document, $scope, $state, project, languages, reso
       translation.active = false;
     else if ($scope.activedTranslation)
       $scope.activedTranslation.active = false;
+
+    $scope.activedTranslation = null;
   }
 
   $scope.updateRoute = updateRoute;
@@ -197,6 +199,59 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
     resource.loadMore();
   })
 
+  $scope.selectNext = function() {
+    var i, j, resource, translationCommit;
+
+    if (null === $scope.activedTranslation) {
+      if ($scope.resources.length > 0 && $scope.resources[0].translationCommits.length > 0) {
+        $scope.activateTranslation($scope.resources[0].translationCommits[0]);
+      }
+
+      return;
+    }
+
+    for (i = 0; i < $scope.resources.length; i++) {
+      resource = $scope.resources[i];
+
+      for (j = 0; j < resource.translationCommits.length; j++) {
+        translationCommit = resource.translationCommits[j];
+
+        if (translationCommit.active) {
+          if (resource.translationCommits[j + 1]) {
+            $scope.activateTranslation(resource.translationCommits[j + 1]);
+          } else if ($scope.resources[i + 1] && $scope.resources[i + 1].translationCommits.length > 0) {
+            $scope.activateTranslation($scope.resources[i + 1].translationCommits[0]);
+          }
+
+          return;
+        }
+      }
+    }
+  }
+
+  $scope.selectPrevious = function() {
+    var i, j, resource, translationCommit;
+
+    for (i = 0; i < $scope.resources.length; i++) {
+      resource = $scope.resources[i];
+
+      for (j = 0; j < resource.translationCommits.length; j++) {
+        translationCommit = resource.translationCommits[j];
+
+        if (translationCommit.active) {
+          if (j > 0 && resource.translationCommits[j - 1]) {
+            $scope.activateTranslation(resource.translationCommits[j - 1]);
+          } else if (i > 0 && $scope.resources[i - 1] && $scope.resources[i - 1].translationCommits.length > 0) {
+            var last = $scope.resources[i - 1].translationCommits.length - 1;
+            $scope.activateTranslation($scope.resources[i - 1].translationCommits[last]);
+          }
+
+          return;
+        }
+      }
+    }
+  }
+
   // $scope.selectNext = _.throttle(function() {
   //   $scope.translationCommits.selectNext();
   //   $scope.updateRoute();
@@ -215,7 +270,7 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        // $scope.selectNext();
+        $scope.selectNext();
       }
     })
     .add({
@@ -224,7 +279,7 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        // $scope.selectPrevious();
+        $scope.selectPrevious();
       }
     })
     .add({

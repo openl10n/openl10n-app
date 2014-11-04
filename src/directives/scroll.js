@@ -22,14 +22,14 @@ function ScrollDirective($document, $timeout) {
       }
 
       var container = attrs['scrollContainer'] ? scope[attrs['scrollContainer']] : $document;
-      var offset = attrs['scrollOffset'] || 0;
-      var duration = attrs['scrollDuration'] || 0;
-      var delay = attrs['scrollDelay'] || 0;
+      var offset = +attrs['scrollOffset'] || 0;
+      var duration = +attrs['scrollDuration'] || 0;
+      var delay = +attrs['scrollDelay'] || 0;
 
       var unwatch = scope.$watch(when, function(newValue, oldValue) {
         if (!oldValue && newValue) {
           $timeout(function() {
-            container.scrollTo(element, +offset, +duration);
+            container.scrollTo(element, offset, duration);
           }, delay);
         }
       });
