@@ -127,15 +127,23 @@ gulp.task('scripts', function () {
     .pipe(plumber())
     .pipe(ngAnnotate())
 
-  // Inline templates
-  var templates = gulp.src(srcDir + '/views/*.html')
-    .pipe(templateCache('templates.js', {
-      standalone: true,
-      root: 'views',
-    }))
-
   // Combine into a single app script
-  streamqueue({ objectMode: true }, vendor, src, templates)
+  var queue = new streamqueue({ objectMode: true })
+    .queue(vendor)
+    .queue(src)
+
+  // Inline templates in prod mode
+  if (!isDebug) {
+    var templates = gulp.src(srcDir + '/views/*.html')
+      .pipe(templateCache('templates.js', {
+        standalone: true,
+        root: 'views',
+      }))
+
+    queue.queue(templates)
+  }
+
+  queue.done()
     .pipe(sourcemaps.init())
       .pipe(concat('app.js', {newLine: ';'}))
       // .pipe(uglify())
