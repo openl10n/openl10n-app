@@ -13,7 +13,7 @@
   }
 }
 
-@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-light', 300, normal);
-@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-Regular', 400, normal);
-@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-Bold', 700, normal);
-@include font-face('Open Sans', '/fonts/OpenSans/OpenSans-Italic', 400, italic);
+@include font-face('Open Sans', '../fonts/OpenSans/OpenSans-light', 300, normal);
+@include font-face('Open Sans', '../fonts/OpenSans/OpenSans-Regular', 400, normal);
+@include font-face('Open Sans', '../fonts/OpenSans/OpenSans-Bold', 700, normal);
+@include font-face('Open Sans', '../fonts/OpenSans/OpenSans-Italic', 400, italic);
