@@ -30,20 +30,22 @@
       </h3> -->
 
       <div class="language" ng-repeat="language in languages">
-        <div class="language__behind">
-          <div class="language__display-name">
-            {{ language.name }}
+        <a ui-sref="translate.source.target({slug: project.slug, source: project.default_locale, target: language.locale})">
+          <div class="language__behind">
+            <div class="language__display-name">
+              {{ language.name }}
+            </div>
+            <div class="language__locale">
+              {{ language.locale }}
+            </div>
           </div>
-          <div class="language__locale">
-            {{ language.locale }}
-          </div>
-        </div>
 
-        <div class="language__title">
-          <span class="language__flag flag-icon flag-icon-{{ language.locale|region|lowercase }}">
-          </span>
-          <span class="language__id">{{ language.name }}</span>
-        </div>
+          <div class="language__title">
+            <span class="language__flag flag-icon flag-icon-{{ language.locale|region|lowercase }}">
+            </span>
+            <span class="language__id">{{ language.name }}</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>

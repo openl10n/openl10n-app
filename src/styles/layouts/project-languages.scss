@@ -19,6 +19,7 @@
     }
 
     &__title {
+      color: $color-dark;
       position: relative;
       padding: 12px 0 2px;
       z-index: 10;
@@ -86,6 +87,7 @@
 
     &__display-name {
       @include font-size(18);
+      color: $color-dark;
     }
 
     &__locale {
