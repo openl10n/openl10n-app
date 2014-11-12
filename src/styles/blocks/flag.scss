@@ -37,9 +37,9 @@ $countries:
 
 @each $country in $countries {
   .flag-icon-#{$country} {
-    background-image: url(../images/flags/4x3/#{$country}.svg);
+    background-image: url(./images/flags/4x3/#{$country}.svg);
   }
   .flag-icon-#{$country}.flag-icon-squared {
-    background-image: url(../images/flags/1x1/#{$country}.svg);
+    background-image: url(./images/flags/1x1/#{$country}.svg);
   }
 }

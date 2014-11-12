@@ -148,7 +148,7 @@ gulp.task('scripts', function () {
       .pipe(concat('app.js', {newLine: ';'}))
       // .pipe(uglify())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(distDir + '/js'))
+    .pipe(gulp.dest(distDir))
 })
 
 //
@@ -158,7 +158,7 @@ gulp.task('styles', function () {
   gulp.src(srcDir + '/styles/app.scss')
     .pipe(plumber())
     .pipe(sass())
-    .pipe(gulp.dest(distDir + '/css'))
+    .pipe(gulp.dest(distDir))
 })
 
 //
