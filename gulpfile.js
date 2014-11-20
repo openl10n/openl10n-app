@@ -121,6 +121,8 @@ gulp.task('templates', function () {
 // Javascript
 //
 gulp.task('scripts', function () {
+  var bootstrap = gulp.src(srcDir + '/bootstrap.js');
+
   var vendor = gulp.src(vendorFiles)
 
   var src = gulp.src(sourceFiles)
@@ -129,6 +131,7 @@ gulp.task('scripts', function () {
 
   // Combine into a single app script
   var queue = new streamqueue({ objectMode: true })
+    .queue(bootstrap)
     .queue(vendor)
     .queue(src)
 
@@ -194,7 +197,12 @@ gulp.task('lint', function() {
 // Test
 //
 gulp.task('test', function (done) {
-  return gulp.src(vendorFiles.concat(sourceFiles).concat(testFiles))
+  var files = [srcDir + '/bootstrap.js']
+    .concat(vendorFiles)
+    .concat(sourceFiles)
+    .concat(testFiles)
+
+  return gulp.src(files)
     .pipe(karma({
       configFile: __dirname + '/karma.conf.js',
       action: 'run'
