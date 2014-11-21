@@ -1,5 +1,5 @@
-/bower_components
-/dist
-/node_modules
 !.gitkeep
-/src/config/config.js
+/bower_components/*
+/dist/*
+/node_modules/*
+/src/public/config.js

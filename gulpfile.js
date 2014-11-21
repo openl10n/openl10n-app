@@ -38,7 +38,8 @@ var vendorFiles = [
 ];
 var sourceFiles = [
   srcDir + '/app.js',
-  srcDir + '/**/*.js'
+  srcDir + '/**/*.js',
+  '!' + srcDir + '/public/**/*.js',
 ];
 var testFiles = [
   'bower_components/angular-mocks/angular-mocks.js',
