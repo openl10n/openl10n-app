@@ -148,10 +148,10 @@ gulp.task('scripts', function () {
   }
 
   queue.done()
-    .pipe(sourcemaps.init())
+    .pipe(isDebug ? sourcemaps.init() : gutil.noop())
       .pipe(concat('app.js', {newLine: ';'}))
-      // .pipe(uglify())
-    .pipe(sourcemaps.write())
+      .pipe(isDebug ? gutil.noop() : uglify())
+    .pipe(isDebug ? sourcemaps.write() : gutil.noop())
     .pipe(gulp.dest(distDir))
 })
 
