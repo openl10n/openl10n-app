@@ -161,7 +161,9 @@ gulp.task('scripts', function () {
 gulp.task('styles', function () {
   gulp.src(srcDir + '/styles/app.scss')
     .pipe(plumber())
-    .pipe(sass())
+    .pipe(sass({
+      outputStyle: isDebug ? 'nested' : 'compressed'
+    }))
     .pipe(gulp.dest(distDir))
 })
 
