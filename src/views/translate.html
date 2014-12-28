@@ -40,23 +40,25 @@
 
   <div class="l-translate-main column column--size-12">
     <div class="l-translations-container">
-      <div class="l-translations" ng-repeat="resource in resources" ng-if="context.source && context.target">
+      <div
+        class="l-translations"
+        ng-repeat="group in translationsGroups"
+        ng-if="context.source && context.target"
+        infinite-scroll="loadMore()"
+        infinite-scroll-distance="1"
+        infinite-scroll-container="containerElement"
+        infinite-scroll-disabled="busy"
+        >
         <h3 class="l-translations__header">
           <i class="l-translations__header-icon icon-file"></i>
-          {{ resource.pathname }}
+          {{ group.resource.pathname }}
         </h3>
 
-        <ul
-          class="l-translations__list"
-          infinite-scroll="resource.loadMore()"
-          infinite-scroll-distance="2"
-          infinite-scroll-container="containerElement"
-          infinite-scroll-disabled="resource.busy"
-        >
+        <ul class="l-translations__list">
           <li
             id="translation-{{translationCommit.id}}"
             class="translation-card"
-            ng-repeat="translationCommit in resource.translationCommits"
+            ng-repeat="translationCommit in group.translations.items"
             ng-class="{
               'translation-card--status-editing': (translationCommit.edit_phrase != translationCommit.target_phrase),
               'translation-card--status-approved': translationCommit.is_approved,
@@ -162,7 +164,7 @@
             </div>
           </li>
 
-          <li class="translation-loading-card" ng-if="!resource.complete" ng-click="resource.loadMore()">
+          <li class="translation-loading-card" ng-if="!group.translations.complete" ng-click="group.translations.loadMore()">
             <div class="spinner">
               <div class="bounce1"></div>
               <div class="bounce2"></div>
@@ -172,7 +174,9 @@
         </ul>
       </div>
     </div>
+  </div>
 
+  <div class="l-translate-sidebar column column--size-5" style="display:none">
     <div ui-view></div>
   </div>
 </div>

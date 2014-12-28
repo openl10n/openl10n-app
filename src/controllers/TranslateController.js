@@ -20,93 +20,88 @@ angular
   .controller('TranslateController', TranslateController)
   .controller('TranslateSourceController', TranslateSourceController)
   .controller('TranslateTargetController', TranslateTargetController)
+  .controller('TranslatePhraseController', TranslatePhraseController)
 ;
 
-function ResourceWrapper(resource, context, filters, translationCommitRepository) {
-  // Keep orginal object & services
-  this.resource = resource;
-  this.context = context;
-  this.filters = filters;
-  this.translationCommitRepository = translationCommitRepository;
 
-  // Map object attributes
-  this.pathname = this.resource.pathname;
-  this.translationCommits = [];
+/**
+ * @ngInject
+ */
+function TranslateController($scope, $state, $timeout, project, languages, resources, TranslationsGroup, TranslationRepository) {
 
-  // Handle paging
-  this.page = 0;
-  this.perPage = 40;
-  this.complete = false;
-  this.busy = false;
-}
-
-ResourceWrapper.prototype.reset = function() {
-  this.translationCommits = [];
-  this.complete = false;
-  this.page = 0;
-}
-
-ResourceWrapper.prototype.loadMore = function() {
-  if (this.busy || this.complete)
-    return;
-
-  if (!this.context.source || !this.context.target)
-    return;
-
-  this.busy = true;
-  this.page++;
-  this.translationCommitRepository.findBy(this.context.source, this.context.target, {
-    resource: this.resource.id,
-    page: this.page,
-    per_page: this.perPage,
-    text: this.filters.text
-  }).then(function(translationCommits) {
-    if (translationCommits.length < this.perPage) {
-      console.log('fetching finished')
-      this.complete = true;
-    }
-
-    for (var i = 0; i < translationCommits.length; i++) {
-      var translationCommit = translationCommits[i];
-      translationCommit.edit_phrase = translationCommit.target_phrase;
-      this.translationCommits.push(translationCommit);
-    }
-
-    this.busy = false;
-  }.bind(this));
-
-}
-
-function TranslateController($document, $scope, $state, project, languages, resources, TranslationRepository, TranslationCommitRepository) {
-
-  console.log('TranslateController');
-
-  // if (!target) {
-  //   $state.transitionTo('translate', {locale: 'en'}, { location: true, inherit: true, relative: $state.$current, notify: false })
-  // }
-
+  // Models
   $scope.project = project;
   $scope.languages = languages;
+  $scope.resources = resources;
   $scope.context = { source: project.default_locale, target: null };
   $scope.filters = { text: '' };
   $scope.searchQuery = '';
+  $scope.translationsGroups = [];
 
-  $scope.resources = [];
-  angular.forEach(resources, function(resource) {
-    $scope.resources.push(
-      new ResourceWrapper(resource, $scope.context, $scope.filters, TranslationCommitRepository)
-    );
-  });
-
-
+  // Utilities
   $scope.activedTranslation = null;
+  $scope.loadingTranslations = false;
+
+  /**
+   * Reinitialize translations with current context & filters.
+   */
+  $scope.reset = function () {
+    $scope.translationsGroups = [];
+
+    angular.forEach($scope.resources, function(resource) {
+      var filters = $scope.filters;
+      filters = { resource: resource.id };
+
+      var group = new TranslationsGroup(resource, $scope.context, filters);
+
+      $scope.translationsGroups.push(group);
+    });
+  }
+
+  /**
+   * Load more translations.
+   *
+   * This happens on infinite scroll, to lazy load the translations.
+   */
+  $scope.loadMore = function() {
+    $scope.loadingTranslations = true;
+    var groupToLoad = null;
+
+    // Find a resource to load
+    for (var i = 0; i < $scope.translationsGroups.length; i++) {
+      var group = $scope.translationsGroups[i];
+      if (!group.translations.complete) {
+        var groupToLoad = group;
+        break;
+      }
+    }
+
+    // Load that resource
+    if (groupToLoad) {
+      groupToLoad.translations
+        .loadMore()
+        .then(function() {
+          $scope.loadingTranslations = false;
+        });
+    }
+  }
+
+  /**
+   * Select a translation.
+   */
   $scope.activateTranslation = function(translation) {
     if (null !== $scope.activedTranslation)
       $scope.activedTranslation.active = false;
 
     $scope.activedTranslation = translation;
     $scope.activedTranslation.active = true;
+
+    $scope.updateRoute();
   }
+
+  /**
+   * Unselect a translation/
+   */
   $scope.deactivateTranslation = function(translation, $event) {
     if ($event)
       $event.stopPropagation();
@@ -116,27 +111,38 @@ function TranslateController($document, $scope, $state, project, languages, reso
       $scope.activedTranslation.active = false;
 
     $scope.activedTranslation = null;
+
+    $scope.updateRoute();
   }
 
-  $scope.updateRoute = updateRoute;
+  /**
+   * Update the route according to the current state of the controller.
+   */
+  $scope.updateRoute = function() {
+    var path = 'translate.source';
+    var params = {source: project.default_locale};
+    var options = {location: "replace", inherit: true, relative: $state.$current, notify: true};
 
-  function updateRoute() {
-    if ($scope.context.source && $scope.context.target) {
-      $state.go('translate.source.target', {
-        source: $scope.context.source,
-        target: $scope.context.target
-      }, {location: "replace", inherit: true, relative: $state.$current, notify: true});
-    } else if ($scope.context.source) {
-      $state.go('translate.source', {
-        source: $scope.context.source,
-      }, {location: "replace", inherit: true, relative: $state.$current, notify: true});
-    } else {
-      $state.go('translate.source', {
-        source: project.default_locale,
-      }, {location: "replace", inherit: true, relative: $state.$current, notify: true});
+    if ($scope.context.source) {
+      params.source = $scope.context.source;
     }
+
+    if ($scope.context.target) {
+      path += '.target';
+      params.target = $scope.context.target;
+    }
+
+    if ($scope.activedTranslation) {
+      path += '.phrase';
+      params.id = $scope.activedTranslation.id;
+    }
+
+    $state.go(path, params, options);
   }
 
+  /**
+   * Save a translation.
+   */
   $scope.saveTranslation = function(translationCommit) {
     var originalPhrase = translationCommit.target_phrase;
     translationCommit.target_phrase = translationCommit.edit_phrase;
@@ -152,6 +158,9 @@ function TranslateController($document, $scope, $state, project, languages, reso
     // TODO : update original data
   }
 
+  /**
+   * Approve a translation.
+   */
   $scope.approveTranslation = function(translationCommit) {
     var originalPhrase = translationCommit.target_phrase;
     translationCommit.target_phrase = translationCommit.edit_phrase;
@@ -168,11 +177,17 @@ function TranslateController($document, $scope, $state, project, languages, reso
     // TODO : update original data
   }
 
+  /**
+   * Cancel an editing
+   */
   $scope.cancelEdit = function(translationCommit) {
     translationCommit.edit_phrase = translationCommit.target_phrase;
     // TODO : update original data
   }
 
+  /**
+   * Submit a search query
+   */
   $scope.search = function(text) {
     $scope.filters.text = text;
     $scope.resources.forEach(function(resource) {
@@ -180,47 +195,58 @@ function TranslateController($document, $scope, $state, project, languages, reso
       resource.loadMore();
     })
   }
+
+  // Init
+  $scope.reset();
+  $timeout(function() {
+    $scope.loadMore();
+  }, 500);
 }
 
+/**
+ * @ngInject
+ */
 function TranslateSourceController($scope, source) {
   console.log('TranslateSourceController');
   $scope.context.source = source;
 }
 
+/**
+ * @ngInject
+ */
 function TranslateTargetController($scope, hotkeys, resources, target, TranslationCommitRepository) {
   console.log('TranslateTargetController');
 
   $scope.context.target = target;
+  $scope.reset();
+  $scope.loadMore();
 
-  console.log($scope.context);
-
-  $scope.resources.forEach(function(resource) {
-    resource.reset();
-    resource.loadMore();
-  })
-
+  /**
+   * Select the next translation
+   */
   $scope.selectNext = function() {
-    var i, j, resource, translationCommit;
+    var i, j, group, translations, translationCommit;
 
     if (null === $scope.activedTranslation) {
-      if ($scope.resources.length > 0 && $scope.resources[0].translationCommits.length > 0) {
-        $scope.activateTranslation($scope.resources[0].translationCommits[0]);
+      if ($scope.translationsGroups.length > 0 && $scope.translationsGroups[0].translations.items.length > 0) {
+        $scope.activateTranslation($scope.translationsGroups[0].translations.items[0]);
       }
 
       return;
     }
 
-    for (i = 0; i < $scope.resources.length; i++) {
-      resource = $scope.resources[i];
+    for (i = 0; i < $scope.translationsGroups.length; i++) {
+      group = $scope.translationsGroups[i];
+      translations = group.translations.items;
 
-      for (j = 0; j < resource.translationCommits.length; j++) {
-        translationCommit = resource.translationCommits[j];
+      for (j = 0; j < translations.length; j++) {
+        translationCommit = translations[j];
 
         if (translationCommit.active) {
-          if (resource.translationCommits[j + 1]) {
-            $scope.activateTranslation(resource.translationCommits[j + 1]);
-          } else if ($scope.resources[i + 1] && $scope.resources[i + 1].translationCommits.length > 0) {
-            $scope.activateTranslation($scope.resources[i + 1].translationCommits[0]);
+          if (translations[j + 1]) {
+            $scope.activateTranslation(translations[j + 1]);
+          } else if ($scope.translationsGroups[i + 1] && $scope.translationsGroups[i + 1].translations.items.length > 0) {
+            $scope.activateTranslation($scope.translationsGroups[i + 1].translations.items[0]);
           }
 
           return;
@@ -229,21 +255,24 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
     }
   }
 
+  /**
+   * Select the previous translation
+   */
   $scope.selectPrevious = function() {
-    var i, j, resource, translationCommit;
+    var i, j, group, translationCommit;
 
-    for (i = 0; i < $scope.resources.length; i++) {
-      resource = $scope.resources[i];
+    for (i = 0; i < $scope.translationsGroups.length; i++) {
+      group = $scope.translationsGroups[i];
 
-      for (j = 0; j < resource.translationCommits.length; j++) {
-        translationCommit = resource.translationCommits[j];
+      for (j = 0; j < group.translations.items.length; j++) {
+        translationCommit = group.translations.items[j];
 
         if (translationCommit.active) {
-          if (j > 0 && resource.translationCommits[j - 1]) {
-            $scope.activateTranslation(resource.translationCommits[j - 1]);
-          } else if (i > 0 && $scope.resources[i - 1] && $scope.resources[i - 1].translationCommits.length > 0) {
-            var last = $scope.resources[i - 1].translationCommits.length - 1;
-            $scope.activateTranslation($scope.resources[i - 1].translationCommits[last]);
+          if (j > 0 && group.translations.items[j - 1]) {
+            $scope.activateTranslation(group.translations.items[j - 1]);
+          } else if (i > 0 && $scope.translationsGroups[i - 1] && $scope.translationsGroups[i - 1].translations.items.length > 0) {
+            var last = $scope.translationsGroups[i - 1].translations.items.length - 1;
+            $scope.activateTranslation($scope.translationsGroups[i - 1].translations.items[last]);
           }
 
           return;
@@ -251,16 +280,6 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
       }
     }
   }
-
-  // $scope.selectNext = _.throttle(function() {
-  //   $scope.translationCommits.selectNext();
-  //   $scope.updateRoute();
-  // }, 100);
-
-  // $scope.selectPrevious = _.throttle(function() {
-  //   $scope.translationCommits.selectPrevious();
-  //   $scope.updateRoute();
-  // }, 100);
 
   hotkeys
     .bindTo($scope)
@@ -302,8 +321,12 @@ function TranslateTargetController($scope, hotkeys, resources, target, Translati
           return;
         $scope.saveTranslation($scope.activedTranslation);
       }
-    })
-    ;
+    });
+}
+
+
+function TranslatePhraseController(translationId) {
+  console.log('Selected translation #' + translationId);
 }
 
 })();

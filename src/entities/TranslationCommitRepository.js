@@ -28,7 +28,7 @@ function TranslationCommitRepository($http, $q, Configuration) {
 
     $http.get(url).success(function(data) {
       deferred.resolve(data);
-    }, function() {
+    }).error(function() {
       deferred.reject();
     });
 

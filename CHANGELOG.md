@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- Optimize editor load for project with many resources: translations calls are now done one by one
+
 ## 0.0.1 - 2014-12-12
 
 Initial version.

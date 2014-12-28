@@ -97,17 +97,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
         },
       }
     })
-    // .state('translate.source.target.phrase', {
-    //   url: '/{id:[0-9]+}',
-    //   menu: 'translate',
-    //   templateUrl: 'views/translate-phrase.html',
-    //   controller: 'TranslatePhraseController',
-    //   resolve: {
-    //     translationId: function($stateParams) {
-    //       return +$stateParams.id;
-    //     },
-    //   }
-    // })
+    .state('translate.source.target.phrase', {
+      url: '/{id:[0-9]+}',
+      menu: 'translate',
+      templateUrl: 'views/translate-phrase.html',
+      controller: 'TranslatePhraseController',
+      resolve: {
+        translationId: function($stateParams) {
+          return +$stateParams.id;
+        },
+      }
+    })
     .state('glossary', {
       url: '/glossary',
       menu: 'glossary',

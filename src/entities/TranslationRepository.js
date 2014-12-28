@@ -32,7 +32,7 @@ function TranslationRepository($http, $q, Configuration) {
       data: angular.extend({ text: phrase, approved: false }, params)
     }).success(function(data) {
       deferred.resolve(data);
-    }, function() {
+    }).error(function() {
       deferred.reject();
     });
 
