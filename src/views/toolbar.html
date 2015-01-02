@@ -1,0 +1,17 @@
+<md-toolbar ng-controller="ToolbarController">
+  <div class="md-toolbar-tools">
+    <md-button href="" ng-click="openSidebar()">
+      Menu
+    </md-button>
+
+    <div ui-view="title" flex></div>
+
+    <div ui-view="menu"></div>
+
+    <div>
+      <md-button>
+        user
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>

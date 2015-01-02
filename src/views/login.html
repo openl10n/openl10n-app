@@ -1,25 +1,42 @@
-<div class="column column--size-4"></div>
+<div layout="row" layout-margin layout-padding>
+  <div flex></div>
 
-<div class="column column--size-3">
-  <h1>
-    Login
-  </h1>
+  <section flex="33" class="ol-card md-whiteframe-z1">
+    <header class="ol-card__header" layout="row">
+      <h3 flex class="ol-card__title">
+        Login with your credentials
+      </h3>
+    </header>
 
-  <form ng-submit="authenticate(credentials.username, credentials.password)" novalidate ng-class="{ 'animated shake' : error }">
-    <p>
-      <label for="" class="form__label" ng-class="{ 'form__label--has-error' : error }">Username</label>
-      <input type="text" ng-model="credentials.username" class="form__control form__control--size-large" ng-class="{ 'form__control--has-error' : error }" autofocus>
-    </p>
+    <form ng-submit="login(credentials)" name="loginForm" novalidate>
+      <div class="ol-card__content">
+        <md-input-container flex>
+          <label>Username</label>
+          <input name="username" required ng-model="credentials.username">
 
-    <p>
-      <label for="" class="form__label" ng-class="{ 'form__label--has-error' : error }">Password</label>
-      <input type="password" ng-model="credentials.password" class="form__control form__control--size-large" ng-class="{ 'form__control--has-error' : error }">
-    </p>
+          <div ng-messages="loginForm.username.$error" ng-if="loginForm.$submitted">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
 
-    <p>
-      <button type="submit" class="button button--type-raised button--color-primary button--size-wide">
-        Login
-      </button>
-    </p>
-  </form>
+        <md-input-container flex>
+          <label>Password</label>
+          <input name="password" required ng-model="credentials.password" type="password">
+
+          <div ng-messages="loginForm.password.$error" ng-if="loginForm.$submitted">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <div layout="row">
+          <div flex></div>
+          <md-button type="submit">
+            Login
+          </md-button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <div flex></div>
 </div>

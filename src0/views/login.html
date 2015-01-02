@@ -1,0 +1,25 @@
+<div class="column column--size-4"></div>
+
+<div class="column column--size-3">
+  <h1>
+    Login
+  </h1>
+
+  <form ng-submit="authenticate(credentials.username, credentials.password)" novalidate ng-class="{ 'animated shake' : error }">
+    <p>
+      <label for="" class="form__label" ng-class="{ 'form__label--has-error' : error }">Username</label>
+      <input type="text" ng-model="credentials.username" class="form__control form__control--size-large" ng-class="{ 'form__control--has-error' : error }" autofocus>
+    </p>
+
+    <p>
+      <label for="" class="form__label" ng-class="{ 'form__label--has-error' : error }">Password</label>
+      <input type="password" ng-model="credentials.password" class="form__control form__control--size-large" ng-class="{ 'form__control--has-error' : error }">
+    </p>
+
+    <p>
+      <button type="submit" class="button button--type-raised button--color-primary button--size-wide">
+        Login
+      </button>
+    </p>
+  </form>
+</div>

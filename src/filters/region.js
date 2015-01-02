@@ -23,7 +23,7 @@ var mapping = {
  *
  * @ngInject
  */
-function regionFilter(StringHandler) {
+function regionFilter() {
 
   /**
    * @name region

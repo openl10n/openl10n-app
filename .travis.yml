@@ -4,14 +4,19 @@ node_js:
   - '0.10'
 
 before_install:
-  - npm install -g bower
-  - npm install -g gulp
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 install:
   - npm install
-  - bower install --config.interactive=false
-  - gulp build --prod
+  - npm run webdriver-update
+  #- node_modules/.bin/bower install --config.interactive=false
+  - node_modules/.bin/gulp build --prod
+
+before_script:
+  - npm run webdriver-start > /dev/null &
+  - node_modules/.bin/gulp server > /dev/null &
+  - sleep 1 # give server time to start
 
 script:
   - gulp test
-

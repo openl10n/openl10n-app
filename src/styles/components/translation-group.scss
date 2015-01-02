@@ -1,0 +1,240 @@
+.ol-translation-container {
+  padding: 20px;
+}
+
+.ol-translation-group {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  background-color: #ddd;
+  border-radius: 4px;
+  max-width: 1000px;
+  // padding-bottom: 20px;
+
+  &__header {
+    padding: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__body {
+    // z-index: 1;
+    // transition: all 0.2s ease-out;
+
+    &.ng-hide {
+      // height: 0px;
+    }
+  }
+
+  &__load-more {
+    position: relative;
+    z-index: 40;
+    margin: 0 20px;
+    margin-top: 5px;
+    margin-bottom: -15px;
+    padding-bottom: 4px;
+    text-align: center;
+  }
+}
+
+.ol-translation-list {
+  display: block;
+}
+
+.ol-translation-item {
+  display: block;
+  margin: 0 20px;
+  padding: 0;
+
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 100ms ease-out;
+  background: #fff;
+  // box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.2);
+
+  // Status
+  border-right: 5px solid #eeeeee;
+  border-right-color: #eeeeee;
+  &--status-untranslated {
+    border-right-color: $color-untranslated;
+  }
+  &--status-untranslated &__phrase--highlight {
+    background-color: #eee;
+  }
+  &--status-translated {
+    border-right-color: $color-translated;
+  }
+  &--status-translated &__phrase--highlight {
+    background-color: lighten($color-translated, 45);
+  }
+  &--status-approved {
+    border-right-color: $color-approved;
+  }
+  &--status-approved &__phrase--highlight {
+    background-color: lighten($color-approved, 45);
+  }
+  &--status-edited {
+    border-right-color: $color-edited;
+  }
+  &--status-edited &__phrase--highlight {
+    background-color: lighten($color-edited, 30);
+  }
+
+  &__header {
+    line-height: 20px;
+    padding: 0 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__key {
+    color: #bdbdbd;
+    font-size: 14px;
+  }
+
+  &__body {
+    padding: 0 15px;
+  }
+
+  &__phrase {
+    font-size: 17px;
+    line-height: 25px;
+    font-weight: 300;
+  }
+
+  &__phrase-title {
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #aaa;
+
+    ol-flag {
+      padding-left: 5px;
+    }
+  }
+
+  &__phrase--preview {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__phrase--full {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  &__phrase--highlight {
+    transition: background-color 150ms ease-out;
+    background-color: #f1f8e9;
+  }
+
+  &__textarea {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 25px;
+    margin: 0;
+    border: none;
+    width: 100%;
+    background: none;
+    resize: none;
+    overflow: auto;
+  }
+
+  &__description {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 23px;
+    border-left: 1px solid #ccc;
+    margin: 15px 5px;
+    padding: 5px 10px;
+  }
+
+  &__footer {
+    padding: 0px 15px;
+    height: 50px;
+    border-top: 1px solid #eeeeee;
+  }
+
+  &__actions {
+    padding-top: 7px;
+  }
+  &__hint {
+    line-height: 50px;
+  }
+
+  &__hint {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    color: #9e9e9e;
+  }
+
+  /**
+   * Collapsed
+   */
+  &--collapsed {
+    // padding: 8px 0;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #fafafa;
+    }
+  }
+
+  &--collapsed &__header {
+    padding-top: 8px;
+  }
+  &--collapsed &__body {
+    padding-bottom: 8px;
+  }
+  &--collapsed &__footer {
+    display: none;
+  }
+  &--collapsed &__phrase {
+    padding-right: 10px;
+  }
+
+  /**
+   * Expanded
+   */
+  &--expanded {
+    border-radius: 2px;
+    border-right-width: 6px;
+    margin: 20px -8px 30px;
+    // box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 17px 50px rgba(0, 0, 0, 0.19);
+  }
+
+  &--expanded &__header {
+    line-height: 50px;
+    border-bottom: 1px solid #eeeeee;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--expanded &__key {
+    color: #9e9e9e;
+  }
+
+  &--expanded &__phrase {
+    line-height: 25px;
+    // padding: 15px 0;
+  }
+
+}

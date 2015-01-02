@@ -1,0 +1,50 @@
+.ol-language-list {
+  .md-tile-content {
+    padding: 12px 16px
+  }
+}
+
+.ol-projects-item,
+.ol-language-item {
+  .md-tile-content {
+    &:hover {
+      cursor: pointer;
+      background: #fafafa;
+    }
+  }
+}
+
+.md-tile-content .ol-language-item {
+
+  &__flag {
+    padding-right: 15px;
+    font-size: 42px;
+
+    .flag-icon {
+      border-radius: 2px;
+      background-color: #ccc;
+    }
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 18px;
+    padding: 0;
+    padding-top: 3px;
+    margin: 0;
+  }
+
+  &__locale {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: #888;
+  }
+}
+
+.ol-resource-list {
+  .md-tile-content {
+    padding: 10px 16px
+  }
+}

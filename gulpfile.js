@@ -8,12 +8,16 @@ var jshint = require('gulp-jshint')
 var karma = require('gulp-karma')
 var ngAnnotate = require('gulp-ng-annotate')
 var plumber = require('gulp-plumber')
+var protractor = require("gulp-protractor").protractor;
 var rimraf = require('rimraf')
 var sourcemaps = require('gulp-sourcemaps')
 var sass = require('gulp-sass')
 var streamqueue = require('streamqueue')
 var templateCache = require('gulp-angular-templatecache')
 var uglify = require('gulp-uglify')
+var readline = require('readline')
+var spawn = require("child_process").spawn;
+
 
 //
 // Variables
@@ -27,23 +31,35 @@ var vendorFiles = [
   vendorDir + '/jquery/dist/jquery.js',
   vendorDir + '/lodash/dist/lodash.js',
   vendorDir + '/string/lib/string.js',
+  vendorDir + '/hammerjs/hammer.js',
+
   vendorDir + '/angular/angular.js',
+  vendorDir + '/angular-messages/angular-messages.js',
   vendorDir + '/angular-ui-router/release/angular-ui-router.js',
+  vendorDir + '/angular-animate/angular-animate.js',
+  vendorDir + '/angular-aria/angular-aria.js',
+  vendorDir + '/angular-material/angular-material.js',
+
+  vendorDir + '/restangular/dist/restangular.js',
   vendorDir + '/angular-gravatar/build/md5.js',
   vendorDir + '/angular-gravatar/build/angular-gravatar.js',
   vendorDir + '/angular-hotkeys/build/hotkeys.js',
-  vendorDir + '/ngInfiniteScroll/build/ng-infinite-scroll.js',
   vendorDir + '/angular-elastic/elastic.js',
   vendorDir + '/angular-scroll/angular-scroll.js',
+  vendorDir + '/ngInfiniteScroll/build/ng-infinite-scroll.js',
 ];
 var sourceFiles = [
-  srcDir + '/app.js',
+  srcDir + '/core/bootstrap.js',
+  srcDir + '/core/app.js',
   srcDir + '/**/*.js',
+  '!' + srcDir + '/**/*.spec.js',
+  '!' + srcDir + '/**/*.e2e.js',
   '!' + srcDir + '/public/**/*.js',
 ];
 var testFiles = [
-  'bower_components/angular-mocks/angular-mocks.js',
-  'test/**/*.js'
+  vendorDir + '/angular-mocks/angular-mocks.js',
+  srcDir + '/**/*.spec.js',
+  // 'test/**/*.js'
 ];
 
 //
@@ -79,11 +95,11 @@ gulp.task('watch', ['server'], function() {
 
   gulp.watch(srcDir + '/views/**/*', ['templates']);
 
-  gulp.src(vendorFiles.concat(sourceFiles).concat(testFiles))
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }));
+  // gulp.src(vendorFiles.concat(sourceFiles).concat(testFiles))
+  //   .pipe(karma({
+  //     configFile: 'karma.conf.js',
+  //     action: 'watch'
+  //   }));
 });
 
 //
@@ -98,7 +114,7 @@ gulp.task('server', function() {
 });
 
 //
-// Assets
+// Static files
 //
 gulp.task('public', function () {
   // Versionned assets
@@ -159,18 +175,34 @@ gulp.task('scripts', function () {
 // Stylesheet
 //
 gulp.task('styles', function () {
-  gulp.src(srcDir + '/styles/app.scss')
+  var vendor = gulp.src(vendorDir + '/angular-material/angular-material.css')
+    .pipe(isDebug ? sourcemaps.init() : gutil.noop())
+      .pipe(concat('vendor.css'))
+    .pipe(isDebug ? sourcemaps.write() : gutil.noop())
+
+  var src = gulp.src(srcDir + '/styles/app.scss')
     .pipe(plumber())
-    .pipe(sass({
-      outputStyle: isDebug ? 'nested' : 'compressed'
-    }))
+    // .pipe(isDebug ? sourcemaps.init() : gutil.noop())
+      .pipe(sass({
+        outputStyle: isDebug ? 'nested' : 'compressed'
+      }))
+    // .pipe(isDebug ? sourcemaps.write() : gutil.noop())
+
+  var queue = new streamqueue({ objectMode: true })
+    .queue(vendor)
+    .queue(src)
+
+  queue.done()
+    .pipe(isDebug ? sourcemaps.init({loadMaps: true}) : gutil.noop())
+      .pipe(concat('app.css'))
+    .pipe(isDebug ? sourcemaps.write() : gutil.noop())
     .pipe(gulp.dest(distDir))
 })
 
 //
 // Icons
 //
-gulp.task('icons', function(){
+gulp.task('icons', function() {
   gulp.src([srcDir + '/icons/*.svg'])
     .pipe(iconfontCSS({
       fontName : 'icons',
@@ -197,9 +229,15 @@ gulp.task('lint', function() {
 });
 
 //
-// Test
+// Tests
 //
-gulp.task('test', function (done) {
+gulp.task('test', function() {
+    gulp.start('test:spec', 'test:e2e');
+});
+
+gulp.task('test:spec', function () {
+  return;
+
   var files = [srcDir + '/bootstrap.js']
     .concat(vendorFiles)
     .concat(sourceFiles)
@@ -214,4 +252,16 @@ gulp.task('test', function (done) {
       // Make sure failed tests cause gulp to exit non-zero
       throw err;
     });
+});
+
+gulp.task('test:e2e', function() {
+  gulp.src(srcDir + '/**/*.e2e.js')
+    .pipe(protractor({
+      configFile: __dirname + '/protractor-local.conf.js',
+      args: [
+        '--baseUrl', 'http://127.0.0.1:3000',
+        // '--browser', 'firefox'
+      ]
+    }))
+    .on('error', function(e) { throw e })
 });

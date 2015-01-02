@@ -1,0 +1,30 @@
+.ol-translate-editor-sidebar {
+  width: 400px;
+}
+
+.ol-translation-toolbar {
+
+}
+
+.ol-translation-toolbar__container {
+  line-height: 30px;
+  padding-right: 10px;
+
+  // select {
+  //   height: 34px;
+  //   font-size: 14px;
+  //   line-height: 1.42857143;
+  //   display: block;
+  //   padding: 6px 12px;
+  // }
+
+  input[type="text"] {
+    border: 0;
+    // color: #fff;
+    height: 35px;
+    padding-left: 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    background-color: #eee;
+  }
+}

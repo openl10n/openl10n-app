@@ -1,0 +1,16 @@
+<div class="ol-translation-toolbar" layout="row">
+  <span class="ol-translation-toolbar__container">
+    {{editor.project.name}}
+  </span>
+
+  <span class="ol-translation-toolbar__container">
+    <select
+      ng-model="editor.targetLocale"
+      ng-options="language.locale as language.name for language in ::editor.languages|orderBy:'name'">
+    </select>
+  </span>
+
+  <div class="ol-translation-toolbar__container" flex>
+    <input type="text" style="width:70%">
+  </div>
+</div>

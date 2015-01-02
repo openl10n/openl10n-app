@@ -1,0 +1,26 @@
+<div class="l-dashboard-projects column column--size-4 column--scrollable">
+  <div class="l-dashboard-projects__header">
+    <h1 class="l-dashboard-projects__title title title--level-1">
+      Projects
+    </h1>
+  </div>
+
+  <div class="l-dashboard-projects__list">
+    <a class="l-dashboard-projects__item project" ng-repeat="project in projects|orderBy:'name'" ui-sref="project({slug: project.slug})">
+      <span class="project__name">
+        {{ project.name }}
+      </span>
+      <span class="project__slug">
+        {{ project.slug }}
+      </span>
+    </a>
+  </div>
+
+  <!--
+  <p>
+    <a href="#" class="button button--type-raised button--color-primary button--size-wide">
+      New project
+    </a>
+  </p>
+  -->
+</div>

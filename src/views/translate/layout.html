@@ -1,0 +1,57 @@
+<div layout="row" layout-fill>
+  <div flex layout="row">
+    <section flex class="ol-translation-container">
+      <div class="ol-translation-group" ng-repeat="translationGroup in editor.translationGroups">
+        <header class="ol-translation-group__header" ng-click="translationGroup.resource.expanded = !translationGroup.resource.expanded">
+          <h3 class="ol-translation-group__title">
+            {{translationGroup.resource.pathname}}
+          </h3>
+        </header>
+
+        <div class="ol-translation-group__body" ng-show="translationGroup.resource.expanded">
+          <div class="ol-translation-list">
+            <div ng-repeat="translation in translationGroup.translations" ng-include="'views/translate/translation-item.html'"></div>
+          </div>
+
+          <div
+            class="ol-translation-group__load-more"
+            layout="row"
+            layout-align="space-around"
+            ng-if="!translationGroup.isComplete"
+            infinite-scroll="editor.loadMore(translationGroup)"
+            infinite-scroll-distance="2"
+            infinite-scroll-container="mainElement"
+            infinite-scroll-disabled="translationGroup.isComplete || translationGroup.isLoading || !translationGroup.resource.expanded">
+
+            <md-button ng-click="editor.loadMore(translationGroup)" ng-show="!translationGroup.isComplete && !translationGroup.isLoading">
+              Load more
+            </md-button>
+
+            <md-progress-circular ng-show="translationGroup.isLoading" md-diameter="20" md-mode="indeterminate">
+            </md-progress-circular>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div ui-view></div>
+  </div>
+
+
+  <md-sidenav md-component-id="right" class="md-sidenav-right ol-translate-editor-sidebar" md-is-locked-open="editor.sidebarOpen">
+    <md-tabs>
+      <md-tab label="Info">
+        <div layout="column" layout-fill layout-align="space-around center">
+          <div>Translation information</div>
+        </div>
+      </md-tab>
+
+      <md-tab label="History">
+        <div layout="column" layout-fill layout-align="space-around center">
+          <div>Translation history</div>
+        </div>
+      </md-tab>
+    </md-tabs>
+  </md-sidenav>
+
+</div>
