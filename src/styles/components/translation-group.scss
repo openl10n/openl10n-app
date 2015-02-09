@@ -49,6 +49,7 @@
 
 .ol-translation-list {
   display: block;
+  padding-bottom: 20px;
 }
 
 .ol-translation-item {
@@ -113,6 +114,7 @@
     font-size: 17px;
     line-height: 25px;
     font-weight: 300;
+    min-height: 25px; // usefull when source+target phrase are empty
   }
 
   &__phrase-title {
