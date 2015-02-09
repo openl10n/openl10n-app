@@ -257,13 +257,13 @@ gulp.task('test:spec', function () {
 });
 
 gulp.task('test:e2e', function() {
-  return;
+  // return;
 
   gulp.src(srcDir + '/**/*.e2e.js')
     .pipe(protractor({
       configFile: __dirname + '/protractor-local.conf.js',
       args: [
-        '--baseUrl', 'http://127.0.0.1:3000',
+        '--baseUrl', 'http://127.0.0.1:3000/#',
         // '--browser', 'firefox'
       ]
     }))
