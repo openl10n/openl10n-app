@@ -48,3 +48,9 @@
     padding: 10px 16px
   }
 }
+
+.ol-resource-item__pathname {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
