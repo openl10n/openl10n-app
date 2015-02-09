@@ -166,7 +166,9 @@ gulp.task('scripts', function () {
   queue.done()
     .pipe(isDebug ? sourcemaps.init() : gutil.noop())
       .pipe(concat('app.js', {newLine: ';'}))
-      .pipe(isDebug ? gutil.noop() : uglify())
+      .pipe(isDebug ? gutil.noop() : uglify({
+        mangle: false
+      }))
     .pipe(isDebug ? sourcemaps.write() : gutil.noop())
     .pipe(gulp.dest(distDir))
 })
