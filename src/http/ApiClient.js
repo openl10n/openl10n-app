@@ -20,9 +20,7 @@ function ApiClient(Restangular, Configuration, Auth) {
     })
 
     // Add Authorization header when authenticated
-    .addFullRequestInterceptor(function(headers, params, element, httpConfig) {
-      headers = headers || {};
-
+    .addFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {
       if (Auth.isAuthenticated()) {
         headers['Authorization'] = 'Basic ' + Auth.getToken();
       }

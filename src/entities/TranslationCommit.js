@@ -8,7 +8,8 @@ angular
 /**
  * @ngInject
  */
-function TranslationCommitFactory($http, $q, $timeout) {
+function TranslationCommitFactory($http, $q, $timeout, ApiClient, Configuration) {
+
   function TranslationCommit(data) {
     // Attributes
     angular.extend(this, data);
@@ -35,16 +36,31 @@ function TranslationCommitFactory($http, $q, $timeout) {
     this.targetPhrase = this.editedPhrase;
     this.isTranslated = true;
     this.isApproved = false;
+
+    ApiClient.all('translations/' + this.id + '/phrases/' + this.targetLocale).customPUT({
+      text: this.targetPhrase,
+      approved: this.isApproved,
+    });
   }
 
   function approve() {
     // this.targetPhrase = this.editedPhrase;
     // this.isTranslated = true;
     this.isApproved = true;
+
+    ApiClient.one('translations/' + this.id + '/phrases', this.targetLocale).customPUT({
+      text: this.targetPhrase,
+      approved: this.isApproved,
+    });
   }
 
   function unapprove() {
     this.isApproved = false;
+
+    ApiClient.one('translations/' + this.id + '/phrases', this.targetLocale).customPUT({
+      text: this.targetPhrase,
+      approved: this.isApproved,
+    });
   }
 
   return TranslationCommit;
