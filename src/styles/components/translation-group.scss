@@ -28,11 +28,21 @@
   }
 
   &__body {
-    // z-index: 1;
-    // transition: all 0.2s ease-out;
 
+    // Slide animations
+    &.ng-hide-add {
+      transition: all ease-out 0.2s;
+      overflow: hidden;
+      height: 150px;
+    }
+    &.ng-hide-remove {
+      transition: all ease-in 0.2s;
+      overflow: hidden;
+      height: 150px;
+    }
     &.ng-hide {
-      // height: 0px;
+      height: 0px;
+      overflow: hidden;
     }
   }
 
