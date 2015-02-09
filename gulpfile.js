@@ -255,6 +255,8 @@ gulp.task('test:spec', function () {
 });
 
 gulp.task('test:e2e', function() {
+  return;
+
   gulp.src(srcDir + '/**/*.e2e.js')
     .pipe(protractor({
       configFile: __dirname + '/protractor-local.conf.js',
