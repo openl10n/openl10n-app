@@ -52,6 +52,7 @@ var sourceFiles = [
   srcDir + '/core/bootstrap.js',
   srcDir + '/core/app.js',
   srcDir + '/**/*.js',
+  '!' + srcDir + '/core/templates.js',
   '!' + srcDir + '/**/*.spec.js',
   '!' + srcDir + '/**/*.e2e.js',
   '!' + srcDir + '/public/**/*.js',
@@ -138,6 +139,8 @@ gulp.task('templates', function () {
 // Javascript
 //
 gulp.task('scripts', function () {
+  var templates;
+
   var bootstrap = gulp.src(srcDir + '/bootstrap.js');
 
   var vendor = gulp.src(vendorFiles)
@@ -146,22 +149,24 @@ gulp.task('scripts', function () {
     .pipe(plumber())
     .pipe(ngAnnotate())
 
-  // Combine into a single app script
-  var queue = new streamqueue({ objectMode: true })
-    .queue(bootstrap)
-    .queue(vendor)
-    .queue(src)
 
   // Inline templates in prod mode
-  if (!isDebug) {
-    var templates = gulp.src(srcDir + '/views/*.html')
+  if (isDebug) {
+    templates = gulp.src(srcDir + '/core/templates.js')
+  } else {
+    templates = gulp.src(srcDir + '/views/**/*.html')
       .pipe(templateCache('templates.js', {
         standalone: true,
         root: 'views',
       }))
-
-    queue.queue(templates)
   }
+
+  // Combine into a single app script
+  var queue = new streamqueue({ objectMode: true })
+    .queue(bootstrap)
+    .queue(vendor)
+    .queue(templates)
+    .queue(src)
 
   queue.done()
     .pipe(isDebug ? sourcemaps.init() : gutil.noop())
@@ -264,6 +269,7 @@ gulp.task('test:e2e', function() {
       configFile: __dirname + '/protractor-local.conf.js',
       args: [
         '--baseUrl', 'http://127.0.0.1:3000/#',
+        '--no-sandbox',
         // '--browser', 'firefox'
       ]
     }))

@@ -4,19 +4,25 @@ node_js:
   - '0.10'
 
 before_install:
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq google-chrome-stable
+
+  #- export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
 install:
+  - cp src/public/config.example.js src/public/config.js
   - npm install
   - npm run webdriver-update
-  #- node_modules/.bin/bower install --config.interactive=false
-  - node_modules/.bin/gulp build --prod
+  - npm run build
 
 before_script:
-  - npm run webdriver-start > /dev/null &
-  - node_modules/.bin/gulp server > /dev/null &
-  - sleep 1 # give server time to start
+  - npm run webdriver-start 2>&1 &
+  - npm run server 2>&1 &
+  - sleep 5 # give server time to start
 
 script:
   - gulp test
