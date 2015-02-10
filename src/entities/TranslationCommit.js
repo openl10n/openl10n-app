@@ -8,7 +8,7 @@ angular
 /**
  * @ngInject
  */
-function TranslationCommitFactory($http, $q, $timeout, ApiClient, Configuration) {
+function TranslationCommitFactory($http, $q, $timeout, ApiClient) {
 
   function TranslationCommit(data) {
     // Attributes
@@ -44,8 +44,9 @@ function TranslationCommitFactory($http, $q, $timeout, ApiClient, Configuration)
   }
 
   function approve() {
-    // this.targetPhrase = this.editedPhrase;
-    // this.isTranslated = true;
+    // Save + Approve
+    this.targetPhrase = this.editedPhrase;
+    this.isTranslated = true;
     this.isApproved = true;
 
     ApiClient.one('translations/' + this.id + '/phrases', this.targetLocale).customPUT({

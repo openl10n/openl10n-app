@@ -132,9 +132,30 @@ function TranslateTargetController($scope, hotkeys, targetLocale, editor) {
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
         e.preventDefault();
-        // if (!$scope.activedTranslation)
-        //   return;
-        // $scope.saveTranslation($scope.activedTranslation);
+        if (!$scope.editor.activeTranslation)
+          return;
+
+        var translation = $scope.editor.activeTranslation;
+        if (!translation.isEditing())
+          return;
+
+        translation.save()
+      }
+    })
+    .add({
+      combo: 'mod+shift+enter',
+      description: 'Approve translation',
+      allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback: function(e) {
+        e.preventDefault();
+        if (!$scope.editor.activeTranslation)
+          return;
+
+        var translation = $scope.editor.activeTranslation;
+        if (!translation.isEditing() && translation.isApproved)
+          return;
+
+        translation.approve()
       }
     });
 }
