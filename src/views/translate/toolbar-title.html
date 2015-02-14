@@ -1,18 +1,31 @@
-<div class="ol-translation-toolbar" layout="row">
+<span class="ol-translation-toolbar">
   <span class="ol-translation-toolbar__container">
-    {{editor.project.name}}
-  </span>
+    <a ui-sref="root.project({project: editor.projectSlug})">
+      {{editor.project.name}}
+    </a>
 
-  <span class="ol-translation-toolbar__container">
+    <md-icon md-svg-src="icons/keyboard_arrow_right.svg" class="md-default-theme"></md-icon>
+
     <select
       ng-model="editor.targetLocale"
       ng-options="language.locale as language.name for language in ::editor.languages|orderBy:'name'">
     </select>
   </span>
 
-  <!--
-  <div class="ol-translation-toolbar__container" flex>
-    <input type="text" style="width:70%">
-  </div>
-  -->
-</div>
+
+  <!-- <span class="ol-translation-toolbar__container">
+    <input type="text" style="width:500px">
+
+
+    <md-autocomplete
+        md-selected-item="selectedItem"
+        md-search-text="searchText"
+        md-items="item in []"
+        md-item-text="display"
+        placeholder="What is your favorite US state?">
+      <span md-highlight-text="searchText">{{item.display}}</span>
+    </md-autocomplete>
+
+  </span> -->
+
+</span>

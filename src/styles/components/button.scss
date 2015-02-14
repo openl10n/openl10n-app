@@ -17,4 +17,23 @@
   &.ol-light-gray {
     color: #666;
   }
+
+  &.md-fab.md-default-theme.ol-transparent {
+    background-color: transparent;
+    box-shadow: none;
+
+    &:focus,
+    &:active,
+    &:hover {
+      background-color: transparent;
+      box-shadow: none;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &.md-default-theme.ol-button-toolbar {
+    border-radius: 50%;
+  }
 }
+
+

@@ -1,10 +1,12 @@
 <md-toolbar ng-controller="ToolbarController">
   <div class="md-toolbar-tools">
-    <md-button ng-click="openSidebar()" class="menu-icon" aria-label="Toggle Menu">
+    <md-button ng-click="openSidebar()" class="ol-button-toolbar" aria-label="Toggle Menu">
       <md-icon md-svg-src="icons/menu.svg" class="md-default-theme"></md-icon>
     </md-button>
 
-    <div ui-view="title" flex></div>
+    <div ui-view="title" class="toolbar__title"></div>
+
+    <span flex></span>
 
     <div ui-view="menu"></div>
 
