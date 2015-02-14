@@ -3,11 +3,12 @@
 
 angular.module('app')
   .controller('LoginController', LoginController)
+  .controller('LogoutController', LogoutController)
 
 /**
  * @ngInject
  */
-function LoginController($scope, Auth, $location) {
+function LoginController($scope, $location, Auth) {
   Auth.logout();
 
   $scope.credentials = {
@@ -29,6 +30,14 @@ function LoginController($scope, Auth, $location) {
       alert('Login fail');
     }
   }
+}
+
+/**
+ * @ngInject
+ */
+function LogoutController($location, Auth) {
+  Auth.logout();
+  $location.path('/login');
 }
 
 })();

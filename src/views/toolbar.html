@@ -1,6 +1,6 @@
 <md-toolbar ng-controller="ToolbarController">
   <div class="md-toolbar-tools">
-    <md-button ng-click="openSidebar()" class="menu-icon" alt="Toggle Menu">
+    <md-button ng-click="openSidebar()" class="menu-icon" aria-label="Toggle Menu">
       <md-icon md-svg-src="icons/menu.svg" class="md-default-theme"></md-icon>
     </md-button>
 
@@ -9,7 +9,7 @@
     <div ui-view="menu"></div>
 
     <div>
-      <md-button>
+      <md-button ui-sref="root.profile()">
         user
       </md-button>
     </div>

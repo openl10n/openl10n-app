@@ -14,6 +14,10 @@ function LoginStateConfig($stateProvider) {
       templateUrl: 'views/login.html',
       controller: 'LoginController',
     })
+    .state('logout', {
+      url: '/logout',
+      controller: 'LogoutController',
+    })
 }
 
 
