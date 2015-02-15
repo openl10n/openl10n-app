@@ -21,6 +21,10 @@ function TranslateTitleController($scope, editor) {
  * @ngInject
  */
 function TranslateSearchController($scope, editor) {
+  $scope.search = function(text) {
+    console.log('search: ' + text);
+  }
+
   $scope.autocompleteSearch = function(text) {
     return [
       // '-is:approved',
