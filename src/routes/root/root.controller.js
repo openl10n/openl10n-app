@@ -8,10 +8,14 @@ angular.module('app')
 /**
  * @ngInject
  */
-function ToolbarController($scope, $mdSidenav) {
+function ToolbarController($scope, $mdSidenav, UserRepository) {
   $scope.openSidebar = function() {
     $mdSidenav('left').open();
   }
+
+  UserRepository.findMe().then(function(user) {
+    $scope.user = user;
+  });
 }
 
 /**

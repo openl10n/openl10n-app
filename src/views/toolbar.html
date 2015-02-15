@@ -8,12 +8,12 @@
 
     <div ui-view="toolbar-middle" class="toolbar__middle" flex></div>
 
-    <div ui-view="toolbar-menu"></div>
+    <div ui-view="toolbar-menu" class="toolbar__menu"></div>
 
-    <div>
-      <md-button ui-sref="root.profile()">
-        user
-      </md-button>
+    <div class="toolbar__user">
+      <a ui-sref="root.profile()" class="toolbar__avatar">
+        <img gravatar-src="user.email" gravatar-size="50" alt="User avatar">
+      </a>
     </div>
   </div>
 </md-toolbar>

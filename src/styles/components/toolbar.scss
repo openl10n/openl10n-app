@@ -7,4 +7,28 @@
     padding-left: 10px;
     padding-right: 30px;
   }
+
+  &__menu {
+  }
+
+  &__user {
+    padding-left: 5px;
+  }
+
+  &__avatar {
+
+    > img {
+      border: 1px solid rgba(#ccc, 0.3);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-top: 4px;
+    }
+
+    &:hover {
+      > img {
+        border-color: rgba(#ccc, 0.5);
+      }
+    }
+  }
 }
