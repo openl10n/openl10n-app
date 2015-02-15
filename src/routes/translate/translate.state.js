@@ -31,6 +31,7 @@ function TranslateStateConfig($stateProvider) {
         },
         'toolbar-middle': {
           templateUrl: 'views/translate/toolbar-middle.html',
+          controller: 'TranslateSearchController',
         },
       }
     })

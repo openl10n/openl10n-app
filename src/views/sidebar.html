@@ -11,10 +11,15 @@
   </md-toolbar>
 
   <div ng-controller="SidebarController">
-    <ul>
-      <li>
+    <ul class="ol-sidebar">
+      <li class="ol-sidebar__item">
         <a ui-sref="root.dashboard()" ng-click="closeSidebar()">
           Dashboard
+        </a>
+      </li>
+      <li class="ol-sidebar__item">
+        <a ui-sref="root.profile()" ng-click="closeSidebar()">
+          Profile
         </a>
       </li>
     </ul>

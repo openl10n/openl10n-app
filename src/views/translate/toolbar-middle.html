@@ -1,10 +1,9 @@
 <md-autocomplete
-    md-selected-item="selectedItem"
-    md-search-text="searchText"
-    md-items="item in []"
-    md-item-text="display"
-    placeholder="Filter translations…">
+  md-selected-item="selectedItem"
+  md-search-text="searchText"
+  md-items="item in autocompleteSearch(text)"
+  placeholder="Filter translations…">
   <span md-highlight-text="searchText">
-    {{item.display}}
+    {{item}}
   </span>
 </md-autocomplete>

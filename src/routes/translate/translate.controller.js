@@ -6,6 +6,7 @@ angular.module('app')
   .controller('TranslateSourceController', TranslateSourceController)
   .controller('TranslateTargetController', TranslateTargetController)
   .controller('TranslateTitleController', TranslateTitleController)
+  .controller('TranslateSearchController', TranslateSearchController)
   .controller('TranslateMenuController', TranslateMenuController)
   .controller('TranslateDialogController', TranslateDialogController)
 
@@ -14,6 +15,20 @@ angular.module('app')
  */
 function TranslateTitleController($scope, editor) {
   $scope.editor = editor;
+}
+
+/**
+ * @ngInject
+ */
+function TranslateSearchController($scope, editor) {
+  $scope.autocompleteSearch = function(text) {
+    return [
+      // '-is:approved',
+      // '-is:translated',
+      // 'is:approved',
+      // 'is:translated',
+    ]
+  }
 }
 
 /**
@@ -49,7 +64,6 @@ function TranslateDialogController($scope, $mdDialog, editor) {
  * @ngInject
  */
 function TranslateController($scope, $state, editor) {
-  console.log('TranslateController')
 
   $scope.editor = editor;
 
@@ -78,7 +92,6 @@ function TranslateController($scope, $state, editor) {
  * @ngInject
  */
 function TranslateSourceController($scope, sourceLocale, editor) {
-  console.log('TranslateSourceController')
   editor.sourceLocale = sourceLocale;
 }
 
@@ -86,7 +99,6 @@ function TranslateSourceController($scope, sourceLocale, editor) {
  * @ngInject
  */
 function TranslateTargetController($scope, hotkeys, targetLocale, editor) {
-  console.log('TranslateTargetController')
   editor.targetLocale = targetLocale;
 
   editor.resetTranslations();
@@ -121,7 +133,6 @@ function TranslateTargetController($scope, hotkeys, targetLocale, editor) {
       description: 'Unselected translation',
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
       callback: function(e) {
-        console.log('ESC');
         e.preventDefault();
         editor.activateTranslation(null);
       }
