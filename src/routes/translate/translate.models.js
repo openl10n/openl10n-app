@@ -14,6 +14,7 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     this.activeTranslation = null;
     this.sourceLocale = null;
     this.targetLocale = null;
+    this.filters = {};
 
     // Public methods
     this.initialize = initialize;
@@ -82,11 +83,11 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
 
     translationGroup.paging.page++;
 
-    var filters = {
+    var filters = angular.extend(this.filters, {
       resource: translationGroup.resource.id,
       page: translationGroup.paging.page,
       per_page: translationGroup.paging.perPage,
-    };
+    });
 
     TranslationCommitRepository
       .findBy(this.sourceLocale, this.targetLocale, filters)

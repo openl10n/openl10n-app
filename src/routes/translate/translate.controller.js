@@ -23,6 +23,8 @@ function TranslateTitleController($scope, editor) {
 function TranslateSearchController($scope, editor) {
   $scope.search = function(text) {
     console.log('search: ' + text);
+    editor.filters.text = text;
+    editor.resetTranslations();
   }
 
   $scope.autocompleteSearch = function(text) {
