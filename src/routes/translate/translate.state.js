@@ -21,13 +21,16 @@ function TranslateStateConfig($stateProvider) {
           templateUrl: 'views/translate/layout.html',
           controller: 'TranslateController',
         },
-        'title': {
+        'toolbar-title': {
           templateUrl: 'views/translate/toolbar-title.html',
           controller: 'TranslateTitleController',
         },
-        'menu': {
+        'toolbar-menu': {
           templateUrl: 'views/translate/toolbar-menu.html',
           controller: 'TranslateMenuController',
+        },
+        'toolbar-middle': {
+          templateUrl: 'views/translate/toolbar-middle.html',
         },
       }
     })

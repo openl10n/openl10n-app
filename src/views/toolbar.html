@@ -4,11 +4,11 @@
       <md-icon md-svg-src="icons/menu.svg" class="md-default-theme"></md-icon>
     </md-button>
 
-    <div ui-view="title" class="toolbar__title"></div>
+    <div ui-view="toolbar-title" class="toolbar__title"></div>
 
-    <span flex></span>
+    <div ui-view="toolbar-middle" class="toolbar__middle" flex></div>
 
-    <div ui-view="menu"></div>
+    <div ui-view="toolbar-menu"></div>
 
     <div>
       <md-button ui-sref="root.profile()">

@@ -27,7 +27,7 @@ function ProjectStateConfig($stateProvider) {
           controller: 'ProjectController',
           templateUrl: 'views/project/layout.html',
         },
-        'title': {
+        'toolbar-title': {
           controller: 'ProjectTitleController',
           templateUrl: 'views/project/toolbar-title.html'
         }

@@ -21,7 +21,7 @@ function ProfileStateConfig($stateProvider) {
           controller: 'ProfileController',
           templateUrl: 'views/profile/layout.html',
         },
-        'title': {
+        'toolbar-title': {
           controller: 'ProfileTitleController',
           templateUrl: 'views/profile/toolbar-title.html'
         }

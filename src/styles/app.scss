@@ -12,6 +12,11 @@
 @import "components/toolbar";
 @import "components/translation-group";
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background-color: #eee;
   color: #37474f;

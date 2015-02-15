@@ -16,7 +16,7 @@ function DashboardStateConfig($stateProvider) {
           templateUrl: 'views/dashboard.html',
           controller: 'DashboardController',
         },
-        'title': {
+        'toolbar-title': {
           template: 'Dashboard'
         }
       },
