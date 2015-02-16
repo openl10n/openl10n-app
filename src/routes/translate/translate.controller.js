@@ -20,7 +20,7 @@ function TranslateTitleController($scope, editor) {
 /**
  * @ngInject
  */
-function TranslateSearchController($scope, editor) {
+function TranslateSearchController($scope, hotkeys, editor) {
   $scope.search = function(text) {
     console.log('search: ' + text);
     editor.filters.text = text;
@@ -35,6 +35,17 @@ function TranslateSearchController($scope, editor) {
       // 'is:translated',
     ]
   }
+
+  hotkeys
+    .bindTo($scope)
+    .add({
+      combo: '/',
+      description: '',
+      callback: function(e) {
+        e.preventDefault();
+        $scope.searchFormElement[0].querySelector('input').focus();
+      }
+    });
 }
 
 /**
