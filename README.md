@@ -31,38 +31,3 @@ gulp
 
 OpenLocalization is released under the MIT License. See the [bundled LICENSE file](LICENSE)
 for details.
-
-
-## Notes
-
-```
-src/
-    app/
-        dashboard/
-            i18n/
-            components/
-            tests/
-            partials/
-            dashboard.state.js
-            dashboard.controller.js
-
-        (projects)
-        projects.index/ --> redirect  to dashboard?
-        projects.show/
-
-        translate/
-        translate.source/
-        translate.source.target/
-        translate.source.target.select/
-
-    components/
-
-    core/
-        resources/
-
-        app.js (modules = app, app.services, app.directives)
-        bootstrap.js
-        routes.js
-        config.js
-
-```
