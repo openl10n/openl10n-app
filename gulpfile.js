@@ -32,6 +32,7 @@ var vendorFiles = [
   vendorDir + '/lodash/dist/lodash.js',
   vendorDir + '/string/lib/string.js',
   vendorDir + '/hammerjs/hammer.js',
+  vendorDir + '/webfontloader/webfontloader.js',
 
   vendorDir + '/angular/angular.js',
   vendorDir + '/angular-messages/angular-messages.js',
