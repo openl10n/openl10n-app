@@ -52,7 +52,13 @@
 
     <div class="ol-translation-item__footer" layout="row">
       <div class="ol-translation-item__hint" flex>
-        Press <strong>TAB</strong> to move to the next phrase.
+        <span ng-show="!translation.isEditing()">
+          Press <strong>TAB</strong> to move to the next phrase.
+        </span>
+
+        <span ng-show="translation.isEditing()" class="u-text-blue">
+          Press <strong><span mod-key></span>+Enter</strong> to save translation
+        </span>
       </div>
 
       <div class="ol-translation-item__actions" ng-show="translation.isEditing()">
