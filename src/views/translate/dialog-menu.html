@@ -1,0 +1,28 @@
+<md-dialog>
+  <md-content>
+    <h2>Settings</h2>
+
+    <p>
+      <label>Source</label>
+      <select
+        ng-model="editor.sourceLocale"
+        ng-options="language.locale as language.name for language in ::editor.languages|orderBy:'name'">
+      </select>
+    </p>
+
+    <p>
+      <label>Target</label>
+      <select
+        ng-model="editor.targetLocale"
+        ng-options="language.locale as language.name for language in ::editor.languages|orderBy:'name'">
+      </select>
+    </p>
+  </md-content>
+
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="hide()" class="md-primary">
+      Close
+    </md-button>
+  </div>
+</md-dialog>

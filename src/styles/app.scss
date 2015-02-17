@@ -1,44 +1,33 @@
-//
-// Global settings
-//
-@import "settings/variables";
-@import "settings/mixins";
-@import "settings/fonts";
-@import "settings/normalize";
-@import "settings/global";
-@import "settings/utilities";
-@import "settings/animate";
 @import "icons";
 
-//
-// Blocks
-//
-@import "blocks/action";
-@import "blocks/alert";
-@import "blocks/button";
-@import "blocks/column";
-@import "blocks/document";
-@import "blocks/flag";
-@import "blocks/form";
-@import "blocks/link";
-@import "blocks/list";
-@import "blocks/loader";
-@import "blocks/media";
-@import "blocks/navbar";
-@import "blocks/title";
+@import "settings/variables";
+@import "settings/utils";
 
-//
-// Layouts
-//
-@import "layouts/dashboard-projects";
-@import "layouts/profile";
-@import "layouts/project-details";
-@import "layouts/project-resources";
-@import "layouts/project-languages";
-@import "layouts/project-stats";
-@import "layouts/translate-edit";
-@import "layouts/translate-header";
-@import "layouts/translate-main";
-@import "layouts/translate-overlay";
-@import "layouts/translate-sidebar";
-@import "layouts/translate-translations";
+@import "components/button";
+@import "components/card";
+@import "components/editor-layout";
+@import "components/flag";
+@import "components/list";
+@import "components/sidebar";
+@import "components/title";
+@import "components/toolbar";
+@import "components/translation-group";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #eee;
+  color: #37474f;
+  // font-family: 'Source Sans Pro', sans-serif;
+}
+
+md-toolbar.md-default-theme {
+  background-color: #37474f;
+  color: white;
+}
+md-content.md-default-theme {
+  background-color: #eee;
+}

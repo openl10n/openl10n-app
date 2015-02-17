@@ -1,0 +1,22 @@
+<form ng-submit="search(searchText)" class="ol-translate-editor-search-form" attach-as="searchFormElement">
+
+  <!--
+  <md-autocomplete
+    md-selected-item="selectedItem"
+    md-search-text="searchText"
+    md-items="item in autocompleteSearch(text)"
+    placeholder="Filter translations…">
+    <span md-highlight-text="searchText">
+      {{item}}
+    </span>
+  </md-autocomplete>
+  -->
+
+  <input
+    type="text"
+    ng-model="searchText"
+    placeholder="Filter translations…">
+
+  <input type="submit" style="display:none">
+
+</form>

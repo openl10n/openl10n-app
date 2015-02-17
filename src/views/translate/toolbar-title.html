@@ -1,0 +1,14 @@
+<span class="ol-translation-toolbar">
+  <span class="ol-translation-toolbar__container">
+    <a ui-sref="root.project({project: editor.projectSlug})">
+      {{editor.project.name}}
+    </a>
+
+    <md-icon md-svg-src="icons/keyboard_arrow_right.svg" class="md-default-theme"></md-icon>
+
+    <select
+      ng-model="editor.targetLocale"
+      ng-options="language.locale as language.name for language in ::editor.languages|orderBy:'name'">
+    </select>
+  </span>
+</span>

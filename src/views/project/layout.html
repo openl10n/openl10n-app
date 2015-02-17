@@ -1,0 +1,73 @@
+<div layout="column" layout-gt-md="row" layout-padding>
+  <div flex>
+    <!-- <h1>{{project.name}}</h1> -->
+
+    <section class="ol-card md-whiteframe-z1">
+      <header class="ol-card__header" layout="row">
+        <h3 flex class="ol-card__title">Languages</h3>
+      </header>
+
+      <md-list class="ol-language-list">
+
+        <md-item
+          class="ol-language-item"
+          ng-repeat="language in ::languages"
+          ui-sref="root.translate.source.target({
+            project: project.slug,
+            source: project.defaultLocale,
+            target: language.locale})"
+          >
+
+          <md-item-content md-ink-ripple>
+            <div class="md-tile-content" layout="row">
+              <div class="ol-language-item__flag">
+                <ol-flag country="{{::language.locale|region}}"></ol-flag>
+              </div>
+
+              <div>
+                <h4 class="ol-language-item__title">
+                  {{::language.name}}
+                </h4>
+                <p class="ol-language-item__locale">
+                  {{::language.locale}}
+                </p>
+              </div>
+            </div>
+          </md-item-content>
+        </md-item>
+
+      </md-list>
+
+      <footer class="ol-card__footer">
+        <!-- View all -->
+      </footer>
+    </section>
+
+  </div>
+
+  <div flex>
+
+    <section class="ol-card md-whiteframe-z1">
+      <header class="ol-card__header" layout="row">
+        <h3 flex class="ol-card__title">Resources</h3>
+      </header>
+
+      <md-list class="ol-resource-list">
+        <md-item class="ol-resource-item" ng-repeat="resource in ::resources">
+          <md-item-content>
+            <div class="md-tile-content" layout="row">
+              <div class="ol-resource-item__pathname">
+                {{::resource.pathname}}
+              </div>
+            </div>
+          </md-item-content>
+        </md-item>
+      </md-list>
+
+      <footer class="ol-card__footer">
+        <!-- View all -->
+      </footer>
+    </section>
+
+  </div>
+</div>

@@ -1,26 +1,29 @@
-<div class="l-dashboard-projects column column--size-4 column--scrollable">
-  <div class="l-dashboard-projects__header">
-    <h1 class="l-dashboard-projects__title title title--level-1">
-      Projects
-    </h1>
+<div layout="column" layout-gt-md="row" layout-padding>
+  <div flex>
+    <section class="ol-card md-whiteframe-z1">
+      <header class="ol-card__header" layout="row">
+        <h3 flex class="ol-card__title">Projects</h3>
+      </header>
+
+      <!-- <md-divider></md-divider> -->
+
+      <md-list class="ol-projects-list">
+        <md-item class="ol-projects-item" ng-repeat="project in projects|orderBy:'name'">
+          <md-item-content md-ink-ripple ui-sref="root.project({project: project.slug})">
+            <div class="md-tile-content">
+              <h3>
+                  {{project.name}}
+              </h3>
+              <h4>{{project.slug}}</h4>
+              <p>
+                {{project.description}}
+              </p>
+            </div>
+          </md-item-content>
+        </md-item>
+      </md-list>
+    </section>
   </div>
 
-  <div class="l-dashboard-projects__list">
-    <a class="l-dashboard-projects__item project" ng-repeat="project in projects|orderBy:'name'" ui-sref="project({slug: project.slug})">
-      <span class="project__name">
-        {{ project.name }}
-      </span>
-      <span class="project__slug">
-        {{ project.slug }}
-      </span>
-    </a>
-  </div>
-
-  <!--
-  <p>
-    <a href="#" class="button button--type-raised button--color-primary button--size-wide">
-      New project
-    </a>
-  </p>
-  -->
+  <div flex></div>
 </div>

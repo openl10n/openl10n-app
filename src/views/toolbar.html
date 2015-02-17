@@ -1,0 +1,19 @@
+<md-toolbar ng-controller="ToolbarController">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="openSidebar()" class="ol-button-toolbar" aria-label="Toggle Menu">
+      <md-icon md-svg-src="icons/menu.svg" class="md-default-theme"></md-icon>
+    </md-button>
+
+    <div ui-view="toolbar-title" class="toolbar__title"></div>
+
+    <div ui-view="toolbar-middle" class="toolbar__middle" flex></div>
+
+    <div ui-view="toolbar-menu" class="toolbar__menu"></div>
+
+    <div class="toolbar__user">
+      <a ui-sref="root.profile()" class="toolbar__avatar">
+        <img gravatar-src="user.email" gravatar-size="50" alt="User avatar">
+      </a>
+    </div>
+  </div>
+</md-toolbar>

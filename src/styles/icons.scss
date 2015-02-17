@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: url('./fonts/icons.eot');
-  src: url('./fonts/icons.eot?#iefix') format('eot'),
-    url('./fonts/icons.woff') format('woff'),
-    url('./fonts/icons.ttf') format('truetype'),
-    url('./fonts/icons.svg#icons') format('svg');
+  src: url('../fonts/icons.eot');
+  src: url('../fonts/icons.eot?#iefix') format('eot'),
+    url('../fonts/icons.woff') format('woff'),
+    url('../fonts/icons.ttf') format('truetype'),
+    url('../fonts/icons.svg#icons') format('svg');
 }
 
 %icon {
@@ -70,20 +70,26 @@
   @if $filename == logo {
     $char: "\E010";
   }
-  @if $filename == minus {
+  @if $filename == md-error {
     $char: "\E011";
   }
-  @if $filename == save {
+  @if $filename == md-warning {
     $char: "\E012";
   }
-  @if $filename == times {
+  @if $filename == minus {
     $char: "\E013";
   }
-  @if $filename == translate {
+  @if $filename == save {
     $char: "\E014";
   }
-  @if $filename == world {
+  @if $filename == times {
     $char: "\E015";
+  }
+  @if $filename == translate {
+    $char: "\E016";
+  }
+  @if $filename == world {
+    $char: "\E017";
   }
 
   @return $char;
@@ -147,6 +153,12 @@
 }
 .icon-logo {
   @include icon(logo);
+}
+.icon-md-error {
+  @include icon(md-error);
+}
+.icon-md-warning {
+  @include icon(md-warning);
 }
 .icon-minus {
   @include icon(minus);
