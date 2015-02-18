@@ -15,6 +15,7 @@ angular.module('app', [
 
   // Application specific
   'templates',
+  'icons',
 
 ]).run(initialization);
 

@@ -54,6 +54,7 @@ var sourceFiles = [
   srcDir + '/core/app.js',
   srcDir + '/**/*.js',
   '!' + srcDir + '/core/templates.js',
+  '!' + srcDir + '/core/icons.js',
   '!' + srcDir + '/**/*.spec.js',
   '!' + srcDir + '/**/*.e2e.js',
   '!' + srcDir + '/public/**/*.js',
@@ -140,7 +141,7 @@ gulp.task('templates', function () {
 // Javascript
 //
 gulp.task('scripts', function () {
-  var templates;
+  var templates, icons;
 
   var bootstrap = gulp.src(srcDir + '/bootstrap.js');
 
@@ -154,11 +155,19 @@ gulp.task('scripts', function () {
   // Inline templates in prod mode
   if (isDebug) {
     templates = gulp.src(srcDir + '/core/templates.js')
+    icons = gulp.src(srcDir + '/core/icons.js')
   } else {
     templates = gulp.src(srcDir + '/views/**/*.html')
       .pipe(templateCache('templates.js', {
-        standalone: true,
         root: 'views',
+        standalone: true,
+      }))
+
+    icons = gulp.src(srcDir + '/public/icons/**/*.svg')
+      .pipe(templateCache('icons.js', {
+        root: 'icons',
+        module: 'icons',
+        standalone: true,
       }))
   }
 
@@ -167,6 +176,7 @@ gulp.task('scripts', function () {
     .queue(bootstrap)
     .queue(vendor)
     .queue(templates)
+    .queue(icons)
     .queue(src)
 
   queue.done()
