@@ -7,7 +7,7 @@ angular.module('app')
 /**
  * @ngInject
  */
-function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, LanguageRepository, TranslationCommitRepository) {
+function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, LanguageRepository, TranslationCommitRepository, TranslationRepository) {
 
   function Editor(projectSlug) {
     this.projectSlug = projectSlug;
@@ -23,6 +23,7 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     this.activateTranslation = activateTranslation;
     this.selectNextTranslation = selectNextTranslation;
     this.selectPreviousTranslation = selectPreviousTranslation;
+    this.createNewTranslation = createNewTranslation;
 
     // UI states
     this.sidebarOpen = false
@@ -51,6 +52,18 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     });
 
     return deferred.promise;
+  }
+
+  function createNewTranslation(translationGroup, key)
+  {
+    var _this = this;
+    TranslationRepository.createTranslation(translationGroup.resource, key)
+      .then(function(translation) {
+        return TranslationCommitRepository.findOne(_this.sourceLocale, _this.targetLocale, translation.id);
+      }).then(function(translationCommit) {
+        return translationGroup.translations.splice(0, 0, translationCommit);
+      });
+
   }
 
   function createTranslationGroups(resources) {

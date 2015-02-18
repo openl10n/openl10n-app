@@ -2,6 +2,9 @@
   <div flex layout="row">
     <section flex class="ol-translation-container">
       <div class="ol-translation-group" ng-repeat="translationGroup in editor.translationGroups">
+        <md-button class="md-fab md-mini md-fab-top-right right" title="add a translation key" ng-show="translationGroup.resource.expanded && !newTranslation" ng-click="newTranslation = {}">
+          <md-icon md-svg-src="icons/add.svg" alt="android "></md-icon>
+        </md-button>
         <header class="ol-translation-group__header" ng-click="translationGroup.resource.expanded = !translationGroup.resource.expanded">
           <h3 class="ol-translation-group__title">
             {{translationGroup.resource.pathname}}
@@ -9,6 +12,22 @@
         </header>
 
         <div class="ol-translation-group__body" ng-show="translationGroup.resource.expanded">
+          <div layout="row" layout-padding layout-align="center center" ng-show="newTranslation">
+            <div flex>
+              <md-input-container>
+                <label>Translation key</label>
+                <input type="text" ng-model="newTranslation.text" >
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-button class="md-raised md-accent md-button" ng-click="editor.createNewTranslation(translationGroup, newTranslation.text); newTranslation = null">
+                Ok
+              </md-button>
+              <md-button class="md-raised md-warn md-button" ng-click="newTranslation = null">
+                Cancel
+              </md-button>
+            </div>
+          </div>
           <div class="ol-translation-list">
             <div ng-repeat="translation in translationGroup.translations" ng-include="'views/translate/translation-item.html'"></div>
           </div>

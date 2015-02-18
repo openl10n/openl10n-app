@@ -13,6 +13,7 @@ function TranslationCommitRepository($http, $q, $timeout, ApiClient, Translation
 
   return angular.extend({}, {
     findBy: findBy,
+    findOne: findOne
   });
 
   /**
@@ -28,19 +29,7 @@ function TranslationCommitRepository($http, $q, $timeout, ApiClient, Translation
     var deferred = $q.defer();
 
     function onSuccess(response) {
-      var translations = response.map(function(translation) {
-        return new TranslationCommit({
-          id: translation.id,
-          key: translation.key,
-          isTranslated: translation.is_translated,
-          isApproved: translation.is_approved,
-          sourceLocale: translation.source_locale,
-          sourcePhrase: translation.source_phrase,
-          targetLocale: translation.target_locale,
-          targetPhrase: translation.target_phrase,
-          editedPhrase: translation.target_phrase,
-        })
-      });
+      var translations = response.map(_transformTranslationCommit);
 
       deferred.resolve(translations);
     }
@@ -55,6 +44,38 @@ function TranslationCommitRepository($http, $q, $timeout, ApiClient, Translation
 
     return deferred.promise;
   }
+
+  /**
+   * Get a translation commits.
+   *
+   * @param {string} source      Source locale
+   * @param {string} target      Target locale
+   * @param {string} translation Translation identifier
+   *
+   * @return {object} the translation commit
+   */
+  function findOne(source, target, translation) {
+    return ApiClient.one('translation_commits/' + source + '/' + target, translation)
+      .get()
+      .then(function(translation) {
+        return _transformTranslationCommit(translation);
+      });
+  }
+
+  function _transformTranslationCommit(translation) {
+    return new TranslationCommit({
+          id: translation.id,
+          key: translation.key,
+          isTranslated: translation.is_translated,
+          isApproved: translation.is_approved,
+          sourceLocale: translation.source_locale,
+          sourcePhrase: translation.source_phrase,
+          targetLocale: translation.target_locale,
+          targetPhrase: translation.target_phrase,
+          editedPhrase: translation.target_phrase,
+        });
+  };
+
 }
 
 })();
