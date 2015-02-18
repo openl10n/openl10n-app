@@ -2,7 +2,7 @@
   "name": "openl10n-app",
   "description": "A client for OpenLocalization built with AngularJS",
   "repository": "https://github.com/openl10n/openl10n-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Matthieu Moquet <matthieu@moquet.net>",
   "license": "MIT",
   "devDependencies": {

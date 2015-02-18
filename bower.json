@@ -2,7 +2,7 @@
   "name": "openl10n-app",
   "description": "A client for OpenLocalization built for AngularJS",
   "homepage": "https://github.com/openl10n/openl10n-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
     "angular": "~1.3",
