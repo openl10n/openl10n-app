@@ -11,8 +11,6 @@
     "gulp-angular-templatecache": "^1.4.2",
     "gulp-concat": "^2.3.4",
     "gulp-connect": "^2.0.6",
-    "gulp-iconfont": "^0.1.1",
-    "gulp-iconfont-css": "0.0.9",
     "gulp-jshint": "^1.8.4",
     "gulp-karma": "0.0.4",
     "gulp-ng-annotate": "^0.2.0",
@@ -32,10 +30,10 @@
     "streamqueue": "^0.1.1"
   },
   "scripts": {
+    "build": "node_modules/.bin/gulp build --prod",
+    "start": "node_modules/.bin/gulp server",
     "postinstall": "node_modules/.bin/bower install",
     "webdriver-start": "node_modules/protractor/bin/webdriver-manager start",
-    "webdriver-update": "node_modules/protractor/bin/webdriver-manager update",
-    "build": "node_modules/.bin/gulp build --prod",
-    "server": "node_modules/.bin/gulp server"
+    "webdriver-update": "node_modules/protractor/bin/webdriver-manager update"
   }
 }

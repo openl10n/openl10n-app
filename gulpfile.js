@@ -2,21 +2,17 @@ var gulp = require('gulp')
 var gutil = require('gulp-util')
 var concat = require('gulp-concat')
 var connect = require('gulp-connect')
-var iconfont = require('gulp-iconfont')
-var iconfontCSS = require("gulp-iconfont-css")
 var jshint = require('gulp-jshint')
 var karma = require('gulp-karma')
 var ngAnnotate = require('gulp-ng-annotate')
 var plumber = require('gulp-plumber')
 var protractor = require("gulp-protractor").protractor;
 var rimraf = require('rimraf')
-var sourcemaps = require('gulp-sourcemaps')
 var sass = require('gulp-sass')
+var sourcemaps = require('gulp-sourcemaps')
 var streamqueue = require('streamqueue')
 var templateCache = require('gulp-angular-templatecache')
 var uglify = require('gulp-uglify')
-var readline = require('readline')
-var spawn = require("child_process").spawn;
 
 
 //
@@ -218,26 +214,6 @@ gulp.task('styles', function () {
 })
 
 //
-// Icons
-//
-gulp.task('icons', function() {
-  gulp.src([srcDir + '/icons/*.svg'])
-    .pipe(iconfontCSS({
-      fontName : 'icons',
-      // path: 'scss',
-      path: srcDir + '/styles/templates/icons.scss',
-      targetPath: '../../styles/icons.scss',
-      fontPath: '../fonts/' // relative path
-    }))
-    .pipe(iconfont({
-      fontName: 'icons',
-      // fixedWidth: true,
-      normalize: true
-    }))
-    .pipe(gulp.dest(srcDir + '/public/fonts'));
-});
-
-//
 // Lint
 //
 gulp.task('lint', function() {
@@ -273,8 +249,6 @@ gulp.task('test:spec', function () {
 });
 
 gulp.task('test:e2e', function() {
-  // return;
-
   gulp.src(srcDir + '/**/*.e2e.js')
     .pipe(protractor({
       configFile: __dirname + '/protractor-local.conf.js',
