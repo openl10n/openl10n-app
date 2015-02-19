@@ -24,6 +24,7 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     this.selectNextTranslation = selectNextTranslation;
     this.selectPreviousTranslation = selectPreviousTranslation;
     this.createNewTranslation = createNewTranslation;
+    this.saveNewTranslation   = saveNewTranslation;
 
     // UI states
     this.sidebarOpen = false
@@ -54,14 +55,25 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     return deferred.promise;
   }
 
-  function createNewTranslation(translationGroup, key)
+  function createNewTranslation(translationGroup) {
+    translationGroup.newTranslation = {};
+  }
+
+  function saveNewTranslation(translationGroup, key)
   {
     var _this = this;
     TranslationRepository.createTranslation(translationGroup.resource, key)
       .then(function(translation) {
         return TranslationCommitRepository.findOne(_this.sourceLocale, _this.targetLocale, translation.id);
+      }, function() {
+        alert('imposible to create the translation');
       }).then(function(translationCommit) {
-        return translationGroup.translations.splice(0, 0, translationCommit);
+        translationGroup.newTranslation = null;
+
+
+        translationGroup.translations.splice(0, 0, translationCommit);
+
+        _this.activateTranslation(translationCommit);
       });
 
   }
