@@ -2,9 +2,6 @@
   <div flex layout="row">
     <section flex class="ol-translation-container">
       <div class="ol-translation-group" ng-repeat="translationGroup in editor.translationGroups">
-        <md-button class="md-fab md-mini md-fab-top-right right" title="add a translation key" ng-show="translationGroup.resource.expanded && !translationGroup.newTranslation" ng-click="editor.createNewTranslation(translationGroup)">
-          <md-icon md-svg-src="icons/add.svg" alt="android "></md-icon>
-        </md-button>
         <header class="ol-translation-group__header" ng-click="translationGroup.resource.expanded = !translationGroup.resource.expanded">
           <h3 class="ol-translation-group__title">
             {{translationGroup.resource.pathname}}
@@ -12,22 +9,6 @@
         </header>
 
         <div class="ol-translation-group__body" ng-show="translationGroup.resource.expanded">
-          <div layout="row" layout-padding layout-align="center center" ng-show="translationGroup.newTranslation">
-            <div flex>
-              <md-input-container>
-                <label>Translation key</label>
-                <input type="text" ng-model="translationGroup.newTranslation.identifier" >
-              </md-input-container>
-            </div>
-            <div flex>
-              <md-button class="md-raised md-accent md-button" ng-click="editor.saveNewTranslation(translationGroup, translationGroup.newTranslation.identifier)">
-                Ok
-              </md-button>
-              <md-button class="md-raised md-warn md-button" ng-click="newTranslation = null">
-                Cancel
-              </md-button>
-            </div>
-          </div>
           <div class="ol-translation-list">
             <div ng-repeat="translation in translationGroup.translations" ng-include="'views/translate/translation-item.html'"></div>
           </div>
@@ -56,7 +37,6 @@
     <div ui-view></div>
   </div>
 
-
   <md-sidenav md-component-id="right" class="md-sidenav-right ol-translate-editor-sidebar" md-is-locked-open="editor.sidebarOpen">
     <md-tabs>
       <md-tab label="Info">
@@ -74,3 +54,4 @@
   </md-sidenav>
 
 </div>
+
