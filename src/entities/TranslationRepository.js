@@ -8,10 +8,11 @@ angular
 /**
  * @ngInject
  */
-function TranslationRepository($http, $q, $timeout, ApiClient, TranslationCommit) {
+function TranslationRepository($http, $q, $timeout, ApiClient) {
 
   return angular.extend({}, {
-    createTranslation: createTranslation
+    createTranslation: createTranslation,
+    createPhrase: createPhrase
   });
 
   /**
@@ -26,6 +27,22 @@ function TranslationRepository($http, $q, $timeout, ApiClient, TranslationCommit
     return ApiClient.all('translations').customPOST({
       resource: resource.id,
       identifier: identifier
+    });
+  };
+
+  /**
+  * Create a new phrase
+  *
+  * @param {int}    translationId Transaltion identifier
+  * @param {string} locale        Locale
+  * @param {phrase} phrase        Phrase to create
+  *
+  * @return {promise}
+  */
+  function createPhrase(translationId, locale, phrase) {
+    return ApiClient.one('translations', translationId).one('phrases', locale).customPOST({
+      text: phrase,
+      approved: false
     });
   };
 

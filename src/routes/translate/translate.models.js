@@ -23,7 +23,6 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     this.activateTranslation = activateTranslation;
     this.selectNextTranslation = selectNextTranslation;
     this.selectPreviousTranslation = selectPreviousTranslation;
-    this.createNewTranslation = createNewTranslation;
     this.saveNewTranslation   = saveNewTranslation;
 
     // UI states
@@ -55,27 +54,13 @@ function EditorFactory($timeout, $q, ProjectRepository, ResourceRepository, Lang
     return deferred.promise;
   }
 
-  function createNewTranslation(translationGroup) {
-    translationGroup.newTranslation = {};
-  }
-
-  function saveNewTranslation(translationGroup, key)
-  {
+  function saveNewTranslation(resource, key, phrase) {
     var _this = this;
-    TranslationRepository.createTranslation(translationGroup.resource, key)
+
+    return TranslationRepository.createTranslation(resource, key)
       .then(function(translation) {
-        return TranslationCommitRepository.findOne(_this.sourceLocale, _this.targetLocale, translation.id);
-      }, function() {
-        alert('imposible to create the translation');
-      }).then(function(translationCommit) {
-        translationGroup.newTranslation = null;
-
-
-        translationGroup.translations.splice(0, 0, translationCommit);
-
-        _this.activateTranslation(translationCommit);
+        return TranslationRepository.createPhrase(translation.id, _this.project.defaultLocale, phrase);
       });
-
   }
 
   function createTranslationGroups(resources) {

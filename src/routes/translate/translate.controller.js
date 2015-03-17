@@ -109,7 +109,12 @@ function TranslateDialogAddTranslationController($scope, $mdDialog, $mdToast, ed
   };
 
   $scope.save = function(resource, key, phrase) {
-    $mdToast.show($mdToast.simple().content('TODO!'));
+    editor.saveNewTranslation(resource, key, phrase).then(function() {
+      $mdDialog.hide();
+      $mdToast.show($mdToast.simple().content('Key added'));
+    }, function() {
+      $mdToast.show($mdToast.simple().content('Error'));
+    });
   };
 }
 
