@@ -33,6 +33,10 @@ function TranslateStateConfig($stateProvider) {
           templateUrl: 'views/translate/toolbar-middle.html',
           controller: 'TranslateSearchController',
         },
+        'footer': {
+          templateUrl: 'views/translate/footer.html',
+          controller: 'TranslateFooterController',
+        }
       }
     })
     .state('root.translate.source', {

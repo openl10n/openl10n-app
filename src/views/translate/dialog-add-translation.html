@@ -1,0 +1,42 @@
+<md-dialog style="width:80%;max-width:600px;">
+  <md-content>
+    <h2 class="md-sticky-no-effect">
+      Create new translation
+    </h2>
+
+    <form name="addTranslation">
+      <div style="padding: 2px; padding-bottom: 26px;">
+        <md-select ng-model="resource"  style="width:100%;margin:auto;">
+          <md-select-label>{{ resource ? resource.pathname : 'Resource pathname' }}</md-select-label>
+          <md-option ng-value="resource" ng-repeat="resource in ::editor.resources">
+            {{ resource.pathname }}
+          </md-option>
+        </md-select>
+      </div>
+
+      <md-input-container>
+        <label>Translation key</label>
+        <input ng-model="key">
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>Default phrase</label>
+        <textarea ng-model="phrase" columns="1"></textarea>
+      </md-input-container>
+
+    </form>
+
+  </md-content>
+
+  <div class="md-actions" layout="row">
+    <span flex></span>
+
+    <md-button ng-click="hide()" class="md-primary">
+      Cancel
+    </md-button>
+
+    <md-button ng-click="save(resource, key, phrase)" class="md-primary md-raised ol-wide">
+      Save
+    </md-button>
+  </div>
+</md-dialog>

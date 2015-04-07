@@ -9,6 +9,8 @@ angular.module('app')
   .controller('TranslateSearchController', TranslateSearchController)
   .controller('TranslateMenuController', TranslateMenuController)
   .controller('TranslateDialogController', TranslateDialogController)
+  .controller('TranslateFooterController', TranslateFooterController)
+  .controller('TranslateDialogAddTranslationController', TranslateDialogAddTranslationController)
 
 /**
  * @ngInject
@@ -74,6 +76,45 @@ function TranslateDialogController($scope, $mdDialog, editor) {
 
   $scope.hide = function() {
     $mdDialog.hide();
+  };
+}
+
+/**
+ * @ngInject
+ */
+function TranslateFooterController($scope, $mdDialog, editor) {
+  $scope.showDialog = function() {
+    $mdDialog.show({
+      controller: TranslateDialogAddTranslationController,
+      locals: { editor: editor },
+      templateUrl: 'views/translate/dialog-add-translation.html',
+      targetEvent: event,
+    })
+  }
+}
+
+/**
+ * @ngInject
+ */
+function TranslateDialogAddTranslationController($scope, $mdDialog, $mdToast, editor) {
+  $scope.editor = editor;
+
+  // Form models
+  $scope.resource = editor.resources.length ? editor.resources[0] : null;
+  $scope.key = '';
+  $scope.phrase = '';
+
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+
+  $scope.save = function(resource, key, phrase) {
+    editor.saveNewTranslation(resource, key, phrase).then(function() {
+      $mdDialog.hide();
+      $mdToast.show($mdToast.simple().content('Key added'));
+    }, function() {
+      $mdToast.show($mdToast.simple().content('Error'));
+    });
   };
 }
 

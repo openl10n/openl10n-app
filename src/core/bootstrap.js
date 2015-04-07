@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 document.body.setAttribute('ng-strict-di', '');
 document.body.setAttribute('ng-app', 'app');
 
@@ -7,6 +10,4 @@ WebFont.load({
   }
 });
 
-// $(function() {
-//   angular.bootstrap(document.body, ['app']);
-// })
+})();
