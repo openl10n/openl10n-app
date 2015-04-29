@@ -20,7 +20,7 @@ install:
   - npm run build
 
 before_script:
-  - npm run webdriver-start 2>&1 > /tmp/webdriver_output.txt &
+  - npm run webdriver-start > /tmp/webdriver_output.txt 2>&1 &
   - npm start 2>&1 &
   - sleep 5 # give server time to start
 
