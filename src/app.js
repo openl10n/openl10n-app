@@ -1,10 +1,17 @@
 import angular from 'angular';
-import configModule from './config/config';
-import MainComponent from './components/main/main';
+import ngNewRouter from 'angular-new-router';
+import ConfigComponent from './config/config';
+
+import {AppController} from './components/app/app';
+import {DashboardController} from './components/dashboard/dashboard';
+import {ProjectController} from './components/project/project';
+//import {MainComponent} from './components/Main/Main';
 
 var app = angular.module('app', [
-  configModule.name,
-  MainComponent.name,
+  'ngNewRouter',
+  ConfigComponent.name,
+  // AppComponent.name,
+  // MainComponent.name,
 ]);
 
 // Override native directive-registration to support classes

@@ -57,6 +57,7 @@
     "configFile": "jspm.conf.js",
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.0",
+      "angular-new-router": "npm:angular-new-router@^0.5.3",
       "jquery": "github:components/jquery@^2.1.4"
     },
     "devDependencies": {

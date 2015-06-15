@@ -27,6 +27,7 @@ gulp.task('default', ['watch'])
 gulp.task('build', ['clean'], cb => {
   runSequence(
     'public',
+    'templates',
     'scripts',
     cb
   );
@@ -77,6 +78,9 @@ gulp.task('watch', ['serve'], () => {
   // Javascript
   gulp.watch([`${config.srcDir}/**/*.js`], ['scripts'])
 
+  // Templates
+  gulp.watch([`${config.srcDir}/**/*.html`], ['templates'])
+
   // Assets
   gulp.watch([`${config.srcDir}/public/**/*`], ['public'])
 });
@@ -88,6 +92,21 @@ gulp.task('public', () => {
   // Source assets
   gulp
     .src(`${config.srcDir}/public/**/*`)
+    .pipe(gulp.dest(config.distDir))
+    .pipe(reload({ stream: true }))
+})
+
+//
+// Templates
+//
+gulp.task('templates', () => {
+  let files = [
+    `${config.srcDir}/**/*.html`,
+    `!${config.srcDir}/public`
+  ]
+
+  gulp
+    .src(files)
     .pipe(gulp.dest(config.distDir))
     .pipe(reload({ stream: true }))
 })

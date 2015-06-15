@@ -239,3 +239,11 @@ export function service (target) {
 export function provider (target) {
   return register({ type: 'provider' })(target);
 }
+
+export function routes (opts) {
+  return function decorate(target, key, descriptor) {
+    target.$routeConfig = opts;
+    target.$inject = target.$inject || [];
+    target.$inject.unshift('$router');
+  };
+}
