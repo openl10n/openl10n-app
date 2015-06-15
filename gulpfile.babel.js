@@ -27,8 +27,9 @@ gulp.task('default', ['watch'])
 gulp.task('build', ['clean'], cb => {
   runSequence(
     'public',
-    'templates',
     'scripts',
+    'styles',
+    'templates',
     cb
   );
 })
@@ -94,6 +95,20 @@ gulp.task('public', () => {
     .src(`${config.srcDir}/public/**/*`)
     .pipe(gulp.dest(config.distDir))
     .pipe(reload({ stream: true }))
+})
+
+//
+// Stylesheets
+//
+gulp.task('styles', () => {
+  let files = [
+    'jspm_packages/github/angular/bower-material*/angular-material.min.css',
+  ]
+
+  gulp
+    .src(files)
+    .pipe($.concat('app.css'))
+    .pipe(gulp.dest(`${config.distDir}/css`))
 })
 
 //

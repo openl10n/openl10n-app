@@ -1,4 +1,5 @@
 import angular from 'angular';
+import ngMaterial from 'angular-material';
 import ngNewRouter from 'angular-new-router';
 import ConfigComponent from './config/config';
 
@@ -8,6 +9,7 @@ import {ProjectController} from './components/project/project';
 //import {MainComponent} from './components/Main/Main';
 
 var app = angular.module('app', [
+  'ngMaterial',
   'ngNewRouter',
   ConfigComponent.name,
   // AppComponent.name,
