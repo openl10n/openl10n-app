@@ -56,16 +56,15 @@ gulp.task('serve', ['build'], cb => {
       // Otherwise it means it tries to require a file in the `jspm_packages`
       // directory.
       middleware: function (req, res, next) {
-        let path = req.url == '/' ? '/index.html' : req.url
+        // Every files should be in dist directory except:
+        // - jspm.conf.js
+        // - jspm_packages/*
+        if (!req.url.match(/^\/(jspm.conf.js|jspm_packages)/)) {
+          req.url = '/' + config.distDir + req.url
+        }
 
-        fs.exists(`${config.distDir}/${path}`, (exists) => {
-          if (exists) {
-            req.url = `/${config.distDir}${path}`
-          }
-
-          res.setHeader('Access-Control-Allow-Origin', '*')
-          next()
-        })
+        res.setHeader('Access-Control-Allow-Origin', '*')
+        next()
       }
     }
   }, cb)
