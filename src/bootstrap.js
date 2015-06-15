@@ -1,3 +1,3 @@
-import {foobar} from './main'
+import {foobar} from 'components/main/main'
 
 console.log(foobar())
