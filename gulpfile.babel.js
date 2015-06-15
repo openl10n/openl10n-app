@@ -122,3 +122,12 @@ gulp.task('scripts', () => {
     .pipe(gulp.dest(config.distDir))
     .pipe(reload({ stream: true }))
 })
+
+//
+// Lint
+//
+gulp.task('lint', function() {
+  return gulp.src(`${config.srcDir}/**/*.js`)
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'));
+});

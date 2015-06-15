@@ -1,5 +1,6 @@
-import MainController from './main-controller'
+import angular from 'angular';
+import MainController from './main-controller';
 
-let MainComponent = angular.module('app.main', [])
+let MainComponent = angular.module('app.main', []);
 
-export default MainComponent
+export default MainComponent;

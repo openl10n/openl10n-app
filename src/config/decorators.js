@@ -67,7 +67,7 @@ export function injectAs (dep) {
           try {
             return $injector.get(dep);
           } catch (err) {
-            throw new Error(`${name} cannot be injected as a property. Inject it in the controller.`);
+            throw new Error(`${dep} cannot be injected as a property. Inject it in the controller.`);
           }
         }
       };
