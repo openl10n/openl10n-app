@@ -7,10 +7,14 @@
 <body>
   <h1>Hello World</h1>
 
+  <p ng-controller="MainCtrl as main">
+    {{main.foobar}}
+  </p>
+
   <script src="./jspm_packages/system.js"></script>
   <script src="./jspm.conf.js"></script>
   <script>
-    System.import('bootstrap').catch(console.error.bind(console));
+    System.import('app').catch(console.error.bind(console));
   </script>
 </body>
 </html>

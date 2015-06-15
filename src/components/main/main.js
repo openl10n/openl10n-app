@@ -1,9 +1,5 @@
-import $ from 'jquery'
+import MainController from './main-controller'
 
-$('h1').css('color', 'blue')
+let MainComponent = angular.module('app.main', [])
 
-console.log('hello buddy')
-
-export function foobar() {
-  return 'I am foobar'
-}
+export default MainComponent
