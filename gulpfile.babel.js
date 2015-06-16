@@ -47,7 +47,7 @@ gulp.task('clean', cb => {
 gulp.task('serve', ['build'], cb => {
   browserSync({
     open: true,
-    port: 9000,
+    port: 3000,
     files: {
       // src: config.srcDir
     },
