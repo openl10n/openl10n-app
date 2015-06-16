@@ -1,4 +1,10 @@
-<h1>Dashboard</h1>
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <h2>
+      Dashboard
+    </h2>
+  </div>
+</md-toolbar>
 
 <p>
   Hello {{dashboard.text}}!
@@ -9,3 +15,7 @@
     <a ng-link="project({slug: 'foobar'})">Foobar</a>
   </li>
 </ul>
+
+<md-button class="md-primary md-raised" ng-click="dashboard.showAlert($event)">
+  Alert
+</md-button>
