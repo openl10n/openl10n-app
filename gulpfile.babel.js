@@ -12,6 +12,7 @@ const reload = browserSync.reload
 // Configuration
 //
 let config = {
+  assetsDir: 'assets',
   srcDir: 'src',
   distDir: 'dist',
 }
@@ -26,7 +27,7 @@ gulp.task('default', ['watch'])
 //
 gulp.task('build', ['clean'], cb => {
   runSequence(
-    'public',
+    'assets',
     'scripts',
     'styles',
     'templates',
@@ -83,16 +84,16 @@ gulp.task('watch', ['serve'], () => {
   gulp.watch([`${config.srcDir}/**/*.html`], ['templates'])
 
   // Assets
-  gulp.watch([`${config.srcDir}/public/**/*`], ['public'])
+  gulp.watch([`${config.assetsDir}/**/*`], ['assets'])
 });
 
 //
 // Static files
 //
-gulp.task('public', () => {
+gulp.task('assets', () => {
   // Source assets
   gulp
-    .src(`${config.srcDir}/public/**/*`)
+    .src(`${config.assetsDir}/**/*`)
     .pipe(gulp.dest(config.distDir))
     .pipe(reload({ stream: true }))
 })
@@ -115,13 +116,8 @@ gulp.task('styles', () => {
 // Templates
 //
 gulp.task('templates', () => {
-  let files = [
-    `${config.srcDir}/**/*.html`,
-    `!${config.srcDir}/public`
-  ]
-
   gulp
-    .src(files)
+    .src(`${config.srcDir}/**/*.html`)
     .pipe(gulp.dest(config.distDir))
     .pipe(reload({ stream: true }))
 })
@@ -140,11 +136,10 @@ gulp.task('scripts', () => {
     ]
   }
 
+  // All javascript files except tests
   let files = [
     `${config.srcDir}/**/*.js`,
-    // Excludes tests & assets
     `!${config.srcDir}/**/*.spec.js`,
-    `!${config.srcDir}/public`,
   ]
 
   gulp.src(files)
