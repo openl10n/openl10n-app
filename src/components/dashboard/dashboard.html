@@ -19,3 +19,9 @@
 <md-button class="md-primary md-raised" ng-click="dashboard.showAlert($event)">
   Alert
 </md-button>
+
+<md-select placeholder="State" ng-model="dashboard.state">
+  <md-option ng-repeat="state in dashboard.states" value="{{state.abbrev}}">
+    {{state.abbrev}}
+  </md-option>
+</md-select>
