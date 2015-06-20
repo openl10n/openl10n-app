@@ -4,7 +4,7 @@ import ngNewRouter from 'angular-new-router';
 import ConfigComponent from './config/config';
 
 import {AppController} from './components/app/app';
-import {DashboardController} from './components/dashboard/dashboard';
+import {HomeController} from './components/home/home';
 import {ProjectController} from './components/project/project';
 //import {MainComponent} from './components/Main/Main';
 

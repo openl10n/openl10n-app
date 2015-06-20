@@ -1,7 +1,7 @@
 import {controller, inject} from '../../config/decorators';
 
 @controller
-export class DashboardController {
+export class HomeController {
   @inject
   $mdDialog = null;
 
