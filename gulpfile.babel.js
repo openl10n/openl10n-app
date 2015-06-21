@@ -80,6 +80,9 @@ gulp.task('watch', ['serve'], () => {
   // Javascript
   gulp.watch([`${config.srcDir}/**/*.js`], ['scripts'])
 
+  // Stylesheets
+  gulp.watch([`${config.srcDir}/**/*.scss`], ['styles'])
+
   // Templates
   gulp.watch([`${config.srcDir}/**/*.html`], ['templates'])
 
@@ -104,12 +107,26 @@ gulp.task('assets', () => {
 gulp.task('styles', () => {
   let files = [
     'jspm_packages/github/angular/bower-material*/angular-material.min.css',
+    `${config.srcDir}/styles/**/*.scss`,
+    `${config.srcDir}/components/**/*.scss`,
   ]
 
   gulp
     .src(files)
+    .pipe($.sourcemaps.init())
     .pipe($.concat('app.css'))
+    .pipe($.sass({
+      precision: 10,
+    }).on('error', $.sass.logError))
+    //.pipe($.autoprefixer({
+    //  browsers: ['last 1 versions'],
+    //  cascade: false,
+    //}))
+    .pipe($.minifyCss())
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest(`${config.distDir}/css`))
+    .pipe($.size({title: 'styles'}))
+    .pipe(reload({ stream: true }))
 })
 
 //
@@ -149,6 +166,7 @@ gulp.task('scripts', () => {
     .pipe($.babel(Object.assign({}, compilerOptions, {modules:'system'})))
     .pipe($.sourcemaps.write("."))
     .pipe(gulp.dest(config.distDir))
+    .pipe($.size({title: 'scripts'}))
     .pipe(reload({ stream: true }))
 })
 
